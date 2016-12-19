@@ -76,7 +76,7 @@ header nav li:hover, .login_in p:hover {
 	width: 100%;
 	height: 650px;
 	margin-bottom: 35px;
-	background-image: url(D:/Workspace/code/pic/section1.jpg);
+	background-image: url(img/section1.jpg);
 	background-size: cover;
 }
 
@@ -174,7 +174,7 @@ header nav li:hover, .login_in p:hover {
 	text-align: center;
 	font-family: "Microsoft YaHei";
 	background-size: cover; 	/*设置图像拉伸*/
-	background-image: url(D:/Workspace/code/pic/map.jpg);
+	background-image: url(img/map.jpg);
 }
 
 .section_4 hr {
@@ -210,7 +210,7 @@ header nav li:hover, .login_in p:hover {
 	text-align: left;
 	line-height: 36px;
 	display: inline-block;
-	background: url(D:/Workspace/code/pic/mail.png) no-repeat 210px #ffffff;
+	background: url(img/mail.png) no-repeat 210px #ffffff;
 }
 
 .section_4 form .option:hover > ul {	/*:hover影响子元素ul*/
@@ -238,7 +238,7 @@ header nav li:hover, .login_in p:hover {
 
 .section_4 form .option li:hover {
 	color: #ffffff;
-	background: url(D:/Workspace/code/pic/ticked.png) no-repeat 10px #BF4E48;
+	background: url(img/ticked.png) no-repeat 10px #BF4E48;
 }
 
 .section_4 form select option {
@@ -327,7 +327,7 @@ header nav li:hover, .login_in p:hover {
 	display: inline-block;
 	margin-left: -10px;
 	position: relative;
-	background-image: url(D:/Workspace/code/pic/world.jpg);
+	background-image: url(img/world.jpg);
 	background-size: cover;
 }
 
