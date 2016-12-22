@@ -23,4 +23,10 @@ demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/
 
 ##任务二        
 Task13: 零基础JavaScript编码（一）      
-demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task13.html
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task13/index.html     
+
+Task14: 零基础JavaScript编码（二）       
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task14/index.html       
+
+Task14: 零基础JavaScript编码（二）      
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task15/index.html       
