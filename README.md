@@ -28,5 +28,20 @@ demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/
 Task14: 零基础JavaScript编码（二）       
 demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task14/index.html       
 
-Task14: 零基础JavaScript编码（二）      
-demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task15/index.html       
+Task15: 零基础JavaScript编码（二）      
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task15/index.html           
+
+Task16: 零基础JavaScript编码（四）         
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task16/index.html      
+
+Task17: 零基础JavaScript编码（五）     
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task17/index.html        
+
+Task18: 基础JavaScript编码（一）           
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task18/index.html        
+
+Task19: 基础JavaScript编码（二）      
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task19/index.html    
+
+Task20: 基础JavaScript编码（三）      
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task20/index.html 
