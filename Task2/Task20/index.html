@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IFE JavaScript Task 02</title>
+    <style>
+        #text-area div {
+            display: inline-block;
+            margin: 5px;
+            height: 30px;
+            line-height: 30px;
+            min-width: 30px;
+            text-align: center;
+            cursor: pointer;
+            background-color: lightseagreen;
+        }
+
+        #text-area div span {
+            color: #fff;
+        }
+
+        button {
+            vertical-align: super;
+        }
+
+        #search-input {
+            vertical-align: super;
+        }
+    </style>
+</head>
+
+<body>
+<label>
+    <textarea rows="5" cols="30" placeholder="请输入多个内容，可通过符号隔开"></textarea>
+    <button id="insert">插入</button>
+    <button id="search">查询</button>
+    <input id="search-input">
+</label>
+
+<div id="text-area">
+</div>
+<script src="scripts/Task20.js"></script>
+</body>
+</html>
