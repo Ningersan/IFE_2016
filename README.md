@@ -44,4 +44,7 @@ Task19: 基础JavaScript编码（二）
 demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task19/index.html    
 
 Task20: 基础JavaScript编码（三）      
-demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task20/index.html 
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task20/index.html     
+
+Task21: 基础JavaScript编码（四）      
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task21/index.html 
