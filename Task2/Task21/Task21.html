@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IFE JavaScript Task 02</title>
+    <style>
+        #tag-area div {
+            display: inline-block;
+            min-width: 30px;
+            line-height: 30px;
+            margin: 10px 10px 10px 0px;
+            color: #fff;
+            text-align: center;
+            cursor: pointer;
+            background-color: #0dc1c1;
+        }
+
+        textarea {
+            margin-top: 10px;
+        }
+
+        #text-area div {
+            display: inline-block;
+            margin: 10px 10px 10px 0px;
+            height: 30px;
+            line-height: 30px;
+            min-width: 30px;
+            text-align: center;
+            cursor: pointer;
+            color: #fff;
+            background-color: #fb6b0b;
+        }
+
+        input {
+            width: 177px;
+            vertical-align: middle;
+        }
+
+        button {
+            display: block;
+            margin-top: 10px;
+            vertical-align: super;
+        }
+    </style>
+</head>
+
+<body>
+<label>Tag:<input id="tagInput"></label>
+<div id="tag-area"></div>
+
+<textarea rows="5" cols="30" placeholder="请输入兴趣爱好，可通过符号隔开"></textarea>
+<button id="confirm">确认兴趣爱好</button>
+<div id="text-area"></div>
+
+<script src="scripts/Task21.js"></script>
+</body>
+</html>
