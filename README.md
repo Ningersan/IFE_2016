@@ -27,7 +27,7 @@ demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/
 Task10: Flexbox 布局练习         
 demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task1/Task10.html         
 
-Task12: 学习CSS3的新特性
+Task12: 学习CSS3的新特性         
 demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task1/Task12.html
 
 ##任务二        
