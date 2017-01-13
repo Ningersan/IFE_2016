@@ -25,7 +25,10 @@ Task8: 响应式网格（栅格化）布局
 demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task1/Task8.html            
 
 Task10: Flexbox 布局练习         
-demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task1/Task10.html   
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task1/Task10.html         
+
+Task12: 学习CSS3的新特性
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task1/Task12.html
 
 ##任务二        
 Task13: 零基础JavaScript编码（一）      
