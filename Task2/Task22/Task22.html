@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IFE task 22</title>
+    <style>
+        body {
+            text-align: center;
+        }
+
+        .tree {
+            width: 80%;
+            height: 300px;
+            margin: 20px auto;
+        }
+
+        div {
+            margin: 36px 20px;
+            border: #fb6b0b solid 2px;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-flex-grow: 1;
+            flex-grow: 1;
+            transition: background-color 1000ms;
+        }
+    </style>
+</head>
+<body>
+    <div class="tree">
+        <div>
+            <div>
+                <div></div>
+                <div></div>
+            </div>
+            <div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+        <div>
+            <div>
+                <div></div>
+                <div></div>
+            </div>
+            <div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+    <form>
+        <select>
+            <option value="DLR">前序</option>
+            <option value="LDR">中序</option>
+            <option value="LRD">后序</option>
+        </select>
+        <button>开始遍历</button>
+    </form>
+    <script src="scripts/Task22.js"></script>
+</body>
+</html>
