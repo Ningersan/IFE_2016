@@ -1,5 +1,6 @@
 var btn = document.querySelector("button");
 var delay = 1000;
+var stack = [];
 
 function renderTreeNode(node) {
     node.style.backgroundColor = "#0dc1c1";
@@ -15,7 +16,10 @@ function traverseTree(value, root) {
             if (!root) {
                 return;
             }
-            renderTreeNode(root);
+            //将渲染函数压入栈中
+            stack.push(function () {
+                renderTreeNode(root);
+            });
             preOrder(root.firstElementChild);
             preOrder(root.lastElementChild);
         }
@@ -25,7 +29,9 @@ function traverseTree(value, root) {
                 return;
             }
             inOrder(root.firstElementChild);
-            renderTreeNode(root);
+            stack.push(function () {
+                renderTreeNode(root);
+            })
             inOrder(root.lastElementChild);
         }
     } else {
@@ -35,10 +41,21 @@ function traverseTree(value, root) {
             }
             postOrder(root.firstElementChild);
             postOrder(root.lastElementChild);
-            renderTreeNode(root);
+            stack.push(function () {
+                renderTreeNode(root);
+            })
         }
     }
     order(root);
+    //设置时间间隔依次调用渲染函数
+    var time = setInterval(function () {
+        if (stack.length === 0) {
+            clearTimeout(time);
+            btn.disabled = false;
+            return;
+        }
+        stack.shift()();
+    }, delay)
 }
 
 btn.addEventListener("click", function () {
@@ -46,4 +63,5 @@ btn.addEventListener("click", function () {
     var value = select[select.selectedIndex].value;
     var root = document.querySelector(".tree");
     traverseTree(value, root);
+    btn.disabled = true;
 })
