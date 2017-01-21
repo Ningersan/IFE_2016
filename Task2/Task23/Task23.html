@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IFE task 23</title>
+    <style>
+        body {
+            padding: 20px 100px;
+            text-align: center;
+        }
+
+        div {
+            margin: 10px;
+            padding: 20px;
+            float: left;
+            border: #fb6b0b solid 1px;
+            transition: background-color 1000ms;
+        }
+
+        .tree:after {
+            content: "";
+            clear: both;
+        }
+
+        button {
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="tree">
+        Super
+        <div>
+            Cat
+            <div>
+                Apple
+                <div>Pear</div>
+                <div>Pig</div>
+                <div>Cola</div>
+                <div>Soccer</div>
+            </div>
+            <div>Phone</div>
+            <div>
+                <div>Book</div>
+                <div>School</div>
+            </div>
+        </div>
+        <div>
+            Note
+            <div>
+                Human
+                <div>Code</div>
+                <div>Operate</div>
+                <div>Man</div>
+            </div>
+            <div>
+                Program
+                <div>
+                    Bement
+                    <div>Cat</div>
+                </div>
+                <div>Glass</div>
+            </div>
+        </div>
+    </div>
+    <button type="button">深度优先遍历</button>
+    <script src="scripts/Task23.js"></script>
+</body>
+</html>
