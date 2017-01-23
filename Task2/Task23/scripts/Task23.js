@@ -1,6 +1,5 @@
 var btn = document.getElementsByTagName("button");
 var root = get(".tree");
-var nodeList = [];
 var lock = false;
 var delay = 500;
 
@@ -32,22 +31,24 @@ function renderTreeNode(nodeList) {
     setDisabled(true);
 
     var time = setInterval(function () {
+        //遍历完成后退出
         if (nodeList.length === 0) {
             preNode.style.backgroundColor = "";
             setDisabled(false);
-            clearTimeout(time);
+            clearInterval(time);
             return;
         }
         node = nodeList.shift();
+        //找到元素后退出
         if (isEqual() && lock) {
             node.style.backgroundColor = "#F04C57";
             //设置找到节点的子节点背景色为白色
             for (var i = 0; i < node.children.length; i++) {
                 node.children[i].style.backgroundColor = "#fff";
             }
-            preNode.style.backgroundColor = "";
+            if (preNode) preNode.style.backgroundColor = "";
             setDisabled(false);
-            clearTimeout(time);
+            clearInterval(time);
             return;
         }
 
@@ -66,6 +67,7 @@ function renderTreeNode(nodeList) {
 
 function traverseTree(value) {
     var BFSindex = 0;  //广度遍历时的索引
+    var nodeList = [];
 
     function depthFirstSearch(node) {
         if (node) {
