@@ -77,6 +77,7 @@ function renderTreeNode(nodeList) {
         if (nodeList.length === 0) {
             setDisabled(false);
             clearInterval(timer);
+            return;
         }
         node = nodeList.shift();
 
