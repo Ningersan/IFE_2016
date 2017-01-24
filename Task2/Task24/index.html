@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IFE task 24</title>
+    <style>
+        body {
+            padding: 0 100px;
+            text-align: center;
+        }
+
+        div {
+            margin: 10px;
+            padding: 20px;
+            float: left;
+            color: #000;
+            border: #fb6b0b solid 1px;
+            transition: background-color 1000ms;
+            background-color: #fff;
+        }
+
+        button {
+            margin: 10px 20px;
+        }
+
+        input {
+            margin-top: 10px;
+        }
+
+        .focus {
+            background-color: #F04C57;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+<button type="button" value="DFT">深度优先遍历</button>
+<button type="button" value="BFT">广度优先遍历</button>
+<input id="search-input"/>
+<button type="button" value="DFS">深度优先搜索</button>
+<button type="button" value="BFS">广度优先搜索</button>
+<br />
+<button type="button" value="add">添加元素</button>
+<input id="add-input"/>
+<button type="button" value="del">删除元素</button>
+<div class="tree">
+    Super
+    <div>
+        Cat
+        <div>
+            Apple
+            <div>Pear</div>
+            <div>Pig</div>
+            <div>Cola</div>
+            <div>Soccer</div>
+        </div>
+        <div>Phone</div>
+        <div>
+            <div>Book</div>
+            <div>School</div>
+        </div>
+    </div>
+    <div>
+        Note
+        <div>
+            Human
+            <div>Code</div>
+            <div>Operate</div>
+            <div>Man</div>
+        </div>
+        <div>
+            Program
+            <div>
+                Bement
+                <div>Cat</div>
+            </div>
+            <div>Glass</div>
+        </div>
+    </div>
+</div>
+<script src="scripts/Task24.js"></script>
+</body>
+</html>
