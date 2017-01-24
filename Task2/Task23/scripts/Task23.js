@@ -1,9 +1,9 @@
 var btn = document.getElementsByTagName("button");
-var root = get(".tree");
+var root = $(".tree");
 var lock = false;
 var delay = 500;
 
-function get(ele) {
+function $(ele) {
     return document.querySelector(ele);
 }
 
@@ -19,8 +19,8 @@ function renderTreeNode(nodeList) {
     var preNode = null;  //记录上个遍历的节点
 
     //查找比较元素
-    function isEqual() {
-        var input = get("input").value.trim();
+    function isEqual(node) {
+        var input = $("input").value.trim();
         if (input == node.firstChild.nodeValue.trim()) {
             return true;
         } else {
@@ -30,37 +30,30 @@ function renderTreeNode(nodeList) {
 
     setDisabled(true);
 
-    var time = setInterval(function () {
-        //遍历完成后退出
-        if (nodeList.length === 0) {
-            preNode.style.backgroundColor = "";
-            setDisabled(false);
-            clearInterval(time);
-            return;
-        }
-        node = nodeList.shift();
-        //找到元素后退出
-        if (isEqual() && lock) {
-            node.style.backgroundColor = "#F04C57";
-            //设置找到节点的子节点背景色为白色
-            for (var i = 0; i < node.children.length; i++) {
-                node.children[i].style.backgroundColor = "#fff";
-            }
-            if (preNode) preNode.style.backgroundColor = "";
-            setDisabled(false);
-            clearInterval(time);
-            return;
-        }
-
+    var timer = setInterval(function () {
         //取消上个节点的颜色
         if (preNode) {
             preNode.style.backgroundColor = "";
         }
-        node.style.backgroundColor = "#0dc1c1";
-        //设置正在遍历时节点的子节点背景色为白色
-        for (var i = 0; i < node.children.length; i++) {
-            node.children[i].style.backgroundColor = "#fff";
+
+        //遍历完成后退出
+        if (nodeList.length === 0) {
+            setDisabled(false);
+            clearInterval(timer);
+            return;
         }
+
+        node = nodeList.shift();
+
+        //找到元素后退出
+        if (lock && isEqual(node)) {
+            node.style.backgroundColor = "#F04C57";
+            setDisabled(false);
+            clearInterval(timer);
+            return;
+        }
+
+        node.style.backgroundColor = "#0dc1c1";
         preNode = node;
     }, delay)
 }
