@@ -21,11 +21,7 @@ function renderTreeNode(nodeList) {
     //查找比较元素
     function isEqual(node) {
         var input = $("input").value.trim();
-        if (input == node.firstChild.nodeValue.trim()) {
-            return true;
-        } else {
-            return false;
-        }
+        return input == node.firstChild.nodeValue.trim();
     }
 
     setDisabled(true);
