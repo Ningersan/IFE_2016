@@ -1,0 +1,87 @@
+fieldset {
+    width: 400px;
+    text-align: center;
+}
+
+button {
+    margin-bottom: 20px;
+}
+
+.tree-area {
+    text-align: left;
+}
+
+div>label {
+    display: block;
+    width: 350px;
+    height: 20px;
+    cursor: pointer;
+}
+
+div>label:hover > i.icon-add, div>label:hover > i.icon-del {
+    display: inline-block;
+}
+
+div>div {
+    margin-left: 20px;
+}
+
+.node-visible {
+    display: inline-block;
+}
+
+.node-hidden {
+    display: none;
+}
+
+.tree-area span {
+    float: left;
+}
+
+.tree-area span:hover {
+    color: #fb6b0b;
+}
+
+i.icon-to-bottom {
+    float: left;
+    margin-top: 4px;
+    margin-right: 6px;
+    width: 0;
+    height: 0;
+    cursor: pointer;
+    border-top: 10px solid #6898c2;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+}
+
+i.icon-to-right {
+    float: left;
+    margin-top: 4px;
+    margin-right: 6px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid #6898c2;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    cursor: pointer;
+}
+
+i.icon-add {
+    display: none;
+    float: left;
+    margin-left: 20px;
+    width: 15px;
+    height: 15px;
+    background: url("../img/add.svg");
+    background-size: 15px 15px;
+}
+
+i.icon-del {
+    display: none;
+    float: left;
+    margin-left: 10px;
+    width: 15px;
+    height: 15px;
+    background: url("../img/delete.png");
+    background-size: 15px 15px;
+}
