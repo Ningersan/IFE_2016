@@ -65,4 +65,7 @@ Task23：JavaScript和树（二）
 demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task23/index.html          
 
 Task24：JavaScript和树（三）      
-demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task24/index.html 
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task24/index.html           
+
+Task24：JavaScript和树（四）      
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task25/index.html 
