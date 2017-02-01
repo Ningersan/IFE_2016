@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IFE task 29</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        label {
+            position: absolute;
+            top: 50%;
+            margin-top: -100px;
+            left: 50%;
+            margin-left: -200px;
+        }
+
+        span {
+            vertical-align: middle;
+            font-size: 20px;
+            font-weight: bolder;
+        }
+
+        #meaning {
+            padding-left: 10px;
+            width: 300px;
+            height: 40px;
+            font-size: 18px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            outline: 0;
+        }
+
+        #check {
+            width: 60px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 18px;
+            color: #fff;
+            border: 0;
+            border-radius: 3px;
+            background-color: #2F79BA;
+        }
+
+        p {
+            margin: 5px 50px;
+            color: #a8a8a8;
+        }
+    </style>
+</head>
+<body>
+<label>
+    <span>名称</span>
+    <input id="meaning" type="text" autofocus="autofocus">  <!--autofocus加载文档时自动获得焦点-->
+    <input id="check" type="button" value="验证">
+    <p>必填，长度为4-16个字符</p>
+</label>
+<script src="scripts/Task29.js"></script>
+</body>
+</html>
