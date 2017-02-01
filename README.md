@@ -68,4 +68,7 @@ Task24：JavaScript和树（三）
 demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task24/index.html           
 
 Task24：JavaScript和树（四）      
-demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task25/index.html 
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task25/index.html           
+
+Task29：表单（一）单个表单项的检验      
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task29/index.html
