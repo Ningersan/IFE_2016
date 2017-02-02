@@ -1,8 +1,6 @@
 /**
  * Created by Ningersan on 2017/2/1.
  */
-var right = true;  //检验全部输入正确
-
 function $(ele) {
     return document.querySelector(ele);
 }
@@ -35,55 +33,12 @@ function checkValue(target) {
             tips.innerHTML = str;
             tips.style.color = "lightgreen";
             target.style.borderColor = "lightgreen";
+            check = true;
         } else {
             tips.innerHTML = str;
             tips.style.color = "red";
             target.style.borderColor = "red";
-            right = false;
-        }
-    }
-
-    if (id === "name") {
-        check = function checkName() {
-            if (getLength(value) >= 4 && getLength(value) <= 16) {
-                render("名称格式正确！", true);
-            } else {
-                render("请检查字符数！", false);
-            }
-        }
-    } else if (id === "password") {
-        check = function checkPassword() {
-            if (value.match(/^[a-zA-Z0-9]{6,18}$/)) {
-                render("密码格式正确！", true);
-            } else {
-                render("格式错误，请重新输入密码", false);
-            }
-        }
-
-    } else if (id === "password-checked") {
-        check = function checkRePassword() {
-            if ($a("input")[1].value.trim() === value) {
-                render("密码正确！", true);
-            } else {
-                render("两次输入密码不一致，请重新检查", false);
-            }
-        }
-    } else if(id === "email") {
-        check = function checkEmail() {
-            var myrReg = /^[a-zA-Z0-9_\.\-]+@[^\.@]+\.[a-z]+$/;
-            if (value.match(myrReg)) {
-                render("邮箱格式正确！", true);
-            } else {
-                render("邮箱格式错误，请重新检查", false);
-            }
-        }
-    } else {
-        check = function checkTel() {
-            if (value.match(/^1\d{10}$/)) {
-                render("手机格式正确！", true);
-            } else {
-                render("手机格式错误，请重新检查", false);
-            }
+            check = false;
         }
     }
 
@@ -92,9 +47,41 @@ function checkValue(target) {
         tips.style.display = "block";
         return;
     }
-    check();
-}
 
+    if (id === "name") {
+        if (getLength(value) >= 4 && getLength(value) <= 16) {
+            render("名称格式正确！", true);
+        } else {
+            render("请检查字符数！", false);
+        }
+    } else if (id === "password") {
+        if (value.match(/^[a-zA-Z0-9]{6,18}$/)) {
+            render("密码格式正确！", true);
+        } else {
+            render("格式错误，请重新输入密码", false);
+        }
+    } else if (id === "password-checked") {
+        if ($a("input")[1].value.trim() === value) {
+            render("密码正确！", true);
+        } else {
+            render("两次输入密码不一致，请重新检查", false);
+        }
+    } else if (id === "email") {
+        var myrReg = /^[a-zA-Z0-9_\.\-]+@[^\.@]+\.[a-z]+$/;
+        if (value.match(myrReg)) {
+            render("邮箱格式正确！", true);
+        } else {
+            render("邮箱格式错误，请重新检查", false);
+        }
+    } else {
+        if (value.match(/^1\d{10}$/)) {
+            render("手机格式正确！", true);
+        } else {
+            render("手机格式错误，请重新检查", false);
+        }
+    }
+    return check;
+}
 
 //绑定事件区
 var inputEle = $a("input");
@@ -117,13 +104,13 @@ for (var i = 0; i < inputEle.length; i++) {
 
 $("button").addEventListener("click", function () {
     for (var i = 0; i < inputEle.length; i++) {
-        checkValue(inputEle[i]);
+        if (!checkValue(inputEle[i])) {
+            alert(i);
+            alert("提交失败");
+            return;
+        }
     }
-    if (right) {
-        alert("提交成功");
-    } else {
-        alert("提交失败，请检查各项输入");
-    }
+    alert("提交成功");
 })
 
 
