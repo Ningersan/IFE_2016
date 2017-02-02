@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IFE task 30</title>
+    <style>
+        div {
+            margin: 20px auto;
+        }
+
+        label {
+            padding-right: 20px;
+            display: inline-block;
+            text-align: right;
+            width: 100px;
+        }
+
+        input {
+            padding-left: 10px;
+            width: 250px;
+            height: 25px;
+            font-size: 14px;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            outline: 0;
+        }
+
+        p {
+            display: none;
+            margin: 5px 130px;
+            color: #a8a8a8;
+            font-size: 14px;
+        }
+
+        button {
+            margin-left: 330px;
+            width: 60px;
+            height: 25px;
+            cursor: pointer;
+            background-color: #75b86b;
+            font-size: 14px;
+            color: #fff;
+            border: 0;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form>
+            <div data-info="必填，长度为4-16个字符">
+                <label for="name">名称</label>
+                <input type="text" id="name">
+                <p></p>
+            </div>
+            <div data-info="请输入长度为6-18个字符的密码，包含字母和数字">
+                <label for="password">密码</label>
+                <input  type="password" id="password">
+                <p></p>
+            </div>
+            <div data-info="请重新输入密码">
+                <label for="password-checked">密码确认</label>
+                <input type="password" id="password-checked">
+                <p></p>
+            </div>
+            <div data-info="example@xxx.com">
+                <label for="email">邮箱</label>
+                <input type="text" id="email">
+                <p></p>
+            </div>
+            <div data-info="请输入11位手机号码">
+                <label for="tel">手机</label>
+                <input type="text" id="tel">
+                <p></p>
+            </div>
+            <button type="button">提交</button>
+        </form>
+    </div>
+    <script src="scripts/Task30.js"></script>
+</body>
+</html>
