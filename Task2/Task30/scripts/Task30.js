@@ -105,7 +105,6 @@ for (var i = 0; i < inputEle.length; i++) {
 $("button").addEventListener("click", function () {
     for (var i = 0; i < inputEle.length; i++) {
         if (!checkValue(inputEle[i])) {
-            alert(i);
             alert("提交失败");
             return;
         }
