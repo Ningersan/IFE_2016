@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IFE task 31</title>
+    <style>
+        .container {
+            text-align: center;
+        }
+
+        #radio-select>div {
+            display: inline-block;
+            margin: 30px 50px;
+        }
+
+        #content span {
+            margin-right: 10px;
+        }
+
+        #content select {
+            width: 180px;
+            height: 28px;
+            cursor: pointer;
+            border-radius: 3px;
+            outline: 0;
+        }
+
+        span {
+            font-weight: bolder;
+        }
+
+        .work-space input {
+            padding-left: 10px;
+            width: 300px;
+            height: 28px;
+            border: 2px solid #ccc;
+            border-radius: 3px;
+            outline: 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<form class="container">
+    <div id="radio-select" onchange="selectRadio()">
+        <div>
+            <input type="radio" id="in-school" name="option-radio" value="in-school" checked>
+            <label for="in-school">在校生</label>
+        </div>
+        <div>
+            <input type="radio" id="out-school" name="option-radio" value="out-school">
+            <label for="out-school">非在校生</label>
+        </div>
+    </div>
+    <div id="content">
+        <div class="school-space">
+            <span>学校</span>
+            <select class="city" onchange="selectCity()">
+                <option value="beijing">北京</option>
+                <option value="shanghai">上海</option>
+                <option value="nanjing">南京</option>
+                <option value="hangzhou">杭州</option>
+            </select>
+            <select class="school">
+                <option>清华大学</option>
+                <option>北京大学</option>
+                <option>中国人民大学</option>
+            </select>
+        </div>
+        <div class="work-space hidden">
+            <label for="work-space"><span>就业单位</span></label>
+            <input id="work-space" type="text">
+        </div>
+    </div>
+</form>
+<script src="scripts/Task31.js"></script>
+</body>
+</html>
