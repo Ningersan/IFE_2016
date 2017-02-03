@@ -76,5 +76,5 @@ demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/
 Task30：表单（二）多个表单项的动态校验      
 demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task30/index.html             
 
-Task30：表单（三）联动     
+Task31：表单（三）联动     
 demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task31/index.html
