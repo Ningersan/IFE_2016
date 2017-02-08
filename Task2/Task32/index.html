@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IFE task 32</title>
+    <link rel="stylesheet" type="text/css" href="css/Task32.css">
+</head>
+<body>
+<aside>
+    <form>
+        <fieldset class="type">
+            <legend>类型</legend>
+            <input id="input" type="radio" name="input-type" checked>
+            <label for="input">输入框</label>
+
+            <input id="radio" type="radio" name="input-type">
+            <label for="radio">单选框</label>
+
+            <input id="checkbox" type="radio" name="input-type">
+            <label for="checkbox">多选框</label>
+
+            <input id="pulldown" type="radio" name="input-type">
+            <label for="pulldown">下拉栏</label>
+
+            <input id="textarea" type="radio" name="input-type">
+            <label for="textarea">文本栏</label>
+        </fieldset>
+        <fieldset class="config">
+            <legend>配置</legend>
+            <label for="name">名称: </label>
+            <input id="name" type="text" value="姓名">
+
+            <input id="necessary" type="radio" name="input-config" checked>
+            <label for="necessary">必填</label>
+
+            <input id="option" type="radio" name="input-config">
+            <label for="option">选填</label>
+        </fieldset>
+        <fieldset class="rule">
+            <legend>规则</legend>
+            <input id="text" type="radio" name="input-rule" checked>
+            <label for="text">文字</label>
+
+            <input id="number" type="radio" name="input-rule">
+            <label for="number">数字</label>
+
+            <input id="email" type="radio" name="input-rule">
+            <label for="email">邮箱&nbsp&nbsp</label>
+
+            <input id="tel" type="radio" name="input-rule">
+            <label for="tel">电话号码</label>
+
+            <input id="password" type="radio" name="input-rule">
+            <label for="password">密码</label>
+        </fieldset>
+        <fieldset class="choice hidden">
+            <legend>选项</legend>
+            <input id="tag-input" type="text" placeholder="输入选项，使用空格，逗号，回车分割">
+            <div class="tag-area"></div>
+        </fieldset>
+        <fieldset class="length-rule">
+            <legend>长度规则</legend>
+            <label>字符范围：</label>
+            <input id="min-length" type="number" min="0" value="4">
+            <span>--</span>
+            <input id="max-length" type="number" max="16" value="16">
+        </fieldset>
+        <button id="btn-add" type="button">add</button>
+    </form>
+</aside>
+<div class="form-show">
+    <h1>表单展示</h1>
+    <form class="result-form">
+        <button class="btn-sub hidden" type="submit">提交</button>
+    </form>
+</div>
+<script src=scripts/Task32.js"></script>
+</body>
+</html>
