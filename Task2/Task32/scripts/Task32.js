@@ -136,35 +136,29 @@ var validator = {
         }
     },
 
-    number: function () {
-        var text = this.ipt.value;
+    number: function (target) {
+        var text = target.value;
         if (text.match(/^\d*$/)) {
-            this.trueTip;
             return true;
         } else {
-            this.errorTip;
             return false;
         }
     },
 
-    email: function () {
-        var text = this.ipt.value;
-        if (value.match(/^[a-zA-Z0-9_\.\-]+@[^\.@]+\.[a-z]+$/)) {
-            this.trueTip;
+    email: function (target) {
+        var text = target.value;
+        if (text.match(/^[a-zA-Z0-9_\.\-]+@[^\.@]+\.[a-z]+$/)) {
             return true;
         } else {
-            this.errorTip;
             return false;
         }
     },
 
-    tel: function () {
-        var text = this.ipt.value;
-        if (value.match(/^1\d{10}$/)) {
-            this.trueTip;
+    tel: function (target) {
+        var text = target.value;
+        if (text.match(/^1\d{10}$/)) {
             return true;
         } else {
-            this.errorTip;
             return false;
         }
     },
@@ -247,9 +241,9 @@ dataProduct.prototype = {
 
     getContactRelativeData: function (data) {
         data.remainder = (data.necessary? "必填": "选填") + "，请输入您的" + data.label;
-        data.successRemainder = data.label + "格式正确！";
+        data.successRemainder = data.label + "格式正确!";;
         data.failRemainder = data.label + "格式不正确，请检查！";
-        data.validator = validator;
+        data.validator = validator[data.inputType];
         return data;
     },
 
@@ -388,6 +382,7 @@ $("#btn-add").onclick = function () {
         inputEles[i].addEventListener("focus", function (e) {
             var target = e.target;
             var tip = target.nextSibling;
+            tip.innerHTML = data.remainder;
             tip.className = "remainder";
             target.style.borderColor = "#0dc1c1";
         })
@@ -396,10 +391,12 @@ $("#btn-add").onclick = function () {
         inputEles[i].addEventListener("blur", function (e) {
             var isTrue = data.validator(e.target, data);
             if (isTrue) {
+                e.target.nextSibling.innerHTML = data.successRemainder;
                 e.target.nextSibling.style.color = "#0dc1c1";
             } else {
-                e.target.nextSibling.style.color = "#F04C57";
-                e.target.className = "error";
+                e.target.style.borderColor = "#F04C57";
+                e.target.nextSibling.className = "error";
+                e.target.nextSibling.innerHTML = data.failRemainder;
             }
         })
     }
