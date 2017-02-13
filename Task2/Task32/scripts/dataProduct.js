@@ -24,7 +24,7 @@ dataProduct.prototype = {
             maxLength: "",
             remainder: "",
             successRemainder: "",
-            failRemainder: "",
+            failRemainder: [],
             validator: function (str, data) {     //表单验证规则
             }
         }
@@ -60,6 +60,7 @@ dataProduct.prototype = {
         data.label = this.name.value;
         data.type = getType(this.type);
         data.inputType = getType(this.rule);
+        data.failRemainder = [data.label + "不能为空"];
         if (data.type != "input" && data.type != "textarea") data.items = getOptions();
         return data;
     },
@@ -69,7 +70,7 @@ dataProduct.prototype = {
         data.maxLength = $("#max-length").value;
         data.remainder = (data.necessary? "必填": "选填") + "，长度为" + data.minLength + "-" + data.maxLength + "个字符";
         data.successRemainder = data.label + "格式正确";
-        data.failRemainder = data.label + "长度不能小于" + data.minLength +"个字符，" + "长度不能大于" + data.maxLength +"个字符！"
+        data.failRemainder.push(data.label + "长度不能小于" + data.minLength +"个字符，" + "长度不能大于" + data.maxLength +"个字符！");
         data.validator = validator.lengthControl;
         return data;
     },
@@ -77,7 +78,7 @@ dataProduct.prototype = {
     getContactRelativeData: function (data) {
         data.remainder = (data.necessary? "必填": "选填") + "，请输入您的" + data.label;
         data.successRemainder = data.label + "格式正确!";;
-        data.failRemainder = data.label + "格式不正确，请检查！";
+        data.failRemainder.push(data.label + "格式不正确，请检查！");
         data.validator = validator[data.inputType];
         return data;
     },

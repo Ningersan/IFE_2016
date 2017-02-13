@@ -111,13 +111,29 @@ fieldset {
     width: 180px;
 }
 
-.remainder {
+input.remainder {
+    border-color: #a8a8a8;
+}
+
+span.remainder {
     display: inline-block;
     font-size: 14px;
     color: #a8a8a8;
 }
 
-.error {
+input.true {
+    border-color: #0dc1c1;
+}
+
+span.true {
+    color: #0dc1c1;
+}
+
+input.error {
+    border-color: #F04C57;
+}
+
+span.error {
     display: inline-block;
     font-size: 14px;
     color: #F04C57;

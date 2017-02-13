@@ -18,18 +18,18 @@ formDealer.prototype = {
     remainderTip: function () {
         this.tip.innerHTML = this.data.remainder;
         this.tip.className = "remainder";
-        this.input.style.borderColor = "#0dc1c1";
+        this.input.className = "remainder";
     },
 
     trueTip: function () {
         this.tip.innerHTML = this.data.successRemainder;
-        this.tip.style.color = "#0dc1c1";
-        this.input.style.borderColor = "#0dc1c1";
+        this.tip.className = "true";
+        this.input.className = "true";
     },
 
-    falseTip: function () {
-        this.tip.innerHTML = this.data.failRemainder;
+    falseTip: function (i) {
+        this.tip.innerHTML = this.data.failRemainder[i];
         this.tip.className = "error";
-        this.input.style.borderColor = "#F04C57";
+        this.input.className = "error";
     }
 }
