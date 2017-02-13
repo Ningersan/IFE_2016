@@ -2,6 +2,7 @@
  * Created by Ningersan on 2017/2/11.
  */
 function dataProduct() {
+    this.id = 0;
 }
 
 dataProduct.prototype = {
@@ -13,6 +14,7 @@ dataProduct.prototype = {
 
     getData: function () {
         var data = {
+            id: "",
             label: "",
             type: "",
             inputType: "",
@@ -54,6 +56,7 @@ dataProduct.prototype = {
     },
 
     getBaseData: function (data) {
+        data.id = "form" + this.id++;
         data.label = this.name.value;
         data.type = getType(this.type);
         data.inputType = getType(this.rule);
@@ -105,11 +108,12 @@ dataProduct.prototype = {
                 this.addTextareaForm(data);
                 break;
         }
+        return data;
     },
 
     addInputForm: function (data) {
         var box = document.createElement("div");
-        box.innerHTML = "<label>" + data.label + "</label><input type='" + data.inputType + "'><span class='hidden'>"+ data.remainder +"</span>";
+        box.innerHTML = "<label>" + data.label + "</label><input id="+ data.id +" type='" + data.inputType + "'><span class='hidden'>"+ data.remainder +"</span>";
         this.resultForm.insertBefore(box, this.submitBtn);
     },
 
@@ -118,7 +122,7 @@ dataProduct.prototype = {
         var box = document.createElement("div");
         text = "<label>" + data.label + "</label>";
         for (var i = 0; i < data.items.length; i++) {
-            text += "<input type='radio' name='option'><label>" + data.items[i] + "</label>";
+            text += "<input id=" + data.id + " type='radio' name='option'><label>" + data.items[i] + "</label>";
         }
         text += "<span class='hidden'>"+ data.remainder +"</span>";
         box.innerHTML = text;
@@ -130,7 +134,7 @@ dataProduct.prototype = {
         var box = document.createElement("div");
         text = "<label>" + data.label + "</label>";
         for (var i = 0; i < data.items.length; i++) {
-            text += "<input type='checkbox' name='option'><label>" + data.items[i] + "</label>";
+            text += "<input id=" + data.id +" type='checkbox' name='option'><label>" + data.items[i] + "</label>";
         }
         text += "<span class='hidden'>"+ data.remainder +"</span>";
         box.innerHTML = text;
@@ -140,7 +144,7 @@ dataProduct.prototype = {
     addPulldownForm: function (data) {
         var text = "";
         var box = document.createElement("div");
-        text = "<label>" + data.label + "</label><select>";
+        text = "<label>" + data.label + "</label><select id=" + data.id + ">";
         for (var i = 0; i < data.items.length; i++) {
             text += "<option>" + data.items[i] + "</option>";
         }
@@ -151,7 +155,7 @@ dataProduct.prototype = {
 
     addTextareaForm: function (data) {
         var box = document.createElement("div");
-        box.innerHTML = "<label>" + data.label + "</label><textarea></textarea><span class='hidden'>"+ data.remainder +"</span>"
+        box.innerHTML = "<label>" + data.label + "</label><textarea id=" + data.id + "></textarea><span class='hidden'>"+ data.remainder +"</span>"
         this.resultForm.insertBefore(box, this.submitBtn);
     }
 }

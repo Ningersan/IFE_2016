@@ -2,13 +2,15 @@
  * Created by Ningersan on 2017/2/11.
  */
 var validator = {
-    lengthControl: function (target, data) {
-        var text = target.value.trim();
+    lengthControl: function (data) {
+        var text = this.input.value.trim();
         var minLength = data.minLength;
         var maxLength = data.maxLength;
         if (getLength(text) >= minLength && getLength(text) <= maxLength) {
+            this.trueTip();
             return true;
         } else {
+            this.falseTip();
             return false;
         }
 
@@ -26,29 +28,35 @@ var validator = {
         }
     },
 
-    number: function (target) {
-        var text = target.value;
+    number: function () {
+        var text = this.input.value;
         if (text.match(/^\d*$/)) {
+            this.trueTip();
             return true;
         } else {
+            this.falseTip();
             return false;
         }
     },
 
-    email: function (target) {
-        var text = target.value;
+    email: function () {
+        var text = this.input.value;
         if (text.match(/^[a-zA-Z0-9_\.\-]+@[^\.@]+\.[a-z]+$/)) {
+            this.trueTip();
             return true;
         } else {
+            this.falseTip();
             return false;
         }
     },
 
-    tel: function (target) {
-        var text = target.value;
+    tel: function () {
+        var text = this.input.value;
         if (text.match(/^1\d{10}$/)) {
+            this.trueTip();
             return true;
         } else {
+            this.falseTip();
             return false;
         }
     },

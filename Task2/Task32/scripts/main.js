@@ -75,40 +75,17 @@ $(".type").addEventListener("change", function (e) {
 })
 
 $(".rule").addEventListener("change", function (e) {
-    var targetId = e.target.id;
-
     //同步配置名称
     $("#name").value = e.target.nextSibling.nextSibling.textContent;
 })
 
+var formStack = [];
+
 $("#btn-add").onclick = function () {
     var data = test.getData();
     test.addForm(data);
+    formStack.push(new formDealer(data));
     test.submitBtn.className = "btn-sub";
-    var inputEles = $(".result-form").getElementsByTagName("input");
-    for (var i = 0; i < inputEles.length; i++) {
-        //绑定焦点事件
-        inputEles[i].addEventListener("focus", function (e) {
-            var target = e.target;
-            var tip = target.nextSibling;
-            tip.innerHTML = data.remainder;
-            tip.className = "remainder";
-            target.style.borderColor = "#0dc1c1";
-        })
-
-        //绑定离开焦点事件
-        inputEles[i].addEventListener("blur", function (e) {
-            var isTrue = data.validator(e.target, data);
-            if (isTrue) {
-                e.target.nextSibling.innerHTML = data.successRemainder;
-                e.target.nextSibling.style.color = "#0dc1c1";
-            } else {
-                e.target.style.borderColor = "#F04C57";
-                e.target.nextSibling.className = "error";
-                e.target.nextSibling.innerHTML = data.failRemainder;
-            }
-        })
-    }
 };
 
 
