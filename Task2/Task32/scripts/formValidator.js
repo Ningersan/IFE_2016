@@ -5,8 +5,14 @@ var validator = {
     lengthControl: function () {
         var text = this.input.value.trim();
         if (text === "") {
-            this.falseTip(0);
-            return;
+            if (this.data.necessary) {
+                this.falseTip(0);
+                return;
+            } else {
+                this.remainderTip();
+                return true;
+            }
+
         }
         var minLength = this.data.minLength;
         var maxLength = this.data.maxLength;
@@ -35,8 +41,14 @@ var validator = {
     number: function () {
         var text = this.input.value.trim();
         if (text === "") {
-            this.falseTip(0);
-            return;
+            if (this.data.necessary) {
+                this.falseTip(0);
+                return;
+            } else {
+                this.remainderTip();
+                return true;
+            }
+
         }
         if (text.match(/^\d*$/)) {
             this.trueTip();
@@ -50,8 +62,14 @@ var validator = {
     email: function () {
         var text = this.input.value.trim();
         if (text === "") {
-            this.falseTip(0);
-            return;
+            if (this.data.necessary) {
+                this.falseTip(0);
+                return;
+            } else {
+                this.remainderTip();
+                return true;
+            }
+
         }
         if (text.match(/^[a-zA-Z0-9_\.\-]+@[^\.@]+\.[a-z]+$/)) {
             this.trueTip();
@@ -65,8 +83,14 @@ var validator = {
     tel: function () {
         var text = this.input.value.trim();
         if (text === "") {
-            this.falseTip(0);
-            return;
+            if (this.data.necessary) {
+                this.falseTip(0);
+                return;
+            } else {
+                this.remainderTip();
+                return true;
+            }
+
         }
         if (text.match(/^1\d{10}$/)) {
             this.trueTip();
@@ -76,5 +100,44 @@ var validator = {
             return false;
         }
     },
+
+    radio: function () {
+        var items = $("#" + this.data.id).getElementsByTagName("input");
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].checked) {
+                this.trueTip();
+                return true;
+            }
+        }
+        if (this.data.necessary) {
+            this.falseTip(0);
+        } else {
+            this.remainderTip();
+            return true;
+        }
+        return false;
+    },
+    
+    checkbox: function () {
+        var items = $("#" + this.data.id).getElementsByTagName("input");
+        for (var i = 0; i < items.length; i++) {
+            if (items[i].checked) {
+                this.trueTip();
+                return true;
+            }
+        }
+        if (this.data.necessary) {
+            this.falseTip(1);
+        } else {
+            this.remainderTip();
+            return true;
+        }
+        return false;
+    },
+
+    pulldown: function () {
+        this.trueTip();
+        return true;
+    }
 }
 

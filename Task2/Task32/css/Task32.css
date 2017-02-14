@@ -96,6 +96,10 @@ fieldset {
     text-align: right;
 }
 
+.form-show div span {
+    margin-left: 10px;
+}
+
 .form-show input[name="option"] {
     width: auto;
 }
@@ -109,6 +113,10 @@ fieldset {
     vertical-align: text-top;
     margin-left: 10px;
     width: 180px;
+}
+
+.radio-form>div, .checkbox-form>div {
+    display: inline-block;
 }
 
 input.remainder {

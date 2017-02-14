@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>IFE task 32</title>
-    <link rel="stylesheet" type="text/css" href="css/Task32.css">
+    <link rel="stylesheet" type="text/css" href="D:\Workspace\code\css\Task32.css">
 </head>
 <body>
 <aside>
@@ -29,12 +29,12 @@
             <legend>配置</legend>
             <label for="name">名称: </label>
             <input id="name" type="text" value="姓名">
-
-            <input id="necessary" type="radio" name="input-config" checked>
-            <label for="necessary">必填</label>
-
-            <input id="option" type="radio" name="input-config">
-            <label for="option">选填</label>
+            <div class="necessary">
+                <input id="necessary" type="radio" name="input-config" checked>
+                <label for="necessary">必填</label>
+                <input id="option" type="radio" name="input-config">
+                <label for="option">选填</label>
+            </div>
         </fieldset>
         <fieldset class="rule">
             <legend>规则</legend>
@@ -71,7 +71,7 @@
 <div class="form-show">
     <h1>表单展示</h1>
     <form class="result-form">
-        <button class="btn-sub hidden" type="submit">提交</button>
+        <button class="btn-sub hidden" type="button">提交</button>
     </form>
 </div>
 <script src="scripts/main.js"></script>

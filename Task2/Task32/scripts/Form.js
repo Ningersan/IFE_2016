@@ -13,6 +13,7 @@ formDealer.prototype = {
     init: function () {
         this.input.addEventListener("focus", this.remainderTip.bind(this));
         this.input.addEventListener("blur", this.validator.bind(this));
+        this.input.addEventListener("change", this.validator.bind(this));  //绑定单选多选下拉类型的事件
     },
 
     remainderTip: function () {

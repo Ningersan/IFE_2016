@@ -11,6 +11,7 @@ dataProduct.prototype = {
     rule: $(".rule"),
     submitBtn: $(".btn-sub"),
     resultForm: $(".result-form"),
+    necessary: $(".necessary"),
 
     getData: function () {
         var data = {
@@ -25,7 +26,7 @@ dataProduct.prototype = {
             remainder: "",
             successRemainder: "",
             failRemainder: [],
-            validator: function (str, data) {     //表单验证规则
+            validator: function () {     //表单验证规则
             }
         }
         data = this.getBaseData(data);
@@ -60,6 +61,8 @@ dataProduct.prototype = {
         data.label = this.name.value;
         data.type = getType(this.type);
         data.inputType = getType(this.rule);
+        data.necessary = getType(this.necessary)==="necessary" ? true : false;
+        console.log(data.necessary);
         data.failRemainder = [data.label + "不能为空"];
         if (data.type != "input" && data.type != "textarea") data.items = getOptions();
         return data;
@@ -85,9 +88,9 @@ dataProduct.prototype = {
 
     getOptionRelativeData: function (data) {
         data.remainder = (data.necessary? "必填": "选填") + "，请选择您的" + data.label;
-        data.successRemainder = data.label + "单选框已选择";
-        data.failRemainder = data.label + "未选择！";
-        data.validator = validator;
+        data.successRemainder = data.label + "已选择！";
+        data.failRemainder.push(data.label + "未选择！");
+        data.validator = validator[data.type];
         return data;
     },
 
@@ -121,11 +124,13 @@ dataProduct.prototype = {
     addRadioForm: function (data) {
         var text = "";
         var box = document.createElement("div");
-        text = "<label>" + data.label + "</label>";
+        box.className = "radio-form";
+        text = "<div id=" + data.id + "><label>" + data.label + "</label>";
         for (var i = 0; i < data.items.length; i++) {
-            text += "<input id=" + data.id + " type='radio' name='option'><label>" + data.items[i] + "</label>";
+            var id = data.id + "" + i;
+            text += "<input id=" + id + " type='radio' name='option'><label>" + data.items[i] + "</label>";
         }
-        text += "<span class='hidden'>"+ data.remainder +"</span>";
+        text += "</div><span class='hidden'>"+ data.remainder +"</span>";
         box.innerHTML = text;
         this.resultForm.insertBefore(box, this.submitBtn);
     },
@@ -133,11 +138,13 @@ dataProduct.prototype = {
     addCheckboxForm: function (data) {
         var text = ""
         var box = document.createElement("div");
-        text = "<label>" + data.label + "</label>";
+        box.className = "checkbox-form";
+        text = "<div id=" + data.id + "><label>" + data.label + "</label>";
         for (var i = 0; i < data.items.length; i++) {
+            var id = data.id + "" + i;
             text += "<input id=" + data.id +" type='checkbox' name='option'><label>" + data.items[i] + "</label>";
         }
-        text += "<span class='hidden'>"+ data.remainder +"</span>";
+        text += "</div><span class='hidden'>"+ data.remainder +"</span>";
         box.innerHTML = text;
         this.resultForm.insertBefore(box, this.submitBtn);
     },
