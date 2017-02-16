@@ -45,7 +45,11 @@ fieldset {
     width: 220px;
 }
 
-.tag-area div {
+#tag-area .color-change {
+    background-color: #fb6b0b;
+}
+
+#tag-area div {
     display: inline-block;
     min-width: 30px;
     line-height: 30px;

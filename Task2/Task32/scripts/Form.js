@@ -4,7 +4,7 @@
 function formDealer(data) {
     this.data = data;
     this.input = $("#" + data.id);
-    this.tip = this.input.nextSibling;
+    this.tip = this.input.nextSibling; 
     this.validator = data.validator;
     this.init();
 }

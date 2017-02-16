@@ -12,7 +12,6 @@ var validator = {
                 this.remainderTip();
                 return true;
             }
-
         }
         var minLength = this.data.minLength;
         var maxLength = this.data.maxLength;
@@ -25,14 +24,9 @@ var validator = {
         }
 
         function getLength(str) {
-            var count = 0;
-            for (var i = 0; i < str.length; i++) {
+            for (var i = 0, count = 0; i < str.length; i++) {
                 var charCode = str.charCodeAt(i);
-                if (charCode >= 0 && charCode <= 128) {
-                    count += 1;
-                } else {
-                    count += 2;
-                }
+                count += (charCode >= 0 && charCode <= 128) ? 1 : 2;
             }
             return count;
         }

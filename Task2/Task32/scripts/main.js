@@ -32,25 +32,6 @@ function getType(ele) {
     }
 }
 
-//获取单选多选下拉的选项
-function getOptions() {
-    var items = [];
-    var childs = $(".tag-area").childNodes;
-    var childsLen = childs.length;
-    if (childsLen === 0) {
-        alert("请输入选项");
-        return;
-    }
-    if (childsLen === 1) {
-        alert("请再次输入一个选项");
-        return;
-    }
-    for (var i = 0; i < childsLen; i++) {
-        items.push(childs[i].innerText);
-    }
-    return items;
-}
-
 //===============================表单联动=========================================
 $(".type").addEventListener("change", function (e) {
     var targetId = e.target.id;
@@ -79,13 +60,27 @@ $(".rule").addEventListener("change", function (e) {
     $("#name").value = e.target.nextSibling.nextSibling.textContent;
 })
 
+//存储生成的表单信息
 var formStack = [];
-
+//添加按钮绑定事件
 $("#btn-add").onclick = function () {
     var data = test.getData();
     test.addForm(data);
     formStack.push(new formDealer(data));
+    //当类型为单选或多选时，默认显示提示
+    if (data.type === "radio" || data.type === "checkbox") {
+        formStack[formStack.length - 1].remainderTip();
+    }
     test.submitBtn.className = "btn-sub";
 };
+
+//提交按钮绑定事件
+$(".btn-sub").onclick = function () {
+    var text = "";
+    for (var i = 0; i < formStack.length; i++) {
+        text += !formStack[i].validator() ? formStack[i].tip.textContent + "\n" : "";
+    }
+    text == "" ? alert("提交成功") : alert(text);
+}
 
 

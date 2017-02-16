@@ -7,7 +7,7 @@ function tagCreator(id) {
 	this.id = id;
     this.ele = $(id);
 	this.area = $(id.slice(0, id.indexOf("-")) + "-area");
-    this.color = (id === "tag-input")? "#fb6b0b" : "#0dc1c1";
+    this.class = (id === "tag-input")? "style-2" : "style-1";
     this.confirm = $("confirm");
 	this.init();
 }
@@ -60,11 +60,11 @@ tagCreator.prototype = {
         console.log(this.color);
         newEle.addEventListener("mouseover", function () {
             this.textContent = "delete: " + this.textContent;
-            this.style.backgroundColor = self.color;
+            this.className = self.class;
         })
         newEle.addEventListener("mouseout", function () {
             this.textContent = this.textContent.replace(/delete: /, "");
-            this.style.backgroundColor = "";
+            this.className = "";
         })
         newEle.addEventListener("click", function () {
             self.area.removeChild(this);

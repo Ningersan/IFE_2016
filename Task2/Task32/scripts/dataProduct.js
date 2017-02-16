@@ -12,6 +12,7 @@ dataProduct.prototype = {
     submitBtn: $(".btn-sub"),
     resultForm: $(".result-form"),
     necessary: $(".necessary"),
+    tagArea: $("#tag-area"),
 
     getData: function () {
         var data = {
@@ -64,8 +65,26 @@ dataProduct.prototype = {
         data.necessary = getType(this.necessary)==="necessary" ? true : false;
         console.log(data.necessary);
         data.failRemainder = [data.label + "不能为空"];
-        if (data.type != "input" && data.type != "textarea") data.items = getOptions();
+        if (data.type != "input" && data.type != "textarea") data.items = this.getOptions();
         return data;
+    },
+
+    //获取单选框，多选框，下拉菜单的选项信息
+    getOptions: function () {
+        var items = [];
+        var childs = this.tagArea.childNodes;
+        var childsLen = childs.length;
+        if (childsLen === 0) {
+            alert("请输入选项");
+            return;
+        } else if (childsLen === 1) {
+            alert("请再次输入一个选项");
+            return;
+        }
+        for (var i = 0; i < childsLen; i++) {
+            items.push(childs[i].innerText);
+        }
+        return items;
     },
 
     getLengthRelativeData: function (data) {
