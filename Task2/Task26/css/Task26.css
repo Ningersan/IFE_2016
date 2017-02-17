@@ -1,0 +1,374 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(2, 7, 29);
+    font-family: "Microsoft YaHei";
+}
+
+.hidden {
+    display: none;
+}
+
+/**********设置背景行星等*********/
+.background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.background [class|=planet] {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.background .planet-1 {
+    top: 50px;
+    left: 300px;
+    background-color: #f5a83e;
+}
+
+.background .planet-2 {
+    top: 150px;
+    right: 350px;
+    width: 30px;
+    height: 30px;
+    background-color: #11a4c6;
+}
+
+.background .planet-3 {
+    top: 450px;
+    left: 300px;
+    background-color: #d9e6cd;
+}
+
+.background .planet-4 {
+    top: 450px;
+    right: 300px;
+    background-color: #f5a83e;
+}
+
+/********设置背景行星内部样式*********/
+.background .planet-1 .hole-4,
+.background .planet-1 .hole-5,
+.background .planet-4 .hole-4,
+.background .planet-4 .hole-5 {
+    background-color: #e0862e;
+}
+
+.background .planet-2 .hole-4 {
+    background-color: #1068a8;
+}
+
+.background .planet-2 .hole-5 {
+    background-color: #84bde7;
+}
+
+.background .planet-3 .hole-4 {
+    background-color: #cbd1c6;
+}
+
+.background .planet-3 .hole-5 {
+    background-color: #999b8d;
+}
+
+.background .hole-4 {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+}
+
+.background .hole-5 {
+    position: absolute;
+    top: 10px;
+    left: -5px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #999b8d;
+}
+
+/********设置行星内部动画*********/
+.rotating {
+    -webkit-animation: rotating 50s linear infinite;
+    animation: rotating 50s linear infinite;
+}
+
+@keyframes rotating {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+/**********设置轨道和中心行星*********/
+.layout {
+    position: relative;
+    margin: 0 auto;
+    width: 800px;
+    height: 680px;
+}
+
+.layout>div {
+    margin: auto;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.layout [class|=orbite] {
+    border: #3e4059 solid 2px;
+    border-radius: 50%;
+}
+
+.planet {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background-color: #ec5d4a;
+}
+
+.hole-1 {
+    position: relative;
+    top: 40px;
+    left: 50px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #c83b38;
+}
+
+.hole-2 {
+    position: relative;
+    top: 80px;
+    left: 90px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #c83b38;
+}
+
+.hole-3 {
+    position: relative;
+    top: 110px;
+    left: 140px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #c83b38;
+}
+
+
+.orbite-1 {
+    width: 350px;
+    height: 350px;
+}
+
+.orbite-2 {
+    width: 450px;
+    height: 450px;
+}
+
+.orbite-3 {
+    width: 550px;
+    height: 550px;
+}
+
+.orbite-4 {
+    width: 650px;
+    height: 650px;
+}
+
+/**********设置底部操作区*********/
+.control-wrap {
+    display: -webkit-flex;
+    display: flex;
+    position: relative;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 90%;
+    height: 150px;
+    border: 2px groove #3e4059;
+    border-radius: 10px;
+}
+
+.control {
+    flex: 7;
+    color: #d9e6cd;
+}
+
+.control [class|=craft] {
+    position: relative;
+    display: inline-block;
+    list-style: none;
+    width: 70px;
+    margin: 40px 40px;
+    cursor: pointer;
+}
+
+.control [class|=craft]:last-child {
+    font-size: 2em;
+}
+
+.control .hidden {
+    display: none;
+}
+
+.control span {
+    display: inline-block;
+    width: 60px;
+    line-height: 60px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: #32a39d;
+}
+
+/**********设置操作按钮*********/
+.control [class|=operate] {
+    position: absolute;
+    margin-left: 40px;
+    display: none;
+    list-style: none;
+}
+
+.control [class|=operate] button {
+    width: 25px;
+    height: 25px;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+    outline: none;
+    font-size: .75rem;
+    color: #32a39d;
+    background-color: #d1e8d6;
+}
+
+.control .operate-fly {
+    left: 20px;
+    top: -20px;
+}
+
+.control .operate-stop {
+    left: 40px;
+    top: 15px;
+}
+
+.control .operate-destory {
+    left: 20px;
+    top: 50px;
+}
+
+/**********设置字体图标*********/
+@font-face {
+    font-family: 'Glyphicons Halflings';
+    src: url("fonts/glyphicons-halflings-regular.eot");
+    src: url("fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("fonts/glyphicons-halflings-regular.woff2") format("woff2"), url("fonts/glyphicons-halflings-regular.woff") format("woff"), url("fonts/glyphicons-halflings-regular.ttf") format("truetype"), url("fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
+}
+
+.glyphicon {
+    position: relative;
+    top: 2px;
+    display: inline-block;
+    font-family: 'Glyphicons Halflings';
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.glyphicon-play:before {
+    content: "\e072"
+}
+
+.glyphicon-stop:before {
+    content: "\e074"
+}
+
+.glyphicon-trash:before {
+    content: "\e020"
+}
+
+/**********设置控制台*********/
+.console {
+    flex: 3;
+    padding: 0 10px;
+    border-left: 2px dotted #3b3f58;
+    color: #32a39d;
+    font-size: 12px;
+    line-height: 16px;
+    overflow: scroll;
+}
+
+/* 设置滚动条的样式 */
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+/* 滚动槽 */
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px #32a39d;
+    border-radius: 10px;
+}
+
+/* 滚动条滑块 */
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(0,0,0,0.1);
+    -webkit-box-shadow: inset 0 0 6px #32a39d;
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: #c83b38;
+}
+
+/* 右下角拖动块的样式 */
+::-webkit-scrollbar-corner {
+    background-color: rgb(2, 7, 29);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
