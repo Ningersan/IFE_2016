@@ -253,7 +253,6 @@ body {
     bottom: 0;
     z-index: -1;
     background-color: #2fa06c;
-    border-radius: 10px;
 }
 
 /**********设置底部操作区*********/
@@ -310,7 +309,7 @@ body {
     list-style: none;
 }
 
-.control .craft>ul {
+.control .craft-control>ul {
     display: none;
 }
 
@@ -381,6 +380,10 @@ body {
     font-size: 12px;
     line-height: 16px;
     overflow: scroll;
+}
+
+.fail {
+    color: #c83b38;
 }
 
 /* 设置滚动条的样式 */
