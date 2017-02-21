@@ -9,14 +9,19 @@ function $a(ele) {
     return document.querySelectorAll(ele);
 }
 
-function craftDirector(num) {
+function CraftDirector(num) {
     this.num = num;
     this.orbite = $(".orbite-" + num);
+    this.angle = 0;
     this.energy = 100;
     this.readyStop = false;
+    this.msg = {
+        id: this.num,
+        commond: null,
+    }
 }
 
-craftDirector.prototype = {
+CraftDirector.prototype = {
     launch: function () {
         var newEle = document.createElement("div");
         newEle.className = "craft-model";
@@ -26,19 +31,19 @@ craftDirector.prototype = {
 
         var director = document.createElement("p");
         director.textContent = "[指挥官]：" + this.num + "号轨道添加飞船的指令已经发送";
-        var massage = document.createElement("p");
-        massage.textContent = "[消息]：" + this.num + "号轨道添加飞船成功";
         $(".console").appendChild(director);
-        $(".console").appendChild(massage);
+
+        this.msg.commond = "launch";
+        Mediator(this.msg);
     },
     
     fly: function () {
         this.readyStop = false;
         var self = this;
-        var angle = 0;
         var craft = $("#craft-" + self.num);
         var energyText = craft.querySelector(".energy-num");
         var energyBar = craft.querySelector(".energy");
+
         var i = setInterval(function () {
             if (self.energy === 0 || self.readyStop) {
                 self.stop();
@@ -49,10 +54,10 @@ craftDirector.prototype = {
                 energyBar.style.backgroundColor = "#c83b38";
             }
 
-            angle += 0.5;
+            self.angle += 0.5;
             self.energy -= 1;
 
-            craft.style.transform = "rotate(" + angle + "deg)";
+            craft.style.transform = "rotate(" + self.angle + "deg)";
             energyText.textContent = self.energy;
             energyBar.style.height = self.energy + "%";
         }, 100)
@@ -83,19 +88,18 @@ craftDirector.prototype = {
     
     destroy: function () {
         var self = this;
+        this.msg.commond = "destory";
+
+        if (Mediator(this.msg)) {
+            return;
+        }
+
         //飞船在三秒后将被摧毁
         setTimeout(function () {
-            console.log($a(".craft-control")[self.num - 1]);
             self.orbite.removeChild(self.orbite.children[0]);
         }, 3000)
     }
 }
-
-//初始化飞船模型
-var craft1 = new craftDirector(1);
-var craft2 = new craftDirector(2);
-craft1.launch();
-craft2.launch();
 
 /************************绑定事件区********************************/
 for (var i = 0, len = $a(".craft-control").length; i < len; i++) {
@@ -105,28 +109,37 @@ for (var i = 0, len = $a(".craft-control").length; i < len; i++) {
     })
 }
 
+var msg = {
+    id: null,
+    command: null
+}
 
 for (var i = 0, len = $a(".operates").length; i < len; i++) {
     $a(".operates")[i].addEventListener("click", function (e) {
-        console.log(event.currentTarget);
-        var operate = e.target.parentNode.parentNode.className;
-        switch (operate) {
+        var id = this.previousElementSibling.textContent.slice(0, 1);
+        var operate = e.target.parentNode.parentNode;
+        switch (operate.className) {
             case "operate-fly":
-                craft1.fly();
+                msg.command = "fly"
                 break;
             case "operate-stop":
-                craft1.stop();
+                msg.command = "stop"
                 break;
             case "operate-destory":
-                craft1.destroy();
+                msg.command = "destory"
+                operate.parentNode.parentNode.className = "craft-control hidden";
                 break;
         }
+        msg.id = id;
+        Mediator(msg);
     })
 }
 
+var craftArr = [];
+
 $("#craft-add").addEventListener("click", function () {
-    var num = $(".hidden").children[0].textContent.slice(0, 1);
-    var newCraft = new craftDirector(num);
-    newCraft.launch();
+    msg.id =  $(".hidden").children[0].textContent.slice(0, 1);
+    msg.command = "launch";
+    Mediator(msg);
     $(".hidden").className = "craft-control";
 })
