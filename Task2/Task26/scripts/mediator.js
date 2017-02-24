@@ -1,42 +1,39 @@
 /**
  * Created by Ningersan on 2017/2/21.
  */
+
+//存储飞船对象
 var craftArr = [];
 
-function getCraftIndex(array, id) {
-    for (var i in array) {
-        if (id === array[i].id) {
-            return i;
-        }
-    }
-}
-
 function Mediator(msg) {
-    var massage = document.createElement("p");
     var text = "";
+    var fail = null;
+
     if (msg.command === "launch") {
-        var newCraft = new CraftDirector(msg.id);
+        var newCraft = new CraftCreator(msg.id);
         newCraft.launch();
-        craftArr.push({craft: newCraft,
-                    id: msg.id});
+        craftArr.push({craft: newCraft.craft, id: msg.id});
         return;
     }
 
     if (Math.floor(Math.random() * 10) > 3) {
-        switch (msg.command) {
-            case "fly":
-                text = "[消息]：" + msg.id + "号飞船启动成功"
-                craftArr[getCraftIndex(craftArr, msg.id)].craft.fly();
-                break;
-            case "stop":
-                text = "[消息]：" + msg.id + "号飞船停止成功";
-                craftArr[getCraftIndex(craftArr, msg.id)].craft.stop();
-                break;
-            case "destory":
-                text = "[消息]：" + msg.id + "号飞船摧毁成功";
-                craftArr[getCraftIndex(craftArr, msg.id)].craft.destroy();
-                break;
-        }
+        setTimeout(function () {
+            switch (msg.command) {
+                case "fly":
+                    text = "[消息]：" + msg.id + "号飞船启动成功";
+                    craftArr[getCraftIndex(craftArr, msg.id)].craft.fly();
+                    break;
+                case "stop":
+                    text = "[消息]：" + msg.id + "号飞船停止成功";
+                    craftArr[getCraftIndex(craftArr, msg.id)].craft.stop();
+                    break;
+                case "destory":
+                    text = "[消息]：" + msg.id + "号飞船摧毁成功";
+                    craftArr[getCraftIndex(craftArr, msg.id)].craft.destroy();
+                    break;
+            }
+            fail = false;
+        }, 1000)
     } else {
         switch (msg.command) {
             case "fly":
@@ -49,10 +46,10 @@ function Mediator(msg) {
                 text = "[注意]:" + msg.id + "号飞船的摧毁命令丢包了!!!!";
                 break;
         }
+        fail = true;
     }
 
     setTimeout(function () {
-        massage.textContent = text;
-        $(".console").appendChild(massage);
+        renderConsole(text, fail);
     }, 1000)
 }
