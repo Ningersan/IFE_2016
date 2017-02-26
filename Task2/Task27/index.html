@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IFE task 26</title>
+    <link rel="stylesheet" type="text/css" href="css/Task27.css">
+</head>
+<body>
+<section class="background">
+    <div class="planet-1 rotating">
+        <div class="hole-4"></div>
+        <div class="hole-5"></div>
+    </div>
+    <div class="planet-2 rotating">
+        <div class="hole-4"></div>
+        <div class="hole-5"></div>
+    </div>
+    <div class="planet-3 rotating">
+        <div class="hole-4"></div>
+        <div class="hole-5"></div>
+    </div>
+    <div class="planet-4 rotating">
+        <div class="hole-4"></div>
+        <div class="hole-5"></div>
+    </div>
+</section>
+<section class="layout">
+    <div class="planet">
+        <div class="hole-1"></div>
+        <div class="hole-2"></div>
+        <div class="hole-3"></div>
+    </div>
+    <div class="orbite-1"></div>
+    <div class="orbite-2"></div>
+    <div class="orbite-3"></div>
+    <div class="orbite-4"></div>
+</section>
+<section class="system">
+    <fieldset class="consume">
+        <legend>速度系统选择</legend>
+            <input id="consume-1" type="radio" value="0.5" name="consume" checked>
+            <label for="consume-1">前进号</label>
+
+            <input id="consume-2" type="radio" value="0.7" name="consume">
+            <label for="consume-2">奔腾号</label>
+
+            <input id="consume-3" type="radio" value="0.9" name="consume">
+            <label for="consume-3">超越号</label>
+    </fieldset>
+    <fieldset class="restore">
+        <legend>能源系统选择</legend>
+        <input id="restore-1" type="radio" value="0.2" name="restore" checked>
+        <label for="restore-1">劲量型</label>
+
+        <input id="restore-2" type="radio" value="0.3" name="restore">
+        <label for="restore-2">光能型</label>
+
+        <input id="restore-3" type="radio" value="0.4" name="restore">
+        <label for="restore-3">永久型</label>
+    </fieldset>
+</section>
+<section class="control-wrap">
+    <div class="control">
+        <ul>
+            <li class="craft-control hidden">
+                <span>1号</span>
+                <ul class="operates">
+                    <li class="operate-fly"><button type="button"><i class="glyphicon glyphicon-play"></i></button></li>
+                    <li class="operate-stop"><button type="button"><i class="glyphicon glyphicon-stop"></i></button></li>
+                    <li class="operate-destroy"><button type="button"><i class="glyphicon glyphicon-trash"></i></button></li>
+                </ul>
+            </li>
+            <li class="craft-control hidden">
+                <span>2号</span>
+                <ul class="operates">
+                    <li class="operate-fly"><button type="button"><i class="glyphicon glyphicon-play"></i></button></li>
+                    <li class="operate-stop"><button type="button"><i class="glyphicon glyphicon-stop"></i></button></li>
+                    <li class="operate-destroy"><button type="button"><i class="glyphicon glyphicon-trash"></i></button></li>
+                </ul>
+            </li>
+            <li class="craft-control hidden">
+                <span>3号</span>
+                <ul class="operates">
+                    <li class="operate-fly"><button type="button"><i class="glyphicon glyphicon-play"></i></button></li>
+                    <li class="operate-stop"><button type="button"><i class="glyphicon glyphicon-stop"></i></button></li>
+                    <li class="operate-destroy"><button type="button"><i class="glyphicon glyphicon-trash"></i></button></li>
+                </ul>
+            </li>
+            <li class="craft-control hidden">
+                <span>4号</span>
+                <ul class="operates">
+                    <li class="operate-fly"><button type="button"><i class="glyphicon glyphicon-play"></i></button></li>
+                    <li class="operate-stop"><button type="button"><i class="glyphicon glyphicon-stop"></i></button></li>
+                    <li class="operate-destroy"><button type="button"><i class="glyphicon glyphicon-trash"></i></button></li>
+                </ul>
+            </li>
+            <li class="craft-add"><span id="craft-add">+</span></li>
+        </ul>
+    </div>
+    <div class="console">
+        <p>准备就绪！请操作</p>
+    </div>
+</section>
+<script src="js/utils.js"></script>
+<script src="js/main.js"></script>
+<script src="js/craft.js"></script>
+<script src="js/command.js"></script>
+<script src="js/BUS.js"></script>
+</body>
+</html>
