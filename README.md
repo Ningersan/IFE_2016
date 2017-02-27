@@ -22,7 +22,10 @@ Task7: 实现常见的技术产品官网的页面架构及样式布局
 demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task1/Task7.html                    
 
 Task8: 响应式网格（栅格化）布局         
-demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task1/Task8.html            
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task1/Task8.html       
+
+Task9: 使用HTML/CSS实现一个复杂页面         
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task1/Task9.html             
 
 Task10: Flexbox 布局练习         
 demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task1/Task10.html         
