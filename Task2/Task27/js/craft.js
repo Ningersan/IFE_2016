@@ -101,7 +101,7 @@ SpaceCraft.prototype = {
     destroy: function () {
         var self = this;
         //删除飞船数组中的当前飞船对象
-        BUS.craft[this.id - 1] = null;
+        BUS.addCraft[this.id - 1] = null;
         //飞船在三秒后将被摧毁
         setTimeout(function () {
             var orbite = $(".orbite-" + self.id);
@@ -134,7 +134,7 @@ SpaceCraft.prototype = {
         //如果丢包，重新执行模拟程序
         while (!BUS.simulateDrop()) {}
 
-        var signal = BUS.signal;
+        var signal = BUS.getSignal();
         var index = parseInt(signal.slice(4), 2);
         //解析信号为JSON格式
         result.id = parseInt(signal.slice(0, 4), 2);

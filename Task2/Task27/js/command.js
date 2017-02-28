@@ -54,6 +54,6 @@ Commander.prototype = {
 
     //向介质发送信号
     sendSignal: function () {
-        this.bus.signal = this.Adapter();
+        this.bus.setSignal(this.Adapter());
     }
 }
