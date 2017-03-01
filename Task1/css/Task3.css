@@ -1,57 +1,59 @@
 body {
-	font-family: "Microsoft yahei";
-	padding: 20px;
+    padding: 20px;
+    font-family: 'Microsoft yahei', sans-serif;
 }
 
 .container {
-	margin: 0px;
-	padding: 20px;
-	*zoom: 1; /*在IE6和7的浏览器中，触发父元素hasLayout机制，决定了元素怎样渲染内容，以及元素与元素之间的相互影响*/
-	background-color: #eee;
-	border: 1px solid #ccc;
+    margin: 0;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #eee;
+    *zoom: 1; /*在IE6和7的浏览器中，触发父元素hasLayout机制，决定了元素怎样渲染内容，以及元素与元素之间的相互影响*/
 }
 
 /*使用clearfix技巧*/
-.container:before, .container:after {  /*:before伪类为了防止子元素顶部的外边距塌陷*/
-	content: "";	/*在父元素上使用：before和：after伪类，在浮动元素父元素前后创建隐藏元素*/
-	display: table;  /*创建匿名的"table-cell"元素*/
+/*:before伪类为了防止子元素顶部的外边距塌陷*/
+.container:before,
+.container:after {
+    display: table;  /*创建匿名的"table-cell"元素*/
+    content: '';     /*在父元素上使用：before和：after伪类，在浮动元素父元素前后创建隐藏元素*/
 }
 
 .container:after {
-	clear: both;    /*清除元素浮动，左右不允许有浮动元素*/
+    clear: both;     /*清除元素浮动，左右不允许有浮动元素*/
 }
 
 .left {
-	float: left;
-	padding: 20px;
-	width: 160px;	/*元素的宽度和边框的宽度并不相同，还需要减去内边距20px，即（200-20*2）px*/
-	border: 1px solid #ccc;
-	background-color: white;
+    float: left;
+    padding: 20px;
+    width: 160px;   
+    border: 1px solid #ccc;
+    background-color: white;
 }
 
 .left h2 {
-	margin: 0px;
-	padding: 0px;
-	float: right;
-	font-size: 14px;
+    float: right;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
 }
 
 .right {
-	float: right;
-	width: 120px;
-	border: 1px solid #ccc;
-	background-color: white;
+    float: right;
+    width: 120px;
+    border: 1px solid #ccc;
+    background-color: white;
 }
 
 .right img {
-	display: block;
-	margin: 20px;
+    display: block;
+    margin: 20px;
 }
 
 .middle {
-	padding: 20px;
-	margin-left: 220px; /*即左边元素宽度+margin  200px+20px*/
-	margin-right: 140px; /*原理同上*/
-	border: 1px solid #ccc;
-	background-color: white;
+    margin-right: 140px; 
+    margin-left: 220px; 
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: white;
 }
