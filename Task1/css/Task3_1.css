@@ -1,0 +1,51 @@
+body {
+    padding: 20px;
+    font-family: 'Microsoft yahei', sans-serif;
+}
+
+.container {
+	position: relative;
+    margin: 0;
+    padding: 20px;
+    height: 420px;
+    border: 1px solid #ccc;
+    background-color: #eee;
+}
+
+.left {
+	position: absolute;
+    padding: 20px;
+    width: 160px;   
+    border: 1px solid #ccc;
+    background-color: #fff;
+}
+
+.left h2 {
+    float: right;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+}
+
+.right {
+	position: absolute;
+	top: 20px;
+	right: 20px;
+    width: 120px;
+    border: 1px solid #ccc;
+    background-color: white;
+}
+
+.right img {
+    display: block;
+    margin: 20px;
+}
+
+.middle {
+    margin-right: 140px; 
+    margin-left: 220px; 
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: white;
+}
+
