@@ -24,11 +24,9 @@ function getSystemInfo(ele) {
 function addEvent(element, event, listener) {
     if (element.addEventListener) {
         element.addEventListener(event, listener, false);
-    }
-    else if (element.attachEvent) {
+    } else if (element.attachEvent) {
         element.attachEvent("on" + event, listener);
-    }
-    else {
+    } else {
         element["on" + event] = listener;
     }
 }
