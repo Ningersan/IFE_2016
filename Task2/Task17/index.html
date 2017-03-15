@@ -1,5 +1,6 @@
-<!DOCTYPE>
-<html>
+<!DOCTYPE html>
+<html lang="zh-CN">
+
 <head>
     <meta charset="utf-8">
     <title>IFE JavaScript Task 01</title>
@@ -10,34 +11,36 @@
             height: 500px;
             margin: 10px auto;
             padding: 10px;
-            justify-content: center;
+            justify-content: space-between;
             align-items: flex-end;
         }
-
+        
         .aqi-chart-wrap div {
             flex: 1;
-            border: 1px solid #000;
+            cursor: pointer;
         }
     </style>
 </head>
-<body>
-<fieldset id="form-gra-time">
-    <legend>请选择日期粒度：</legend>
-    <label>日<input name="gra-time" value="day" type="radio" checked="checked"></label>
-    <label>周<input name="gra-time" value="week" type="radio"></label>
-    <label>月<input name="gra-time" value="month" type="radio"></label>
-</fieldset>
 
-<fieldset>
-    <legend>请选择查看的城市：</legend>
-    <select id="city-select">
+<body>
+    <fieldset id="form-gra-time">
+        <legend>请选择日期粒度：</legend>
+        <label>日<input name="gra-time" value="day" type="radio" checked="checked"></label>
+        <label>周<input name="gra-time" value="week" type="radio"></label>
+        <label>月<input name="gra-time" value="month" type="radio"></label>
+    </fieldset>
+
+    <fieldset>
+        <legend>请选择查看的城市：</legend>
+        <select id="city-select">
         <option>北京</option>
     </select>
-</fieldset>
+    </fieldset>
 
-<div class="aqi-chart-wrap">
-</div>
+    <div class="aqi-chart-wrap">
+    </div>
 
-<script src="scripts/Task17.js"></script>
+    <script src="js/Task17.js"></script>
 </body>
+
 </html>

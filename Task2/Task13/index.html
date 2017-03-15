@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
-    <head>
+<head>
     <meta charset="utf-8">
     <title>IFE JavaScript Task 01</title>
-    </head>
+</head>
 <body>
 
     <label>请输入北京今天空气质量：<input id="aqi-input" type="text"></label>
@@ -22,25 +22,27 @@
     */
 
     //查找元素
-    function get(x) {
-        return document.getElementById(x);
+    function $(id) {
+        return document.getElementById(id);
     }
 
-    //输出值在aqi-display中
-    function print() {
-        var num = get("aqi-input").value; //获取输入值
-        if (!isNaN(num) && num!="") {
-            get("aqi-display").innerHTML = num;
+    function handle() {
+        var num = $("aqi-input").value.trim(); 
+
+        if (!isNaN(num) && num !== "") {
+            $("aqi-display").innerHTML = num;
         } else {
-            alert("your input is not a number, please enter again.");
+            alert("your input is not a number, please enter again!");
         }
     }
 
-    get("button").onclick = print; //触发事件
-    //回车触发
-    get("aqi-input").onkeyup = function (event) {
+    // 给按钮绑定事件
+    $("button").onclick = handle;
+    
+    //在输入框输入数字后回车触发事件
+    $("aqi-input").onkeyup = function (event) {
         if (event.keyCode === 13) {
-            print();
+            handle();
         }
     }
 })();

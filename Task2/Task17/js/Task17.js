@@ -8,13 +8,20 @@
  }
  };
  */
+function $(ele) {
+    return document.querySelector(ele);
+}
+
+function $a(ele) {
+    return document.querySelectorAll(ele);
+}
 
 var colors = ['#16324a', '#24385e', '#393f65', '#4e4a67', '#5a4563', '#b38e95',
     '#edae9e', '#c1b9c2', '#bec3cb', '#9ea7bb', '#99b4ce', '#d7f0f8'];
 
-var citySelect = document.getElementById("city-select");
-var dateInput = document.getElementsByName("gra-time");
-var aqiChartWrap =  document.getElementsByClassName("aqi-chart-wrap")[0];
+var citySelect = $("#city-select");
+var dateInput = $a("#form-gra-time input");
+var aqiChartWrap =  $(".aqi-chart-wrap");
 
 // 以下两个函数用于随机模拟生成测试数据
 function getDateStr(dat) {
@@ -62,11 +69,11 @@ var pageState = {
  * 渲染图表
  */
 function renderChart() {
-    var color = "";
     var text = "";
+    var color = "";
     for (var date in chartData) {
-        color = colors[Math.floor(Math.random() * 11)];
-        text += "<div title='"+date+"' style='height:"+chartData[date]+"px; background-color:"+color+"'></div>";
+        color = colors[Math.floor(Math.random() * 12 + 0)];
+        text += "<div title='" + date + " AQI: " + chartData[date] + "' style='height:" + chartData[date] + "px; background-color:" + color + "'></div>";
     }
     aqiChartWrap.innerHTML = text;
 }
@@ -130,40 +137,53 @@ function initAqiChartData() {
     // 处理好的数据存到 chartData 中
     var newChartData = chartData;
     if (pageState.nowGraTime === "week") {
+        // 初始化数据
         chartData = {};
-        var countDay = 0, countWeek = 0, countData = 0;
+        var countDay  = 0;
+        var countWeek = 0;
+        var countData = 0;
+
         for (var date in newChartData) {
             countDay++;
             countData += newChartData[date];
             if ((new Date(date)).getDay() === 6) {
                 countWeek++;
+                // 计算这周数据的平均值
                 chartData["第"+countWeek+"周"] = Math.round(countData/countDay);
-                countData = 0;
+                // 重置当前天数和累计数据
                 countDay = 0;
+                countData = 0;
             }
         }
-        if (countDay != 0) {
+        // 未满一周的数据处理
+        if (countDay !== 0) {
             countWeek++;
             chartData["第"+countWeek+"周"] = Math.round(countData/countDay);
         }
     }
 
     if (pageState.nowGraTime === "month") {
+        // 初始化数据
         chartData = {};
-        var countDay = 0, countMonth = 0, countData = 0;
+        var countDay = 0;
+        var countData = 0;
+        var countMonth = 0;
+
         for (var date in newChartData) {
             countDay++;
             countData += newChartData[date];
             if ((new Date(date)).getMonth() != countMonth) {
                 countMonth++;
                 chartData["第" + countMonth + "月"] = Math.round(countData / countDay);
+                // 重置当前天数和累计数据
                 countData = 0;
                 countDay = 0;
             }
         }
-        if (countDay != 0) {
+        // 未满一月的数据处理
+        if (countDay !== 0) {
             countMonth++;
-            chartData["第"+countWeek+"月"] = Math.round(countData/countDay);
+            chartData["第"+countMonth+"月"] = Math.round(countData/countDay);
         }
     }
 }

@@ -32,7 +32,7 @@ function addAqiData() {
 function renderAqiList() {
     var items = "";
     for (var city in aqiData) {
-        items += "<tr><td>" + city + "</td>" + "<td>" + aqiData[city] + "</td><td><button id="+ city +">删除</button></td></tr>";
+        items += "<tr><td>" + city + "</td>" + "<td>" + aqiData[city] + "</td><td><button data-city="+ city +">删除</button></td></tr>";
     }
     document.getElementById("aqi-table").innerHTML = items;
 }
@@ -62,7 +62,9 @@ function init() {
 
     // 想办法给aqi-table中的所有删除按钮绑定事件，触发delBtnHandle函数
     document.getElementById("aqi-table").addEventListener("click", function(event){
-        if(event.target.nodeName.toLowerCase() === 'button') delBtnHandle(event.target.id);
+        if(event.target.nodeName.toLowerCase() === "button") { 
+            delBtnHandle(event.target.dataset.city);
+        }
     });
 }
 
