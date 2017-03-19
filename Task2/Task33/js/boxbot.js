@@ -12,7 +12,7 @@
         robot.style.top = "0";
         robot.style.left = "0";
         robot.style.transform = "rotate(0deg)";
-        robot.src = "D:/Workspace/code/pic/bot.png";
+        robot.src = "img/bot.png";
 
         // 创建10*10表格
         for (var i = 0; i < 9; i++) {

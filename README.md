@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 #baidu_ife_2016 的任务      
-=======
-#baidu_ife_2016 的任务     
->>>>>>> origin/master
 ##任务一
 Task1: 零基础HTML编码      
 demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task1/Task1.html 
@@ -67,7 +63,7 @@ demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/
 
 Task22: JavaScript和树（一)      
 demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task22/index.html       
-          
+​          
 Task23: JavaScript和树（二）      
 demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task23/index.html          
 
@@ -93,4 +89,7 @@ Task31：表单（三）联动
 demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task31/index.html          
 
 Task32：表单（四）实现表单自动生成工厂    
-demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task32/index.html    
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task32/index.html   
+
+Task33：听指令的小方块（一）    
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task33/index.html 
