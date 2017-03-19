@@ -51,7 +51,6 @@ var queue = {
     },
 
     render: function () {
-        var item = "";
         numArea.innerHTML = this.items.map(function (item, index) {
             return "<div data-index='" + index + "'>" + item + "</div>";
         }).join("");
