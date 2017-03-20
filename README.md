@@ -92,4 +92,7 @@ Task32：表单（四）实现表单自动生成工厂
 demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task32/index.html   
 
 Task33：听指令的小方块（一）    
-demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task33/index.html 
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task33/index.html           
+
+Task34：听指令的小方块（二）    
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task34/index.html 
