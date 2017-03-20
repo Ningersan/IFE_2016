@@ -1,0 +1,30 @@
+table {
+    position: relative;
+    border-collapse: collapse;
+}
+
+table td {
+    width: 42px;
+    height: 42px;
+    border: 1px solid rgb(237 ,237 ,237);
+}
+
+table img {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    -webkit-transition: all .25s  ease-in-out;
+    -moz-transition: all .25s  ease-in-out;
+    transition: all .25s  ease-in-out;
+}
+
+.control {
+    margin-top: 10px;
+    width: 400px;
+    text-align: center;
+}
+
+.control input {
+    vertical-align: middle;
+    height: 18px;
+}
