@@ -121,7 +121,7 @@
                 boxbot.move(0);
                 break;
             default:
-                alert("sorry，请检查输入。\n输入'GO', 'TUN LEF', 'TUN RIG', 'TUN BAC'指令来控制小方块");
+                alert("sorry，请检查输入。\n输入'GO', 'TUN LEF', 'TUN RIG', 'TUN BAC', 'TRA LEF', 'TRA TOP', 'TRA RIG', 'TRA BOT', 'MOV LEF', 'MOV TOP', 'MOV RIG', 'MOV BOT', 指令来控制小方块");
                 break;
         }
     });
