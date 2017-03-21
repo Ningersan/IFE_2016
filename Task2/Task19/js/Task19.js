@@ -20,6 +20,7 @@ var queue = {
 
     leftPush: function () {
         var value = getValue();
+
         if (value && !queue.isFull()) {
             this.items.unshift(value);
             this.render();
@@ -28,6 +29,7 @@ var queue = {
 
     rightPush: function () {
         var value = getValue();
+
         if (value && !queue.isFull()) {
             this.items.push(value);
             this.render();
@@ -58,6 +60,7 @@ var queue = {
             number = Math.floor(Math.random() * 90 + 10);
             this.items.push(number);
         }
+
         this.render();
     },
 
@@ -72,24 +75,28 @@ var queue = {
         var self = this;
         var len = this.items.length;
         var divs = numArea.querySelectorAll("div");
+
         var timer = setInterval(function () {
             if (i === (len - 1)) {
                 clearInterval(timer);
             }
+
             for (var j = (len - 1); j > i; j--) {
                 if (self.items[j] < self.items[j - 1]) {
                     swapData(j, j - 1);
                     swapDomHight(divs[j], divs[j - 1]);
                 }
             }
+
             divs[i++].style.backgroundColor = "#55bcbc";
         }, 150);
     },
-}
+};
 
 // 交换两个数据顺序
 function swapData(a, b) {
     var temp = queue.items[a];
+
     queue.items[a] = queue.items[b];
     queue.items[b] = temp;
 }
@@ -97,6 +104,7 @@ function swapData(a, b) {
 //交换两个dom节点的高度
 function swapDomHight(ele1, ele2) {
     var temp = ele1.offsetHeight;
+
     ele1.style.height = ele2.offsetHeight + "px";
     ele2.style.height = temp + "px";
     //改变颜色
@@ -111,7 +119,7 @@ function getValue() {
         if (value > 10 && value < 100) {
             return value;
         } else {
-            alert("out of range")
+            alert("out of range");
         }
     } else {
         alert("please enter a number");
@@ -142,7 +150,7 @@ function btnEvent() {
                 queue.bubbleSort();
                 break;
         }
-    })
+    });
 }
 
 // 事件委托，给队列显示区绑定事件
@@ -151,7 +159,7 @@ function divEvent() {
         if (event.target.dataset.index) {
             queue.delete(event.target.dataset.index);
         }
-    })
+    });
 }
 
 // 初始化事件

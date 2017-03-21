@@ -9,18 +9,19 @@ var queue = {
     // 从输入框获取数据
     getValue: function() {
         var value = numInput.value;
+
         if (!isNaN(value) && value !== "") {
             // 清空输入框
             numInput.value = "";
             return value;
-        }
-        else {
+        } else {
             alert("please enter a number");
         }
     },
 
     leftPush: function () {
         var value = this.getValue();
+
         if (value) {
             this.items.unshift(value);
             this.render();
@@ -29,6 +30,7 @@ var queue = {
  
     rightPush: function () {
         var value = this.getValue();
+
         if (value) {
             this.items.push(value);
             this.render();
@@ -55,7 +57,7 @@ var queue = {
             return "<div data-index='" + index + "'>" + item + "</div>";
         }).join("");
     }
-}
+};
 
 //事件委托，给四个按钮绑定事件
 function btnEvent() {
@@ -74,7 +76,7 @@ function btnEvent() {
                 queue.rightPop();
                 break;
         }
-    })
+    });
 }
 
 // 事件委托，给队列显示区绑定事件
@@ -83,7 +85,7 @@ function divEvent() {
         if (event.target.dataset.index) {
             queue.delete(event.target.dataset.index);
         }
-    })
+    });
 }
 
 // 初始化事件

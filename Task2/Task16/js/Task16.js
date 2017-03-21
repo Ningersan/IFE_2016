@@ -15,13 +15,14 @@ var aqiData = {};
 function addAqiData() {
     var city = document.getElementById("aqi-city-input").value.trim();
     var num = document.getElementById("aqi-value-input").value.trim();
+
     if (!city.match(/^[A-Za-z\u4E00-\u9FA5]+$/)) {
         alert("城市名称必须为中英文字符！");
-        return ;
+        return;
     }
     if (!num.match(/^\d+$/)) {
         alert("空气质量必须为整数！");
-        return ;
+        return;
     }
     aqiData[city] = num;
 }
@@ -31,9 +32,11 @@ function addAqiData() {
  */
 function renderAqiList() {
     var items = "";
+    
     for (var city in aqiData) {
         items += "<tr><td>" + city + "</td>" + "<td>" + aqiData[city] + "</td><td><button data-city="+ city +">删除</button></td></tr>";
     }
+    
     document.getElementById("aqi-table").innerHTML = items;
 }
 
@@ -52,7 +55,7 @@ function addBtnHandle() {
  */
 function delBtnHandle(city) {
     // do sth.
-    delete aqiData[city]
+    delete aqiData[city];
     renderAqiList();
 }
 

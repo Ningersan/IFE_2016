@@ -21,6 +21,7 @@
                 tbody.rows[i].insertCell(j);
             }
         }
+
         tbody.appendChild(robot);
         table.appendChild(tbody);
         boxbotMap.appendChild(table);
@@ -51,6 +52,7 @@
 
         move: function (angle) {
             // 更新小方块当前状态
+
             // x轴偏移量
             var posX = parseInt(this.robot.style.left);
             // y轴偏移量
@@ -129,6 +131,7 @@
     // 绑定键盘控制事件
     document.addEventListener("keydown", function (event) {
         var e = event || window.event;
+        
         switch (e.keyCode) {
             case 37:
                 boxbot.turn(90);

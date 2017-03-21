@@ -35,7 +35,7 @@ function getDateStr(dat) {
 function randomBuildData(seed) {
     var returnData = {};
     var dat = new Date("2016-01-01");
-    var datStr = ''
+    var datStr = '';
     for (var i = 1; i < 92; i++) {
         datStr = getDateStr(dat);
         returnData[datStr] = Math.ceil(Math.random() * seed);
@@ -63,7 +63,7 @@ var chartData = {};
 var pageState = {
     nowSelectCity: "北京",
     nowGraTime: "day"
-}
+};
 
 /**
  * 渲染图表
@@ -71,10 +71,12 @@ var pageState = {
 function renderChart() {
     var text = "";
     var color = "";
+
     for (var date in chartData) {
         color = colors[Math.floor(Math.random() * 12 + 0)];
         text += "<div title='" + date + " AQI: " + chartData[date] + "' style='height:" + chartData[date] + "px; background-color:" + color + "'></div>";
     }
+
     aqiChartWrap.innerHTML = text;
 }
 
@@ -84,8 +86,10 @@ function renderChart() {
 function graTimeChange() {
     // 设置对应数据
     pageState.nowGraTime = event.target.value;
+
     //初始化数据
     initAqiChartData();
+
     // 调用图表渲染函数
     renderChart();
 }
@@ -96,8 +100,10 @@ function graTimeChange() {
 function citySelectChange() {
     // 设置对应数据
     pageState.nowSelectCity = event.target.value;
+
     //初始化数据
     initAqiChartData();
+
     // 调用图表渲染函数
     renderChart();
 }
@@ -107,7 +113,7 @@ function citySelectChange() {
  */
 function initGraTimeForm() {
     for (var i = dateInput.length - 1; i >= 0; i--) {
-        dateInput[i].addEventListener("click", graTimeChange)
+        dateInput[i].addEventListener("click", graTimeChange);
     }
 }
 
@@ -117,9 +123,11 @@ function initGraTimeForm() {
 function initCitySelector() {
     // 读取aqiSourceData中的城市，然后设置id为city-select的下拉列表中的选项
     var city = "";
+
     for (var key in aqiSourceData) {
         city += "<option>" + key + "</option>";
     }
+
     citySelect.innerHTML = city;
 
     // 给select设置事件，当选项发生变化时调用函数citySelectChange
@@ -155,6 +163,7 @@ function initAqiChartData() {
                 countData = 0;
             }
         }
+
         // 未满一周的数据处理
         if (countDay !== 0) {
             countWeek++;
@@ -180,6 +189,7 @@ function initAqiChartData() {
                 countDay = 0;
             }
         }
+
         // 未满一月的数据处理
         if (countDay !== 0) {
             countMonth++;
@@ -192,7 +202,7 @@ function initAqiChartData() {
  * 初始化函数
  */
 function init() {
-    initGraTimeForm()
+    initGraTimeForm();
     initCitySelector();
     initAqiChartData();
     renderChart();
