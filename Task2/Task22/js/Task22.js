@@ -4,7 +4,7 @@ var btn = document.querySelector("button");
 
 /**
  * 渲染当前dom节点的颜色，并在一定时间后恢复它
- * @param {node} node - dom节点 
+ * @param {Node} node - dom节点 
  */
 function renderTreeNode(node) {
     node.style.backgroundColor = "#0dc1c1";

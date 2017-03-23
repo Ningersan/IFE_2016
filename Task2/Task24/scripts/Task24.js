@@ -1,7 +1,7 @@
-var btn = document.getElementsByTagName("button");
-var root = $(".tree");
-var lock = false;
 var delay = 500;
+var lock = false;
+var root = $(".tree");
+var btn = document.getElementsByTagName("button");
 
 function $(ele) {
     return document.querySelector(ele);
@@ -18,34 +18,29 @@ function setDisabled(flag) {
     }
 }
 
-//绑定点击焦点事件
-function listener() {
-    var divEle = $(".tree");
-    divEle.addEventListener("click", function (event) {
-        if (!event.target.className) {
-            event.target.className = "focus";
-        } else {
-            event.target.removeAttribute("class");
-        }
-    })
-}
-
-//添加元素
+/**
+ * 给树添加节点
+ */
 function addElement() {
+    var focusEle = $a(".focus");
+    var str = $("#add-input").value.trim();
+
     if (!$(".focus")) {
         alert("请选择一个元素");
     }
-    var str = $("#add-input").value.trim();
-    var focusEle = $a(".focus");
-    for (var i = 0; i < focusEle.length; i++) {
-        focusEle[i].innerHTML += "<div>"+str+"</div>";
+
+    for (var i = 0, len = focusEle.length; i < len; i++) {
+        focusEle[i].innerHTML += "<div>" + str + "</div>";
     }
 }
 
-//删除元素
+/**
+ *删除选定的树节点 
+ */
 function delElement() {
     var delEle = $a(".focus");
-    for (var i = 0; i < delEle.length; i++) {
+
+    for (var i = 0, len = delEle.length; i < len; i++) {
         delEle[i].parentNode.removeChild(delEle[i]);
     }
 }
@@ -87,13 +82,15 @@ function renderTreeNode(nodeList) {
 
         node.style.backgroundColor = "#0dc1c1";
         preNode = node;
-    }, delay)
+    }, delay);
 }
 
 function dealTree(value) {
-    var BFSindex = 0;  //广度遍历时的索引
+    //广度遍历时的索引
+    var BFSindex = 0;  
     var nodeList = [];
 
+    // 深度优先搜素
     function depthFirstSearch(node) {
         if (node) {
             nodeList.push(node);
@@ -102,6 +99,7 @@ function dealTree(value) {
         }
     }
 
+    // 广度优先搜索
     function breadthFirstSearch(node) {
         if (node) {
             nodeList.push(node);
@@ -136,15 +134,39 @@ function dealTree(value) {
             breadthFirstSearch(root);
             break;
     }
+
     renderTreeNode(nodeList);
 }
 
+//绑定点击焦点事件
+addEvent($(".tree"), "click", function(event) {
+    if (!event.target.className) {
+        event.target.className = "focus";
+    } else {
+        event.target.removeAttribute("class");
+    }
+});
+
 //给按钮设置监听事件
-for (var i = 0; i < btn.length; i++) {
-    btn[i].addEventListener("click", function (event) {
+for (var i = 0; i < btn.length; i++) {    
+    addEvent(btn[i], "click", function() {
         var value = event.target.value;
         dealTree(value);
     });
 }
 
-listener();
+/**
+ * 事件绑定函数，兼容浏览器差异
+ * @param {Node} element - 被绑定的dom节点 
+ * @param {string} event - 绑定事件的名称
+ * @param {Function} listener - 绑定的函数
+ */
+function addEvent(element, event, listener) {
+    if (element.addEventListener) {
+        element.addEventListener(event, listener, false);
+    } else if (element.attachEvent) {
+        element.attachEvent("on" + event, listener);
+    } else {
+        element["on" + event] = listener;
+    }
+}

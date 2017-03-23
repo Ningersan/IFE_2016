@@ -9,24 +9,24 @@ function $(id) {
  * @param {string} id 
  */
 function TagCreator(id) {
-	this.id = id;
+    this.id = id;
     this.ele = $(id);
-	this.area = $(id.slice(0, id.indexOf("-")) + "-area");
+    this.area = $(id.slice(0, id.indexOf("-")) + "-area");
     this.class = (id === "tag-input")? "style-2" : "style-1";
     this.confirm = $("confirm");
-	this.init();
+    this.init();
 }
 
 TagCreator.prototype = {
     // 初始化事件
-	init: function () {
+    init: function () {
         var self = this;
 
         // 绑定键盘事件
         this.ele.onkeyup = this.dealKeyCode.bind(this);
 
         // 绑定确认按钮事件
-		this.confirm.onclick = this.render.bind(this);
+        this.confirm.onclick = this.render.bind(this);
 
         // 事件委托，处理标签事件
         this.area.addEventListener("mouseover", function (e) {
@@ -48,11 +48,11 @@ TagCreator.prototype = {
                 self.area.removeChild(e.target);
             }
         });
-	},
+    },
 
     // 获取输入框输入数据
     getData: function () {
-	    var strArr = [];
+        var strArr = [];
 
         switch (this.id) {
             case "tag-input":
@@ -67,65 +67,65 @@ TagCreator.prototype = {
     },
 
     // 当输入空格，逗号，回车时，生成tag
-	dealKeyCode: function () {
+    dealKeyCode: function () {
         if (this.id === "tag-input") {
             if (event.keyCode === 13 || event.keyCode === 188 || event.keyCode === 32) {
                 this.render();
             }
         }
-	},
+    },
 
-	render: function () {
-	    var strArr = this.getData();
+    render: function () {
+        var strArr = this.getData();
 
-		for (var i = 0, len = strArr.length; i < len; i++) {
-			if (strArr[i] !== "" && !this.checkRep(strArr[i])) {
-				this.addNode(strArr[i]);
+        for (var i = 0, len = strArr.length; i < len; i++) {
+            if (strArr[i] !== "" && !this.checkRep(strArr[i])) {
+                this.addNode(strArr[i]);
                 this.checkNum();
-			}
-		}
+            }
+        }
 
         this.ele.value = "";
-	},
+    },
     
-	addNode: function (str) {
+    addNode: function (str) {
         var node = document.createTextNode(str);
         var newEle = document.createElement("div");
 
         newEle.className = "tag";
         newEle.appendChild(node);
         this.area.appendChild(newEle);
-	},
+    },
 
     // 检查tag数量是否超过10个，如超过则删除
-	checkNum: function () {
-		var childs = this.area.childNodes;
+    checkNum: function () {
+        var childs = this.area.childNodes;
 
-	    if (childs.length > 10) {
-	        alert("Elements is full, remove the first one");
+        if (childs.length > 10) {
+            alert("Elements is full, remove the first one");
 
             for (var i = 10, len = childs.length; i < len; i++) {
-	            this.area.removeChild(this.area.firstChild);
-	        }
-	    }
-	},
+                this.area.removeChild(this.area.firstChild);
+            }
+        }
+    },
 
     // 检查是否有重复的元素
-	checkRep: function (str) {
-	    var childs = this.area.childNodes;
+    checkRep: function (str) {
+        var childs = this.area.childNodes;
 
-	    if (!childs) {
+        if (!childs) {
             return false;
         }
 
-	    for (var i = childs.length - 1; i >= 0; i--) {
-	        if (str === childs[i].innerText) {
-	            return true;
-	        }
-	    }
+        for (var i = childs.length - 1; i >= 0; i--) {
+            if (str === childs[i].innerText) {
+                return true;
+            }
+        }
         
-	    return false;
-	}
+        return false;
+    }
 };
 
 //实例化
