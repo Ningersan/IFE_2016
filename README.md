@@ -95,4 +95,7 @@ Task33：听指令的小方块（一）
 demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task33/index.html           
 
 Task34：听指令的小方块（二）    
-demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task34/index.html 
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task34/index.html           
+
+Task35：听指令的小方块（三）    
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task35/index.html 
