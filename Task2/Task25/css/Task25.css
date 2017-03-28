@@ -42,7 +42,11 @@ div>div {
     color: #fb6b0b;
 }
 
-i.icon-to-bottom {
+i {
+    margin-top: 5px;
+}
+
+.icon-to-bottom {
     float: left;
     margin-top: 4px;
     margin-right: 6px;
@@ -54,7 +58,7 @@ i.icon-to-bottom {
     border-right: 5px solid transparent;
 }
 
-i.icon-to-right {
+.icon-to-right {
     float: left;
     margin-top: 4px;
     margin-right: 6px;
@@ -66,7 +70,7 @@ i.icon-to-right {
     cursor: pointer;
 }
 
-i.icon-add {
+.icon-add {
     display: none;
     float: left;
     margin-left: 20px;

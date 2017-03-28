@@ -70,7 +70,7 @@ SpaceCraft.prototype = {
             self.energy -= self.energyConsume - self.energySystem;
             energyText.textContent = Math.floor(self.energy);
             energyBar.style.height = self.energy + "%";
-        }, 50)
+        }, 50);
     },
 
     stop : function () {

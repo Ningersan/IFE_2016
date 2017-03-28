@@ -1,4 +1,3 @@
-
 // 初始化表格
 (function init() {
     var table = document.createElement("table");

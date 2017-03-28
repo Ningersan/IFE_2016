@@ -159,7 +159,7 @@ for (var i = 0; i < btn.length; i++) {
  * 事件绑定函数，兼容浏览器差异
  * @param {Node} element - 被绑定的dom节点 
  * @param {string} event - 绑定事件的名称
- * @param {Function} listener - 绑定的函数
+ * @param {function} listener - 绑定的函数
  */
 function addEvent(element, event, listener) {
     if (element.addEventListener) {
