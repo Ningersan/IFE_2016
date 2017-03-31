@@ -1,5 +1,5 @@
-#baidu_ife_2016 的任务      
-##任务一
+# baidu_ife_2016 的任务      
+## 任务一
 Task1: 零基础HTML编码      
 demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task1/Task1.html 
 
@@ -33,7 +33,7 @@ demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/
 Task12: 学习CSS3的新特性         
 demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task1/Task12.html
 
-##任务二        
+## 任务二        
 Task13: 零基础JavaScript编码（一）      
 demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task13/index.html     
 
