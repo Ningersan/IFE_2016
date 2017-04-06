@@ -2,34 +2,55 @@
  * Created by Ningersan on 2017/2/21.
  */
 
+/**
+ * 传播介质
+ */
 var BUS = function () {
     //私有变量，记录传输信号
     var signal = null;
+    
     //私有变量，保存飞船队列
     var craftObjArr = [null, null, null, null];
 
     //公有方法
     return {
-        //向飞船队列添加对象
+        /**
+        * 获取信号
+        * @return {string} signal - 二进制信号
+        */
         getSignal: function () {
             return signal;
         },
 
+        /**
+        * 设置信号
+        */
         setSignal: function (value) {
             signal = value;
+
+            // 介质发送信号
+            this.sendSignal();
         },
 
-        //获取飞船对象数组
+        /**
+        * 获取飞船对象数组
+        * @return {array} craftObjArr - 飞船数组
+        */
         getCraft: function () {
             return craftObjArr;
         },
 
-        //向飞船队列添加对象
+        /**
+        * 向飞船队列添加飞船对象
+        */
         addCraft: function (craft, index) {
             this.getCraft()[index] = craft;
         },
 
-        //模拟丢包率
+        /**
+        * 模拟丢包率
+        * @return {Boolean}
+        */
         simulateDrop: function () {
             var text = "";
             var id = parseInt(this.getSignal().slice(2, 4), 2) + 1;
@@ -46,6 +67,7 @@ var BUS = function () {
                         text = "[消息]：" + id + "号飞船摧毁成功";
                         break;
                 }
+                
                 this.renderConsole(text, false);
                 return true;
             } else {
@@ -60,33 +82,43 @@ var BUS = function () {
                         text = "[注意]:" + id + "号飞船的摧毁命令丢包了!!!!";
                         break;
                 }
+
                 this.renderConsole(text, true);
                 return false;
             }
         },
 
-        //向飞船发送信号
+        /**
+        * 向飞船发送信号
+        */
         sendSignal: function () {
             var self = this;
             var id = parseInt(this.getSignal().slice(2, 4), 2);
             setTimeout(function () {
                 //飞船接受信号
                 self.getCraft()[id].receive();
-            }, 300)
+            }, 300);
         },
 
-        //渲染控制台
+        /**
+         * 渲染控制台
+         * @param {string} - 文本
+         * @param {Boolean} - 是否成功
+         */
         renderConsole: function (text, fail) {
             var consoleEle = $(".console");
             var massage = document.createElement("p");
+
             massage.textContent = text;
+
             if (fail) {
                 massage.className = "fail";
             }
+
             //更新控制台信息
             consoleEle.appendChild(massage);
             //控制栏滚动条自动滚动到底部
             consoleEle.scrollTop = consoleEle.scrollHeight;
         }
-    }
+    };
 }();

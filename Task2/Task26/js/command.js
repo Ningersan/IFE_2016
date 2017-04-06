@@ -6,7 +6,7 @@
 var msg = {
     id: null,
     command: null
-}
+};
 
 function command(operate, id) {
     var text = "";
@@ -20,11 +20,11 @@ function command(operate, id) {
             text = "[指挥官]:" + id +"号飞船飞行指令已发送";
             break;
         case "operate-stop":
-            msg.command = "stop"
+            msg.command = "stop";
             text = "[指挥官]:" + id +"号飞船停止指令已发送";
             break;
         case "operate-destory":
-            msg.command = "destory"
+            msg.command = "destory";
             text = "[指挥官]:" + id +"号飞船摧毁指令已发送";
             $a(".craft-control")[id - 1].className = "craft-control hidden";
             break;
@@ -35,19 +35,23 @@ function command(operate, id) {
 
     //向介质发送消息
     msg.id = id;
-    Mediator(msg);
+    mediator(msg);
 }
 
 //渲染控制台
 function renderConsole(text, fail) {
     var console = $(".console");
     var massage = document.createElement("p");
+
     massage.textContent = text;
+
     if (fail) {
         massage.className = "fail";
     }
+
     //更新控制台信息
     console.appendChild(massage);
+    
     //控制栏滚动条自动滚动到底部
     console.scrollTop = console.scrollHeight;
 }

@@ -1,16 +1,13 @@
-/**
- * Created by Ningersan on 2017/2/21.
- */
-
 //存储飞船对象
 var craftArr = [];
 
-function Mediator(msg) {
+function mediator(msg) {
     var text = "";
     var fail = null;
 
     if (msg.command === "launch") {
         var newCraft = new CraftCreator(msg.id);
+        
         newCraft.launch();
         craftArr.push({craft: newCraft.craft, id: msg.id});
         return;
@@ -33,7 +30,7 @@ function Mediator(msg) {
                     break;
             }
             fail = false;
-        }, 1000)
+        }, 1000);
     } else {
         switch (msg.command) {
             case "fly":
@@ -51,5 +48,5 @@ function Mediator(msg) {
 
     setTimeout(function () {
         renderConsole(text, fail);
-    }, 1000)
+    }, 1000);
 }
