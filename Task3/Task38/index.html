@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            table {
+                text-align: center;
+                border-collapse: collapse;
+            }
+            td {
+                border: 2px solid #03A9F4;
+                padding: 5px 40px;
+            }
+            .triangle {
+                display: inline-block;
+                margin-left: 10px;
+                margin-top: 3px;
+            }
+            .triangle div {
+                width: 0;
+                height: 0;
+                cursor: pointer;
+            }
+            .triangle-top {
+                margin-bottom: 3px;
+                border-left: 4px solid transparent;
+                border-right: 4px solid transparent;
+                border-bottom: 8px solid #D0648A;
+            }
+            .triangle-bottom {
+                border-top: 8px solid #D0648A;
+                border-left: 4px solid transparent;
+                border-right: 4px solid transparent;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script src="./js/sortableTable.js"></script>
+    </body>
+</html>
