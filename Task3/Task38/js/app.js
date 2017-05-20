@@ -12,9 +12,9 @@ addEvent($("#container"), "click", function (event) {
     var targetClass = event.target.className;
     var targetIndex = event.target.parentNode.dataset.index;
 
-    if (targetClass === "triangle-top") {
+    if (targetClass === "arrow-up") {
         table.sortData(ascSort, targetIndex);
-    } else {
+    } else if (targetClass === "arrow-down") {
         table.sortData(desSort, targetIndex);
     }
 });

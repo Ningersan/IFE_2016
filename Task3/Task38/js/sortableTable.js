@@ -26,8 +26,6 @@ SortableTable.prototype.init = function() {
 SortableTable.prototype.getData = function() {
     var data = [];
 
-    data.push(this.head);
-
     for (var name in this.data) {
         var rowData = this.data[name];
 
@@ -44,11 +42,7 @@ SortableTable.prototype.getData = function() {
  * @param {*number} index - 记录第几列的数据
  */
 SortableTable.prototype.sortData = function(orderFunc, index) {
-    var data = this.data.slice(1);
-
-    data.sort(orderFunc(index));
-    data.unshift(this.head);
-    this.data = data;
+    this.data.sort(orderFunc(index));
     this.render();
 };
 
@@ -59,12 +53,19 @@ SortableTable.prototype.render = function() {
     var text = [];
     var self = this;
 
-    text.push("<table><tbody>");
+    // 处理表头
+    text.push("<table><thead><tr>");
 
-    this.data.forEach(function(element, index) {
+    this.head.forEach(function(item) {
+        text.push("<th style='position: relative'>" + item + "</th>");
+    });
+    text.push("</tr></thead><tbody>");
+
+    this.data.forEach(function(rowData, index) {
         text.push("<tr>");
-        self.data[index].forEach(function(value) {
-            text.push("<td>" + value + "</td>");
+
+        rowData.forEach(function(item) {
+            text.push("<td>" + item + "</td>");
         });
 
         text.push("</tr>");
@@ -84,7 +85,18 @@ SortableTable.prototype.insertSortEle = function() {
     var text = "";
 
     for (var i = 1, len = td.length; i < len; i++) {
-        text = "<div class='triangle' data-index='" + i + "'><div class='triangle-top'></div><div class='triangle-bottom'></div></div>";
-        td[i].innerHTML += text;
+        var div = document.createElement("div");
+        div.dataset.index = i;
+        div.style.cssText = "display: inline-block; position: absolute; top: 4px; margin-left: 10px;";
+
+        for (var j = 0; j < 2; j++) {
+            var arrow = document.createElement("div");
+            arrow.className = j === 0 ? "arrow-up" : "arrow-down";
+            arrow.style.cssText = "border-left: 6px solid transparent; border-right: 6px solid transparent; cursor: pointer";
+            arrow.style.cssText += j === 0 ? "border-bottom: 6px solid #fff; margin-bottom: 3px" : "border-top: 6px solid #fff";
+            div.appendChild(arrow);
+        }
+
+        td[i].appendChild(div);
     }
 };
