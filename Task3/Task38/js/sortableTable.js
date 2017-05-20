@@ -2,6 +2,13 @@ function $(ele) {
     return document.querySelector(ele);
 }
 
+/**
+ * 生成可排序的表格
+ * @constructor
+ * @param {*Node} ele - 生成表格的父容器
+ * @param {*array} tableHead - 表头
+ * @param {*Object} data - 数据
+ */
 function SortableTable(ele, tableHead, data) {
     this.ele = ele;
     this.head = tableHead;
@@ -13,22 +20,17 @@ SortableTable.prototype.init = function() {
     this.render();
 };
 
-// 处理数据为生成表格的格式
+/**
+ * 处理数据为表格需要的格式
+ */
 SortableTable.prototype.getData = function() {
     var data = [];
 
     data.push(this.head);
 
     for (var name in this.data) {
-        var score = 0;
         var rowData = this.data[name];
 
-        // 计算总分
-        for (var i = 0, len = rowData.length; i < len; i++) {
-            score += rowData[i];
-        }
-
-        rowData.push(score);
         rowData.unshift(name);
         data.push(rowData);
     }
@@ -36,6 +38,11 @@ SortableTable.prototype.getData = function() {
     this.data = data;
 };
 
+/**
+ * 根据索引来排序当前类别的数据
+ * @param {*function} orderFunc - 排序方法（升序，降序）
+ * @param {*number} index - 记录第几列的数据
+ */
 SortableTable.prototype.sortData = function(orderFunc, index) {
     var data = this.data.slice(1);
 
@@ -45,6 +52,9 @@ SortableTable.prototype.sortData = function(orderFunc, index) {
     this.render();
 };
 
+/**
+ * 渲染生成表格
+ */
 SortableTable.prototype.render = function() {
     var text = [];
     var self = this;
@@ -65,6 +75,9 @@ SortableTable.prototype.render = function() {
     this.insertSortEle();
 };
 
+/**
+ * 插入可排序按钮到表格中
+ */
 SortableTable.prototype.insertSortEle = function() {
     var tableHeadEle = $("#container tr");
     var td = tableHeadEle.children;
@@ -75,47 +88,3 @@ SortableTable.prototype.insertSortEle = function() {
         td[i].innerHTML += text;
     }
 };
-
-var head = ["姓名", "语文", "数学", "英语", "总分"];
-var objData = {
-    "小明": [89, 98, 95],
-    "小红": [91, 94, 98],
-    "小亮": [88, 100, 80]
-};
-
-var table = new SortableTable($("#container"), head, objData);
-table.init();
-
-addEvent($("#container"), "click", function(event) {
-    var targetClass = event.target.className;
-    var targetIndex = event.target.parentNode.dataset.index;
-
-    if (targetClass === "triangle-top") {
-        instance.sortData(ascSort, targetIndex);
-    } else {
-        instance.sortData(desSort, targetIndex);
-    }
-});
-
-function ascSort(index) {
-    return function(array1, array2) {
-        return array1[index] - array2[index];
-    };
-}
-
-function desSort(index) {
-    return function(array1, array2) {
-        return array2[index] - array1[index];
-    };
-}
-
-//事件绑定函数，兼容浏览器差异
-function addEvent(element, event, listener) {
-    if (element.addEventListener) {
-        element.addEventListener(event, listener, false);
-    } else if (element.attachEvent) {
-        element.attachEvent("on" + event, listener);
-    } else {
-        element["on" + event] = listener;
-    }
-}
