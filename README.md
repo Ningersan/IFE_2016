@@ -99,3 +99,14 @@ demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/
 
 Task35：听指令的小方块（三）    
 demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task2/Task35/index.html 
+
+## 任务三
+
+Task37：UI组件之浮出层    
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task3/Task37/index.html 
+
+Task38：UI组件之排序表格    
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task3/Task38/index.html 
+
+Task39：UI组件之冻结列表格   
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task3/Task39/index.html 
