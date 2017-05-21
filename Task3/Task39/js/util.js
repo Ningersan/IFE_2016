@@ -25,17 +25,44 @@ function desSort(index) {
  */
 function randomScore(n) {
     var arr = [];
-    var total = 0;
+    var num = null;
 
     for (var i = 0; i < n; i++) {
-        var num = Math.floor(Math.random() * 61 + 40);
-
-        total += num;
+        num = Math.floor(Math.random() * 61 + 40);
         arr.push(num);
     }
 
-    arr.push(total);
     return arr;
+}
+
+/**
+ * 判断参数是否是数组
+ * @param {*array} arr - 判断对象
+ */
+function isArray(arr) {
+    return Object.prototype.toString.call(arr) === '[object Array]';
+}
+
+/**
+ * 深度拷贝
+ * @param {*Object || array} obj 数组或者对象
+ */
+function deepCopy(obj) {
+    var newObj = null;
+
+    if (typeof obj !== 'object' && typeof obj !== 'function') {
+        return obj;
+    }
+
+    newObj = isArray(obj) ? [] : {};
+
+    for (var i in obj) {
+        if (obj.hasOwnProperty(i)) {
+            newObj[i] = typeof obj[i] === 'object' ? deepCopy(obj[i]) : obj[i];
+        }
+    }
+
+    return newObj;
 }
 
 //事件绑定函数，兼容浏览器差异
