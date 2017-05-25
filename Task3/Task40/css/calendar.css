@@ -18,7 +18,7 @@
     color: #ccc;
 }
 
-.datepicker-selected {
+.datepicker-today, .datepicker-selected {
     color: #fff;
     background: rgb(153, 177, 224);
 }

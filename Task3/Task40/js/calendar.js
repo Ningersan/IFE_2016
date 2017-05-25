@@ -1,7 +1,6 @@
 function DatePicker(append) {
     this.container = append;
     this.mainEle = null;
-    this.table = null;
     this.date = new Date();
     this.init();
 }
@@ -58,16 +57,18 @@ DatePicker.prototype.init = function() {
     $('<tbody>')
         .appendTo(table)
         .click(function(e) {
-            var date = new Date(self.date);
             var target = e.target;
             var targetValue = parseInt($(target).text());
+            var date = new Date(self.date);
             var selectDate = null;
 
             if (!$(target).hasClass('date-out-of-range')) {
                 // reset all selected marks
+                $('.datepicker-table td').removeClass('datepicker-today');
                 $('.datepicker-table td').removeClass('datepicker-selected');
-                $(target).toggleClass('datepicker-selected');
+                $(target).addClass('datepicker-selected');
                 selectDate = new Date(date.setDate(targetValue));
+                self.date = selectDate;
                 return selectDate;
             }
         });
@@ -90,7 +91,8 @@ DatePicker.prototype.nextMonth = function() {
 };
 
 DatePicker.prototype.renderByDate = function(date) {
-    // 当前年，月
+    // 当前年，月，日
+    var thisDate = date.getDate();
     var thisMonth = date.getMonth();
     var thisYear = date.getFullYear();
 
@@ -105,6 +107,8 @@ DatePicker.prototype.renderByDate = function(date) {
 
     var tbody = [];
 
+    var tdStr = null;
+
     // set title
     $('.datepicker-title').html('<span>' + this.monthStr[thisMonth] + '</span>' + '&nbsp' + '<span>' + thisYear + '</span>');
 
@@ -117,7 +121,8 @@ DatePicker.prototype.renderByDate = function(date) {
             var curMonth = thisMonthFirstDate.getMonth();
 
             if (curMonth === thisMonth) {
-                tbody.push('<td>' + curDate + '</td>');
+                tdStr = curDate === thisDate ? '<td class="datepicker-today">' + curDate + '</td>' : '<td>' + curDate + '</td>';
+                tbody.push(tdStr);
             } else {
                 tbody.push("<td class='date-out-of-range'>" + curDate + "</td>");
             }
