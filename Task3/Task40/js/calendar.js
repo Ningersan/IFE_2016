@@ -40,7 +40,8 @@ DatePicker.prototype.init = function() {
     var self = this;
 
     // 动态加载css
-    $('head').append("<link rel='stylesheet' type='text/css' href='./css/calendar.css'>")
+    $('head').append('<link rel="stylesheet" type="text/css" href="./css/icon.css">')
+        .append('<link rel="stylesheet" type="text/css" href="./css/calendar.css">')
         .ready(console.log('css加载成功啦'));
 
     // 渲染表头
