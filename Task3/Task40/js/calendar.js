@@ -1,6 +1,7 @@
 function DatePicker(append) {
     this.container = append;
     this.mainEle = null;
+    this.selectedEle = null;
     this.date = new Date();
     this.init();
 }
@@ -10,11 +11,11 @@ DatePicker.prototype.monthStr = ['january', 'February', 'March', 'April', 'May',
 
 DatePicker.prototype.init = function() {
     this.mainEle = $('<div>')
-        .addClass('datePicker-main')
+        .addClass('datepicker-main')
         .appendTo(this.container);
 
     var headEle = $('<div>')
-        .addClass('datePicker-head')
+        .addClass('datepicker-head')
         .appendTo(this.mainEle);
 
     var arrowLeft = $('<i>')
@@ -60,21 +61,24 @@ DatePicker.prototype.init = function() {
         .click(function(e) {
             var target = e.target;
             var targetValue = parseInt($(target).text());
-            var date = new Date(self.date);
-            var selectDate = null;
+            var selectedDate = null;
+
+            self.selectedEle = target;
 
             if (!$(target).hasClass('date-out-of-range')) {
                 // reset all selected marks
-                $('.datepicker-table td').removeClass('datepicker-today');
-                $('.datepicker-table td').removeClass('datepicker-selected');
+                $('.datepicker-today').removeClass();
+                $('.datepicker-selected').removeClass();
                 $(target).addClass('datepicker-selected');
-                selectDate = new Date(date.setDate(targetValue));
-                self.date = selectDate;
-                return selectDate;
+
+                self.selectDate();
             }
         });
 
     this.renderByDate(this.date);
+
+    // 默认今天为选择的元素
+    this.selectedEle = $('.datepicker-today');
 };
 
 DatePicker.prototype.preMonth = function() {
@@ -89,6 +93,15 @@ DatePicker.prototype.nextMonth = function() {
     var nextMonth = new Date(this.date.setMonth(++month));
 
     this.renderByDate(nextMonth);
+};
+
+DatePicker.prototype.selectDate = function() {
+    var curDate = new Date(this.date);
+    var selectedValue = parseInt($(this.selectedEle).text());
+
+    selectedDate = new Date(curDate.setDate(selectedValue));
+    this.date = selectedDate;
+    return this.date;
 };
 
 DatePicker.prototype.renderByDate = function(date) {

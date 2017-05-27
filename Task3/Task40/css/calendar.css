@@ -1,4 +1,4 @@
-.datePicker-main {
+.datepicker-main {
     margin: 50px auto;
     width: 280px;
     color: #000;
@@ -7,7 +7,7 @@
     font-family: "Helvetica Neue", Helvetica, "Hiragino Sans GB",  "Microsoft YaHei", Arial,sans-serif;
 }
 
-.datePicker-head {
+.datepicker-head {
     padding: .6em 1.5em;
     text-align: center;
     font-weight: bold;
@@ -20,7 +20,7 @@
 
 .datepicker-today, .datepicker-selected {
     color: #fff;
-    background: rgb(153, 177, 224);
+    background: rgb(153, 177, 224) !important;
 }
 
 .arrow {

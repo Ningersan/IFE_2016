@@ -83,8 +83,8 @@ DatePicker.prototype.init = function() {
 
             if (!$(target).hasClass('date-out-of-range')) {
                 // reset all selected marks
-                $('.datepicker-today').removeClass('datepicker-today');
-                $('.datepicker-table td').removeClass('datepicker-selected');
+                $('.datepicker-today').removeClass();
+                $('.datepicker-selected').removeClass();
                 $(target).addClass('datepicker-selected');
 
                 selectedDate = new Date(date.setDate(targetValue));
