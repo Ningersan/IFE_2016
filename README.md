@@ -110,3 +110,9 @@ demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/
 
 Task39：UI组件之冻结列表格   
 demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task3/Task39/index.html 
+
+Task40：UI组件之日历组件（一）   
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task3/Task40/index.html 
+
+Task41：UI组件之日历组件（二）   
+demo: https://htmlpreview.github.io/?https://github.com/Ningersan/IFE_2016/blob/master/Task3/Task41/index.html 
