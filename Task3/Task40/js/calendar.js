@@ -1,14 +1,24 @@
+/**
+ * 日历构造函数
+ * @constructor
+ * @param {*Node} append - 挂载元素 
+ */
 function DatePicker(append) {
     this.container = append;
+    this.date = new Date();
     this.mainEle = null;
     this.selectedEle = null;
-    this.date = new Date();
     this.init();
 }
 
+// 使用到的月份，星期字符串
 DatePicker.prototype.dayStr = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 DatePicker.prototype.monthStr = ['january', 'February', 'March', 'April', 'May', 'June', 'july', 'August', 'Septemper', 'October', 'November', 'December'];
 
+/**
+ * 生成日历头部，表格头部
+ * 初始化事件
+ */
 DatePicker.prototype.init = function() {
     this.mainEle = $('<div>')
         .addClass('datepicker-main')
@@ -55,12 +65,14 @@ DatePicker.prototype.init = function() {
     thead.push('</tr></thead>');
     table.append(thead.join(''));
 
+    // 默认今天为选择的元素
+    this.selectedEle = $('.datepicker-today');
+
     // 渲染表体, 添加事件
     $('<tbody>')
         .appendTo(table)
         .click(function(e) {
             var target = e.target;
-            var targetValue = parseInt($(target).text());
             var selectedDate = null;
 
             self.selectedEle = target;
@@ -75,12 +87,13 @@ DatePicker.prototype.init = function() {
             }
         });
 
+    // 根据当月日历渲染表格项
     this.renderByDate(this.date);
-
-    // 默认今天为选择的元素
-    this.selectedEle = $('.datepicker-today');
 };
 
+/**
+ * 获取上个月的当月日历数据
+ */
 DatePicker.prototype.preMonth = function() {
     var month = this.date.getMonth();
     var preMonth = new Date(this.date.setMonth(--month));
@@ -88,6 +101,9 @@ DatePicker.prototype.preMonth = function() {
     this.renderByDate(preMonth);
 };
 
+/**
+ * 获取下个月的当月日历数据
+ */
 DatePicker.prototype.nextMonth = function() {
     var month = this.date.getMonth();
     var nextMonth = new Date(this.date.setMonth(++month));
@@ -95,15 +111,22 @@ DatePicker.prototype.nextMonth = function() {
     this.renderByDate(nextMonth);
 };
 
+/**
+ * 获取点击日历日期信息
+ */
 DatePicker.prototype.selectDate = function() {
     var curDate = new Date(this.date);
     var selectedValue = parseInt($(this.selectedEle).text());
+    var selectedDate = new Date(curDate.setDate(selectedValue));
 
-    selectedDate = new Date(curDate.setDate(selectedValue));
     this.date = selectedDate;
     return this.date;
 };
 
+/**
+ * 根据日期渲染当月日历
+ * @param {*Date} date - 日期
+ */
 DatePicker.prototype.renderByDate = function(date) {
     // 当前年，月，日
     var thisDate = date.getDate();
