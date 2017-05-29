@@ -28,12 +28,11 @@
         p {
             display: none;
             margin: 5px 130px;
-            color: #a8a8a8;
             font-size: 14px;
         }
 
         button {
-            margin-left: 330px;
+            margin-left: 300px;
             width: 60px;
             height: 25px;
             cursor: pointer;
@@ -43,38 +42,51 @@
             border: 0;
             border-radius: 2px;
         }
+
+        .tips {
+            display: block;
+            color: #a8a8a8;
+        }
+
+        .success {
+            color: #4fc08d;
+        }
+
+        .error {
+            color: #f75659;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <form>
-            <div data-info="必填，长度为4-16个字符">
-                <label for="name">名称</label>
+        <form class="sign-up">
+            <div>
+                <label for="name" data-info="必填，长度为4-16个字符">名称</label>
                 <input type="text" id="name">
                 <p></p>
             </div>
-            <div data-info="请输入长度为6-18个字符的密码，包含字母和数字">
-                <label for="password">密码</label>
+            <div>
+                <label for="password" data-info="请输入长度为6-18个字符的密码，包含字母和数字">密码</label>
                 <input  type="password" id="password">
                 <p></p>
             </div>
-            <div data-info="请重新输入密码">
-                <label for="password-checked">密码确认</label>
-                <input type="password" id="password-checked">
+            <div>
+                <label for="passwordChecked" data-info="请重新输入密码">密码确认</label>
+                <input type="password" id="passwordChecked">
                 <p></p>
             </div>
-            <div data-info="example@xxx.com">
-                <label for="email">邮箱</label>
+            <div>
+                <label for="email" data-info="example@xxx.com">邮箱</label>
                 <input type="text" id="email">
                 <p></p>
             </div>
-            <div data-info="请输入11位手机号码">
-                <label for="tel">手机</label>
+            <div>
+                <label for="tel" data-info="请输入11位手机号码">手机</label>
                 <input type="text" id="tel">
                 <p></p>
             </div>
-            <button type="button">提交</button>
         </form>
+        <button class="submit" type="button">提交</button>        
     </div>
     <script src="scripts/Task30.js"></script>
 </body>
