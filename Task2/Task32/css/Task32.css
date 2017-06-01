@@ -1,7 +1,8 @@
 h1 {
-    margin: 20px 400px;
+    margin: 20px auto;
     font-size: 20px;
     color: #0dc1c1;
+    text-align: center;
     font-family: "Microsoft yahei";
 }
 
@@ -45,7 +46,7 @@ fieldset {
     width: 220px;
 }
 
-#tag-area .color-change {
+#tag-area .delete {
     background-color: #fb6b0b;
 }
 
@@ -72,7 +73,7 @@ fieldset {
     float: left;
     position: relative;
     margin: 10px 40px;
-    width: 900px;
+    width: 67%;
     border: 2px solid #ccc;
 }
 
@@ -133,11 +134,11 @@ span.remainder {
     color: #a8a8a8;
 }
 
-input.true {
+input.success {
     border-color: #0dc1c1;
 }
 
-span.true {
+span.success {
     color: #0dc1c1;
 }
 

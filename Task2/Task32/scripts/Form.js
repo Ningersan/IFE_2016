@@ -1,19 +1,20 @@
 /**
  * Created by Ningersan on 2017/2/13.
  */
-function formDealer(data) {
+
+function Form(data) {
     this.data = data;
     this.input = $("#" + data.id);
-    this.tip = this.input.nextSibling; 
+    this.tip = this.input.nextElementSibling; 
     this.validator = data.validator;
     this.init();
 }
 
-formDealer.prototype = {
+Form.prototype = {
     init: function () {
         this.input.addEventListener("focus", this.remainderTip.bind(this));
         this.input.addEventListener("blur", this.validator.bind(this));
-        this.input.addEventListener("change", this.validator.bind(this));  //绑定单选多选下拉类型的事件
+        this.input.addEventListener("change", this.validator.bind(this));
     },
 
     remainderTip: function () {
@@ -24,8 +25,8 @@ formDealer.prototype = {
 
     trueTip: function () {
         this.tip.innerHTML = this.data.successRemainder;
-        this.tip.className = "true";
-        this.input.className = "true";
+        this.tip.className = "success";
+        this.input.className = "success";
     },
 
     falseTip: function (i) {
@@ -33,4 +34,4 @@ formDealer.prototype = {
         this.tip.className = "error";
         this.input.className = "error";
     }
-}
+};

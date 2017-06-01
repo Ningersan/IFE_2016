@@ -4,6 +4,9 @@
 var validator = {
     lengthControl: function () {
         var text = this.input.value.trim();
+        var minLength = this.data.minLength;
+        var maxLength = this.data.maxLength;
+
         if (text === "") {
             if (this.data.necessary) {
                 this.falseTip(0);
@@ -13,8 +16,7 @@ var validator = {
                 return true;
             }
         }
-        var minLength = this.data.minLength;
-        var maxLength = this.data.maxLength;
+
         if (getLength(text) >= minLength && getLength(text) <= maxLength) {
             this.trueTip();
             return true;
@@ -96,9 +98,9 @@ var validator = {
     },
 
     radio: function () {
-        var items = $("#" + this.data.id).getElementsByTagName("input");
-        for (var i = 0; i < items.length; i++) {
-            if (items[i].checked) {
+        var $inputs = $("#" + this.data.id).getElementsByTagName("input");
+        for (var i = 0; i < $inputs.length; i++) {
+            if ($inputs[i].checked) {
                 this.trueTip();
                 return true;
             }
@@ -113,9 +115,9 @@ var validator = {
     },
     
     checkbox: function () {
-        var items = $("#" + this.data.id).getElementsByTagName("input");
-        for (var i = 0; i < items.length; i++) {
-            if (items[i].checked) {
+        var $inputs = $("#" + this.data.id).getElementsByTagName("input");
+        for (var i = 0; i < $inputs.length; i++) {
+            if ($inputs[i].checked) {
                 this.trueTip();
                 return true;
             }
@@ -133,5 +135,4 @@ var validator = {
         this.trueTip();
         return true;
     }
-}
-
+};
