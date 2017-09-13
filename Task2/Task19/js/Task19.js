@@ -1,19 +1,19 @@
-var numInput = document.getElementById('num-input')
-var btnArea = document.getElementsByTagName('label')[0]
-var columnsArea = document.getElementById('num-area')
+var numInput = $('#num-input')
+var btnArea = $('.control')
+var columnsArea = $('#num-area')
 
 var strategy = {
     'left-in': function () {
-        queue.leftPush()
+        queue.leftIn()
     },
     'right-in': function () {
-        queue.rightPush()
+        queue.rightIn()
     },
     'left-out': function () {
-        queue.leftPop()
+        queue.leftOut()
     },
     'right-out': function () {
-        queue.rightPop()
+        queue.rightOut()
     },
     'random': function () {
         queue.CreatNumberRandom()
@@ -58,30 +58,30 @@ var queue = {
         }
     },
 
-    leftPush: function() {
+    leftIn: function() {
         var value = getValue()
 
-        if (!queue.isFull()) {
+        if (value && !queue.isFull()) {
             this.items.unshift(value)
             this.update()
         }
     },
 
-    rightPush: function() {
+    rightIn: function() {
         var value = getValue()
 
-        if (!queue.isFull()) {
+        if (value && !queue.isFull()) {
             this.items.push(value)
             this.update()
         }
     },
 
-    leftPop: function() {
+    leftOut: function() {
         alert(this.items.shift())
         this.update()
     },
 
-    rightPop: function() {
+    rightOut: function() {
         alert(this.items.pop())
         this.update()
     },
@@ -114,11 +114,12 @@ var queue = {
 
     update: function() {
         columnsArea.innerHTML = this.items.map(function (item, index) {
-            return "<div data-index='" + index + "' title='" + item + "' style='height: " + item * 2 + "px'></div>"
+            return "<div data-index='" + index + "' title='" + item + "' class='orange'" + " style='height: " + item * 2 + "px'></div>"
         }).join('')
     },
 
     renderSort: function(func) {
+        var time = $('#speed').value
         var animations = this.animations
         var timer = setTimeout(function performAnimation() {
             if (animations.length) {
@@ -127,12 +128,12 @@ var queue = {
                 disableAllBtn(true)
                 resetAllColor()
                 func(params[0], params[1])
-                timer = setTimeout(performAnimation, 150)
+                timer = setTimeout(performAnimation, time)
             } else {
                 disableAllBtn(false)
                 resetAllColor()
             }
-        }, 150)
+        }, time)
     },
 
     bubbleSort: function() {
@@ -281,8 +282,8 @@ function updateSwap(index1, index2) {
     ele2.style.height = temp.height + 'px'
 
     // 改变颜色
-    ele1.style.backgroundColor = '#55bcbc'
-    ele2.style.backgroundColor = '#55bcbc'
+    ele1.className = 'lightseagreen'
+    ele2.className = 'lightseagreen'
 }
 
 /**
@@ -298,19 +299,19 @@ function setColumnInfo(source, target) {
     target.title = typeof source === 'number' ? columns[source].title : source.title
     target.style.height = typeof source === 'number' ? columns[source].offsetHeight + 'px' : source.height + 'px'
 
-    target.style.backgroundColor = '#55bcbc'
+    target.className = 'lightseagreen'
 }
 
 // clear doms color
 function resetAllColor() {
     var columns = columnsArea.querySelectorAll('div')
     Array.prototype.forEach.call(columns, function(element) {
-        element.style.backgroundColor = '#ed7d31'
+        element.className = 'orange'
     })
 }
 
 function disableAllBtn(flag) {
-    var buttons = document.querySelectorAll('button')
+    var buttons = $a('button')
     for (var i = 0, len = buttons.length; i < len; i++) {
         buttons[i].disabled = flag
     }
@@ -344,6 +345,14 @@ function initEvent() {
             queue.delete(event.target.dataset.index)
         }
     })
+}
+
+function $(str) {
+    return document.querySelector(str)
+}
+
+function $a(str) {
+    return document.querySelectorAll(str)
 }
 
 // 事件绑定函数，兼容浏览器差异

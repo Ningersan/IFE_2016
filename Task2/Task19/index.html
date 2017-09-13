@@ -18,14 +18,22 @@
             margin: 5px;
             width: 15px;
             cursor: pointer;
-            background-color: #ed7d31;
             opacity: 0.9;
+            /* transition: height .5s; */
+        }
+
+        .orange {
+            background-color: #ed7d31;
+        }
+
+        .lightseagreen {
+            background-color: #55bcbc;
         }
     </style>
 </head>
 
 <body>
-    <label>
+    <div class="control">
         <input id="num-input" type="text">
         <button id="left-in">左侧入</button>
         <button id="right-in" style="margin-right: 15px">右侧入</button>
@@ -37,7 +45,8 @@
         <button id="insert-sort">插入排序</button>
         <button id="quick-sort">快速排序</button>
         <button id="heap-sort">堆排序</button>
-    </label>
+        <label for="speed">speed(ms)<input type="number" id="speed" value="150" /></label>
+    </div>
     <div id="num-area"></div>
 
     <script src="js/Task19.js"></script>
