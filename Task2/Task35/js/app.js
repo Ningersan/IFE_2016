@@ -2,7 +2,7 @@
  * @constructor
  */
 function Application() {
-    this.taskQueue = [];    
+    this.taskQueue = [];
     this.robot = new Boxbot();
     this.editor = new Editor();
     this.$startBtn = $(".execute");
@@ -22,7 +22,7 @@ Application.prototype.addTaskQueue = function (func) {
 Application.prototype.codeExcute = function () {
     var i = 0;
     var self = this;
-    var lastNum = null;    
+    var lastNum = null;
     var codes = this.editor.$editor.value;
     var keyArr = codes.split("\n");
 
