@@ -3,6 +3,10 @@
     font-family: "Source Code Pro", "Consolas", "Microsoft yahei", 'Segoe UI', sans-serif;
 }
 
+article {
+    padding: 30px;
+}
+
 .boxbot-map {
     float: left;
 }
@@ -13,18 +17,47 @@ table {
 }
 
 table td {
-    width: 42px;
-    height: 42px;
-    border: 1px solid rgb(237 ,237 ,237);
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    border: 1px solid #bdc3c7;
 }
 
-table img {
+.map-20x20 td {
+    width: 37px;
+    height: 37px;
+}
+
+.map-30x30 td {
+    width: 25px;
+    height: 25px;
+}
+
+.x-axis {
+    border: 0;
+    text-align: center;
+}
+
+.y-axis {
+    padding-right: 5px;
+    border: 0;
+    text-align: right;
+}
+
+.boxbot {
     position: absolute;
-    width: 40px;
-    height: 40px;
     -webkit-transition: all .25s ease-in-out;
     -moz-transition: all .25s ease-in-out;
     transition: all .25s ease-in-out;
+}
+
+.map-20x20 .boxbot {
+    width: 36px;
+    height: 36px;
+}
+
+.map-30x30 .boxbot {
+    width: 24px;
+    height: 24px;
 }
 
 .commander {
@@ -71,9 +104,17 @@ table img {
     background-color: #34495e;
 }
 
-.execute {
+.execute-btn {
     margin-left: 10px;
     width: 50px;
+}
+
+.random-btn {
+    width: 80px;
+}
+
+.wall {
+    background-color: #bdc3c7;
 }
 
 .success {
