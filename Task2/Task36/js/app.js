@@ -16,7 +16,7 @@ Application.prototype.build = function() {
     var map = this.robot.map;
     var coordinate = map.random();
 
-    while (map.getType(coordinate) !== '') {
+    while (map.getType(coordinate)) {
         coordinate = map.random();
     }
 
@@ -78,7 +78,6 @@ Application.prototype.start = function() {
                 Array.prototype.unshift.apply(self.taskQueue, path);
             }
 
-            // console.log(i);
             self.editor.setMark(i++, "success");
         } catch (ex) {
             self.editor.setMark(i, "error");

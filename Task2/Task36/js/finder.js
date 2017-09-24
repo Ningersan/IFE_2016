@@ -18,14 +18,21 @@ Finder.prototype.filter = function(rounds) {
     var self = this;
 
     return rounds.filter(function(point) {
-        return self.map.getType({x: point.x, y: point.y}) === '' && !existList(point, self.closeList);
+        return !self.map.getType({x: point.x, y: point.y}) && !inList(point, self.closeList);
     })
 }
 
 Finder.prototype.findWay = function(start, end) {
-    var self = this;
     var resultIndex = null;
     var currentPath = null;
+
+    this.openList = [];
+    this.closeList = [];
+    this.result = [];
+
+    if (this.map.getType(end)) {
+        throw '无法到达 ' + '[' + end.x + ',' + end.y + ']';
+    }
 
     if (start.x === end.x && start.y === end.y) {
         return;
@@ -33,11 +40,12 @@ Finder.prototype.findWay = function(start, end) {
 
     this.openList.push({x: start.x, y: start.y, G: 0});
 
-    while (!(resultIndex = existList({ x: end.x, y: end.y }, this.openList))) {
+    while (!(resultIndex = inList({ x: end.x, y: end.y }, this.openList))) {
         var currentPoint = this.openList.pop();
         this.closeList.push(currentPoint);
 
         var filter = this.filter(this.getRounds(currentPoint));
+
         var openList = filter.map(function(point) {
             point.parent = currentPoint;
             point.G = currentPoint.G + 10;
@@ -47,6 +55,11 @@ Finder.prototype.findWay = function(start, end) {
         });
 
         this.openList = this.openList.concat(openList);
+
+        if (!this.openList.length) {
+            throw '无法寻路';
+        }
+
         this.openList.sort(comparisonByProperty('F'));
     }
 

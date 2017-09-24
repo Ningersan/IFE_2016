@@ -2,7 +2,7 @@
  * Created by Ningersan on 2017/2/22.
  */
 
-function existList(point, list) {
+function inList(point, list) {
     // console.log(point)
     for (var i = 0, len = list.length; i < len; i++) {
         var item = list[i];

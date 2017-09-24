@@ -71,5 +71,5 @@ Map.prototype.random = function() {
     var x = Math.floor(Math.random() * this.rows + 1);
     var y = Math.floor(Math.random() * this.columns + 1);
 
-    return [x, y];
+    return {'x': x, 'y': y};
 }

@@ -143,7 +143,7 @@ Boxbot.prototype.moveTo = function(destination, isTurn) {
 
     if (isTurn) {
         var position = this.getCurrentPosition()
-        var distance = [parseInt(destination.x) - position.x, parseInt(destination.y) - position.y]
+        var distance = [destination.x - position.x, destination.y - position.y]
 
         if (distance[0] < 0) {
             this.turn(null, LEFT);
@@ -161,18 +161,11 @@ Boxbot.prototype.moveTo = function(destination, isTurn) {
 }
 
 Boxbot.prototype.search = function(destination) {
-    var self = this;
-    var tasks = [];
-    var path = this.finder.findWay(this.getCurrentPosition(), { x: parseInt(destination[0]), y: parseInt(destination[1]) });
+    var start = this.getCurrentPosition();
+    var end = { x: parseInt(destination[0]), y: parseInt(destination[1]) };
+    var path = this.finder.findWay(start, end);
+    console.log(path)
     return path;
-    var timer = setInterval(function() {
-        if (path.length === 0) {
-            clearInterval(timer);
-            return;
-        }
-
-        self.moveTo(path.shift(), true);
-    }, 300);
 }
 
 Boxbot.prototype.build = function() {
@@ -201,7 +194,7 @@ Boxbot.prototype.checkPath = function (direction, grid) {
         var x = position.x + i * offsetPosition.x;
         var y = position.y + i * offsetPosition.y;
 
-        if (this.map.getType({'x': x, 'y': y}) !== '') {
+        if (this.map.getType({'x': x, 'y': y})) {
             throw '无法到达[' + x + ',' + y + ']';
         }
     }
