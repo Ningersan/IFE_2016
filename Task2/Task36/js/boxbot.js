@@ -4,16 +4,16 @@ var TOP = 180
 var RIGHT = 270
 
 /**
- * 听指令的小方块
  * @constructor
+ * 听指令的小方块
  */
 function Boxbot(grid) {
     this.map = new Map(grid, grid);
     this.finder = new Finder(this.map);
     this.init();
     this.$robot = $(".boxbot");
-    this.grid = grid;
     this.gridWidth = this.$robot.clientWidth;
+    this.gridHeight = this.$robot.clientHeight;
 }
 
 /**
@@ -29,7 +29,6 @@ Boxbot.prototype.init = function() {
     robot.style.transform = "rotate(0deg)";
 
     $("tbody").appendChild(robot);
-
     addEvent(document, "keydown", this.control.bind(this));
 };
 
@@ -84,9 +83,9 @@ Boxbot.prototype.getCurrentPosition = function() {
 /**
  * 根据当前方向获取偏移值
  * @param {number} direction - 方向
- * @param {number} grid - 前进的格数
+ * @param {number} step - 前进的格数
  */
-Boxbot.prototype.getOffsetPosition = function (direction, grid) {
+Boxbot.prototype.getOffsetPosition = function (direction, step) {
     var sign = {
         0: [0, 1],
         90: [-1, 0],
@@ -95,25 +94,29 @@ Boxbot.prototype.getOffsetPosition = function (direction, grid) {
     }[direction];
 
     return {
-        x: sign[0] * grid,
-        y: sign[1] * grid,
+        x: sign[0] * step,
+        y: sign[1] * step,
     };
 }
 
 /**
  * 获取目的坐标
  * @param {number} direction - 方向
- * @param {number} grid - 前进的格数
+ * @param {number} step - 前进的格数
  * @return {array} - 目的坐标
  */
-Boxbot.prototype.getPosition = function(direction, grid) {
+Boxbot.prototype.getPosition = function(direction, step) {
+    var currentPosition = null;
+    var offsetPosition = null;
+
     // direction 可能为0， 不能直接判断if（direction)
     if (direction === null) {
         direction = this.getCurrentDirection();
     }
 
-    var currentPosition = this.getCurrentPosition()
-    var offsetPosition = this.getOffsetPosition(direction, grid)
+    currentPosition = this.getCurrentPosition()
+    offsetPosition = this.getOffsetPosition(direction, step)
+
     return {
         x: currentPosition.x + offsetPosition.x,
         y: currentPosition.y + offsetPosition.y,
@@ -123,13 +126,15 @@ Boxbot.prototype.getPosition = function(direction, grid) {
 /**
  * 移动小方块
  * @param {number} angle - 朝向角度
- * @param {number} grid - 前进的格数
+ * @param {number} step - 前进的格数
  * @return {boolean} - 返回是否执行状态
  */
-Boxbot.prototype.move = function(direction, grid) {
-    this.checkPath(direction, grid);
+Boxbot.prototype.move = function(direction, step) {
+    var didestination = null;
 
-    var destination = this.getPosition(direction, grid);
+    this.checkPath(direction, step);
+    destination = this.getPosition(direction, step);
+
     return this.moveTo(destination, false);
 };
 
@@ -157,28 +162,42 @@ Boxbot.prototype.moveTo = function(destination, isTurn) {
     }
 
     this.$robot.style.left = destination.x * this.gridWidth + 'px';
-    this.$robot.style.top = destination.y * this.gridWidth + 'px';
+    this.$robot.style.top = destination.y * this.gridHeight + 'px';
 }
 
+/**
+ * 搜素路径
+ * @@param {object} destination - 目的坐标
+ * @return {array} - 路径数组
+ */
 Boxbot.prototype.search = function(destination) {
     var start = this.getCurrentPosition();
     var end = { x: parseInt(destination[0]), y: parseInt(destination[1]) };
     var path = this.finder.findWay(start, end);
-    console.log(path)
+
     return path;
 }
 
+/**
+ * 在朝向上修墙
+ */
 Boxbot.prototype.build = function() {
     var position = this.getPosition(this.getCurrentDirection(), 1);
+
     if (!this.map.getType(position)) {
-        this.map.setClassName(position, 'wall');
+        this.map.setWall(position);
     } else {
         throw '前方无法修墙';
     }
 }
 
+/**
+ * 给墙设置颜色
+ * @param {string} color - 颜色号
+ */
 Boxbot.prototype.setColor = function(color) {
     var position = this.getPosition(this.getCurrentDirection(), 1);
+
     if (this.map.getType(position) === 'wall') {
         this.map.setColor(position, color);
     } else {
@@ -186,11 +205,16 @@ Boxbot.prototype.setColor = function(color) {
     }
 }
 
-Boxbot.prototype.checkPath = function (direction, grid) {
+/**
+ * 检查路径是否可到达
+ * @param {number} direction - 方向
+ * @param {number} step - 前进格数
+ */
+Boxbot.prototype.checkPath = function (direction, step) {
     var position = this.getCurrentPosition();
     var offsetPosition = this.getOffsetPosition(direction, 1);
 
-    for (var i = 1; i <= grid; i++) {
+    for (var i = 1; i <= step; i++) {
         var x = position.x + i * offsetPosition.x;
         var y = position.y + i * offsetPosition.y;
 
@@ -202,7 +226,7 @@ Boxbot.prototype.checkPath = function (direction, grid) {
 
 /**
  * 键盘控制事件
- * @param event
+ * @param {event}
  */
 Boxbot.prototype.control = function(event) {
     var e = event || window.event;

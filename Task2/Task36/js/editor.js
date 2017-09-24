@@ -71,5 +71,6 @@ Editor.prototype.setMark = function(index, className) {
     if (index < 0) {
         return;
     }
+
     this.$lineArea.children[index].className = className; 
 };

@@ -4,14 +4,24 @@
 function Application() {
     this.speed = 300;
     this.taskQueue = [];
-    this.robot = new Boxbot(20);
     this.editor = new Editor();
+    this.robot = new Boxbot(20);
     this.$runBtn = $(".execute-btn");
     this.$buildBtn = $(".random-btn");
+    this.init();
+}
+
+/**
+ * 初始化事件
+ */
+Application.prototype.init = function() {
     addEvent(this.$runBtn, "click", this.run.bind(this));
     addEvent(this.$buildBtn, "click", this.build.bind(this));
 }
 
+/**
+ * 随机修墙
+ */
 Application.prototype.build = function() {
     var map = this.robot.map;
     var coordinate = map.random();
@@ -20,7 +30,7 @@ Application.prototype.build = function() {
         coordinate = map.random();
     }
 
-    map.setClassName(coordinate, 'wall');
+    map.setWall(coordinate);
 }
 
 /**
@@ -52,6 +62,7 @@ Application.prototype.start = function() {
             return;
         }
 
+        // 如果处于寻路状态，维持i不变
         if (step) {
             i--;
             step--;
@@ -75,6 +86,8 @@ Application.prototype.start = function() {
                         params: item,
                     }
                 })
+
+                // 添加动画到任务队列
                 Array.prototype.unshift.apply(self.taskQueue, path);
             }
 
