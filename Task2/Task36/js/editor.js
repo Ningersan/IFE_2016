@@ -3,18 +3,18 @@
  * @constructor
  */
 function Editor() {
-    this.taskQueue = [];
-    this.$editor = $(".commander-editor");
-    this.$lineArea = $(".commander-lines");
-    this.init();
+    this.taskQueue = []
+    this.$editor = $('.commander-editor')
+    this.$lineArea = $('.commander-lines')
+    this.init()
 }
 
 /**
  * 初始化事件
  */
 Editor.prototype.init = function() {
-    addEvent(this.$editor, "input", this.update.bind(this));
-    addEvent(this.$editor, "scroll", this.scroll.bind(this));
+    addEvent(this.$editor, 'input', this.update.bind(this))
+    addEvent(this.$editor, 'scroll', this.scroll.bind(this))
 }
 
 /**
@@ -22,23 +22,23 @@ Editor.prototype.init = function() {
  * @param event
  */
 Editor.prototype.scroll = function(event) {
-    this.$lineArea.style.top = -this.$editor.scrollTop + "px";
-};
+    this.$lineArea.style.top = -this.$editor.scrollTop + 'px'
+}
 
 /**
  * 输入指令，实现行号的更新
  */
 Editor.prototype.update = function() {
-    var text = "";
-    var enter = this.$editor.value.match(/\n/g);
-    var lineNum = enter ? enter.length + 1 : 1;
+    var text = ''
+    var enter = this.$editor.value.match(/\n/g)
+    var lineNum = enter ? enter.length + 1 : 1
 
     for (var i = 1; i <= lineNum; i++) {
-        text += "<div class='commander-lines-item'>" + i + "</div>";
+        text += "<div class='commander-lines-item'>" + i + '</div>'
     }
 
-    this.$lineArea.innerHTML = text;
-};
+    this.$lineArea.innerHTML = text
+}
 
 /**
  * 检查当前行代码的指令是否合法
@@ -49,18 +49,18 @@ Editor.prototype.update = function() {
 Editor.prototype.isTrue = function(command, callback) {
     for (var key in commands) {
         if (commands[key].pattern.test(command)) {
-            if (typeof callback === "function") {
-                var func = commands[key].run;
-                var params = command.match(commands[key].pattern).slice(1);
-                callback.call(app, {run: func, params: params});
+            if (typeof callback === 'function') {
+                var func = commands[key].run
+                var params = command.match(commands[key].pattern).slice(1)
+                callback.call(app, {run: func, params: params})
             }
 
-            return true;
+            return true
         }
     }
 
-    return false;
-};
+    return false
+}
 
 /**
  * 给行号添加标记
@@ -69,8 +69,8 @@ Editor.prototype.isTrue = function(command, callback) {
  */
 Editor.prototype.setMark = function(index, className) {
     if (index < 0) {
-        return;
+        return
     }
 
-    this.$lineArea.children[index].className = className; 
-};
+    this.$lineArea.children[index].className = className
+}
