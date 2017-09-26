@@ -60,8 +60,39 @@ table td {
     height: 24px;
 }
 
-.commander {
+aside {
     float: left;
+}
+
+select:focus {
+    outline: none;
+}
+
+.control {
+    margin: 5px auto 10px 12px;
+}
+
+.control select,
+.control button {
+    font-size: 12px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+.speed {
+    margin-right: -10px;
+}
+
+.execute-btn {
+    margin-left: 10px;
+    width: 45px;
+}
+
+.random-btn {
+    width: 70px;
+}
+
+.commander {
     margin-left: 20px;
     width: 200px;
     height: 382px;
@@ -102,15 +133,6 @@ table td {
     resize: none;
     border-radius: 0 4px 4px 0;
     background-color: #34495e;
-}
-
-.execute-btn {
-    margin-left: 10px;
-    width: 50px;
-}
-
-.random-btn {
-    width: 80px;
 }
 
 .wall {

@@ -12,7 +12,7 @@ function Editor() {
 /**
  * 初始化事件
  */
-Editor.prototype.init = function() {
+Editor.prototype.init = function () {
     addEvent(this.$editor, 'input', this.update.bind(this))
     addEvent(this.$editor, 'scroll', this.scroll.bind(this))
 }
