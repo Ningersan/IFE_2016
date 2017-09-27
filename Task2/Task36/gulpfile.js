@@ -4,7 +4,6 @@ var minifyCss = require('gulp-minify-css')
 var uglify = require('gulp-uglify')
 var concat = require('gulp-concat')
 var rename = require('gulp-rename')
-// var browserSync = require('browser-sync').create()
 
 gulp.task('lint', function() {
     gulp.src('./src/js/*.js')

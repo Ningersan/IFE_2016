@@ -5,9 +5,12 @@ function Application() {
     this.speed = 300
     this.taskQueue = []
     this.editor = new Editor()
-    this.robot = new Boxbot(20)
+    this.robot = new Boxbot()
+    this.$speedBtn = $('.speed')
+    this.$sizeBtn = $('.map-size')
     this.$runBtn = $('.execute-btn')
     this.$buildBtn = $('.random-btn')
+    this.$resetBtn = $('.reset-btn')
     this.init()
 }
 
@@ -17,6 +20,24 @@ function Application() {
 Application.prototype.init = function() {
     addEvent(this.$runBtn, 'click', this.run.bind(this))
     addEvent(this.$buildBtn, 'click', this.build.bind(this))
+    addEvent(this.$sizeBtn, 'change', this.setSize.bind(this))
+    addEvent(this.$speedBtn, 'change', this.setSpeed.bind(this))
+    addEvent(this.$resetBtn, 'click', this.reset.bind(this))
+    addEvent(document, 'keydown', this.robot.control.bind(this.robot))
+}
+
+/**
+ * 设置地图大小
+ */
+Application.prototype.setSize = function (e) {
+    e = e || event
+
+    var size = parseInt(e.target.value)
+    $('article').className = { 20: 'map-20x20', 30: 'map-30x30' }[size]
+
+    this.taskQueue = []
+    this.robot.map.init(size, size)
+    this.robot.init()
 }
 
 /**
@@ -31,6 +52,24 @@ Application.prototype.build = function() {
     }
 
     map.setWall(coordinate)
+}
+
+/**
+ * 清除所有墙
+ */
+Application.prototype.reset = function() {
+    var walls = $a('.wall')
+    for (var i = 0, len = walls.length; i < len; i++) {
+        walls[i].removeAttribute('class')
+    }
+}
+
+/**
+ * 获取并设置动画速度
+ */
+Application.prototype.setSpeed = function(e) {
+    e = e || event
+    this.speed = e.target.value
 }
 
 /**

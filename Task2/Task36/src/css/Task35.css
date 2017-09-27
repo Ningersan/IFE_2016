@@ -4,7 +4,9 @@
 }
 
 article {
-    padding: 30px;
+    position: relative;
+    margin: 30px;
+    overflow: hidden;
 }
 
 .boxbot-map {
@@ -12,7 +14,6 @@ article {
 }
 
 table {
-    position: relative;
     border-collapse: collapse;
 }
 
@@ -45,14 +46,16 @@ table td {
 
 .boxbot {
     position: absolute;
-    -webkit-transition: all .25s ease-in-out;
-    -moz-transition: all .25s ease-in-out;
-    transition: all .25s ease-in-out;
+    padding-top: 1px;
+    padding-left: 1px;
+    -webkit-transition: top .25s ease-in-out, left .25s ease-in-out, transform .25s ease-in-out;
+    -moz-transition: top .25s ease-in-out, left .25s ease-in-out, transform .25s ease-in-out;
+    transition: top .25s ease-in-out, left .25s ease-in-out, transform .25s ease-in-out;
 }
 
 .map-20x20 .boxbot {
-    width: 36px;
-    height: 36px;
+    width: 37px;
+    height: 37px;
 }
 
 .map-30x30 .boxbot {

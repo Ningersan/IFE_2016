@@ -7,29 +7,25 @@ var RIGHT = 270
  * @constructor
  * 听指令的小方块
  */
-function Boxbot(grid) {
-    this.map = new Map(grid, grid)
+function Boxbot() {
+    this.map = new Map()
     this.finder = new Finder(this.map)
-    this.init()
     this.$robot = $('.boxbot')
-    this.gridWidth = this.$robot.clientWidth
-    this.gridHeight = this.$robot.clientHeight
+    this.gridWidth = null
+    this.gridHeight = null
+    this.init()
 }
 
 /**
  * 初始化小方块的位置和键盘事件
  */
 Boxbot.prototype.init = function() {
-    var robot = document.createElement('img')
-    robot.className = 'boxbot'
-    robot.src = 'img/bot.png'
+    this.gridWidth = this.$robot.clientWidth
+    this.gridHeight = this.$robot.clientHeight
 
-    robot.style.top = $('td').clientWidth + 'px'
-    robot.style.left = $('td').clientHeight + 'px'
-    robot.style.transform = 'rotate(0deg)'
-
-    $('tbody').appendChild(robot)
-    addEvent(document, 'keydown', this.control.bind(this))
+    this.$robot.style.top = this.gridHeight + 'px'
+    this.$robot.style.left = this.gridWidth + 'px'
+    this.$robot.style.transform = 'rotate(0deg)'
 }
 
 /**
@@ -134,7 +130,7 @@ Boxbot.prototype.move = function(direction, step) {
 
     this.checkPath(direction, step)
     destination = this.getPosition(direction, step)
-
+    // console.log(destination)
     return this.moveTo(destination, false)
 }
 
@@ -171,11 +167,17 @@ Boxbot.prototype.moveTo = function(destination, isTurn) {
  * @return {array} - 路径数组
  */
 Boxbot.prototype.search = function(destination) {
-    var start = this.getCurrentPosition()
-    var end = { x: parseInt(destination[0]), y: parseInt(destination[1]) }
-    var path = this.finder.findWay(start, end)
+    destination = { x: parseInt(destination[0]), y: parseInt(destination[1]) }
 
-    return path
+    if (this.map.getType(destination) !== null) {
+        var start = this.getCurrentPosition()
+        var end = destination
+        var path = this.finder.findWay(start, end)
+
+        return path
+    } else {
+        throw new Error('无法到达[' + destination.x + ',' + destination.y + ']')
+    }
 }
 
 /**
@@ -187,6 +189,7 @@ Boxbot.prototype.build = function() {
     if (!this.map.getType(position)) {
         this.map.setWall(position)
     } else {
+        console.log(this.map.getType(position))
         throw new Error('前方无法修墙')
     }
 }
@@ -217,8 +220,9 @@ Boxbot.prototype.checkPath = function (direction, step) {
     for (var i = 1; i <= step; i++) {
         var x = position.x + i * offsetPosition.x
         var y = position.y + i * offsetPosition.y
+        var type = this.map.getType({ 'x': x, 'y': y })
 
-        if (this.map.getType({'x': x, 'y': y})) {
+        if (type === null || type !== '') {
             throw new Error('无法到达[' + x + ',' + y + ']')
         }
     }
@@ -228,8 +232,8 @@ Boxbot.prototype.checkPath = function (direction, step) {
  * 键盘控制事件
  * @param {event}
  */
-Boxbot.prototype.control = function(event) {
-    var e = event || window.event
+Boxbot.prototype.control = function(e) {
+    e = e || event
 
     switch (e.keyCode) {
         case 13:
@@ -239,7 +243,11 @@ Boxbot.prototype.control = function(event) {
             this.turn(90)
             break
         case 38:
-            this.move(this.getCurrentDirection(), 1)
+            try {
+                this.move(this.getCurrentDirection(), 1)
+            } catch (ex) {
+                console.log(ex)
+            }
             e.preventDefault()
             break
         case 39:
@@ -247,6 +255,8 @@ Boxbot.prototype.control = function(event) {
             break
         case 40:
             this.turn(180)
+            break
+        default:
             break
     }
 }

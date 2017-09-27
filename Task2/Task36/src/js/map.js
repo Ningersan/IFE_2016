@@ -3,28 +3,41 @@
  * @param {int} columns
  * @param {int} rows
  */
-function Map(rows, columns) {
+function Map() {
+    this.rows = 20
+    this.columns = 20
+    this.$boxs = null
+    this.$element = $('.boxbot-map')
+    this.init(20, 20)
+}
+
+/**
+ * 初始化地图和属性
+ */
+Map.prototype.init = function(rows, columns) {
+    this.create(rows, columns)
     this.rows = rows
     this.columns = columns
-    this.$element = $('.boxbot-map')
-    this.init()
     this.$boxs = $a('td')
 }
 
 /**
  * 初始化地图
  */
-Map.prototype.init = function() {
+Map.prototype.create = function(rows, columns) {
     var table = document.createElement('table')
     var tbody = document.createElement('tbody')
 
-    table.className = this.rows === 20 ? 'map-20x20' : 'map-30x30'
+    // 如果地图生成过就先销毁
+    if (this.$element.innerHTML) {
+        this.$element.innerHTML = ''
+    }
 
     // 创建表格
-    for (var i = 0; i < this.rows + 1; i++) {
+    for (var i = 0; i < rows + 1; i++) {
         tbody.insertRow(i)
 
-        for (var j = 0; j < this.columns + 1; j++) {
+        for (var j = 0; j < columns + 1; j++) {
             var cell = tbody.rows[i].insertCell(j)
 
             if (i === 0 && j === 0) {
@@ -68,7 +81,8 @@ Map.prototype.getNode = function(position) {
 * @return {string} - 返回类名
  */
 Map.prototype.getType = function(position) {
-    return this.getNode(position).className
+    var node = this.getNode(position)
+    return node ? node.className : null
 }
 
 /**

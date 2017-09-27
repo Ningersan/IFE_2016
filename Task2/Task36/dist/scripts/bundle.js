@@ -62,28 +62,41 @@ function addEvent(element, event, listener) {
  * @param {int} columns
  * @param {int} rows
  */
-function Map(rows, columns) {
+function Map() {
+    this.rows = 20
+    this.columns = 20
+    this.$boxs = null
+    this.$element = $('.boxbot-map')
+    this.init(20, 20)
+}
+
+/**
+ * 初始化地图和属性
+ */
+Map.prototype.init = function(rows, columns) {
+    this.create(rows, columns)
     this.rows = rows
     this.columns = columns
-    this.$element = $('.boxbot-map')
-    this.init()
     this.$boxs = $a('td')
 }
 
 /**
  * 初始化地图
  */
-Map.prototype.init = function() {
+Map.prototype.create = function(rows, columns) {
     var table = document.createElement('table')
     var tbody = document.createElement('tbody')
 
-    table.className = this.rows === 20 ? 'map-20x20' : 'map-30x30'
+    // 如果地图生成过就先销毁
+    if (this.$element.innerHTML) {
+        this.$element.innerHTML = ''
+    }
 
     // 创建表格
-    for (var i = 0; i < this.rows + 1; i++) {
+    for (var i = 0; i < rows + 1; i++) {
         tbody.insertRow(i)
 
-        for (var j = 0; j < this.columns + 1; j++) {
+        for (var j = 0; j < columns + 1; j++) {
             var cell = tbody.rows[i].insertCell(j)
 
             if (i === 0 && j === 0) {
@@ -127,7 +140,8 @@ Map.prototype.getNode = function(position) {
 * @return {string} - 返回类名
  */
 Map.prototype.getType = function(position) {
-    return this.getNode(position).className
+    var node = this.getNode(position)
+    return node ? node.className : null
 }
 
 /**
@@ -162,6 +176,7 @@ function Editor() {
  * 初始化事件
  */
 Editor.prototype.init = function () {
+    this.update()
     addEvent(this.$editor, 'input', this.update.bind(this))
     addEvent(this.$editor, 'scroll', this.scroll.bind(this))
 }
@@ -233,29 +248,25 @@ var RIGHT = 270
  * @constructor
  * 听指令的小方块
  */
-function Boxbot(grid) {
-    this.map = new Map(grid, grid)
+function Boxbot() {
+    this.map = new Map()
     this.finder = new Finder(this.map)
-    this.init()
     this.$robot = $('.boxbot')
-    this.gridWidth = this.$robot.clientWidth
-    this.gridHeight = this.$robot.clientHeight
+    this.gridWidth = null
+    this.gridHeight = null
+    this.init()
 }
 
 /**
  * 初始化小方块的位置和键盘事件
  */
 Boxbot.prototype.init = function() {
-    var robot = document.createElement('img')
-    robot.className = 'boxbot'
-    robot.src = 'img/bot.png'
+    this.gridWidth = this.$robot.clientWidth
+    this.gridHeight = this.$robot.clientHeight
 
-    robot.style.top = $('td').clientWidth + 'px'
-    robot.style.left = $('td').clientHeight + 'px'
-    robot.style.transform = 'rotate(0deg)'
-
-    $('tbody').appendChild(robot)
-    addEvent(document, 'keydown', this.control.bind(this))
+    this.$robot.style.top = this.gridHeight + 'px'
+    this.$robot.style.left = this.gridWidth + 'px'
+    this.$robot.style.transform = 'rotate(0deg)'
 }
 
 /**
@@ -360,7 +371,7 @@ Boxbot.prototype.move = function(direction, step) {
 
     this.checkPath(direction, step)
     destination = this.getPosition(direction, step)
-
+    // console.log(destination)
     return this.moveTo(destination, false)
 }
 
@@ -397,11 +408,17 @@ Boxbot.prototype.moveTo = function(destination, isTurn) {
  * @return {array} - 路径数组
  */
 Boxbot.prototype.search = function(destination) {
-    var start = this.getCurrentPosition()
-    var end = { x: parseInt(destination[0]), y: parseInt(destination[1]) }
-    var path = this.finder.findWay(start, end)
+    destination = { x: parseInt(destination[0]), y: parseInt(destination[1]) }
 
-    return path
+    if (this.map.getType(destination) !== null) {
+        var start = this.getCurrentPosition()
+        var end = destination
+        var path = this.finder.findWay(start, end)
+
+        return path
+    } else {
+        throw new Error('无法到达[' + destination.x + ',' + destination.y + ']')
+    }
 }
 
 /**
@@ -413,6 +430,7 @@ Boxbot.prototype.build = function() {
     if (!this.map.getType(position)) {
         this.map.setWall(position)
     } else {
+        console.log(this.map.getType(position))
         throw new Error('前方无法修墙')
     }
 }
@@ -443,8 +461,9 @@ Boxbot.prototype.checkPath = function (direction, step) {
     for (var i = 1; i <= step; i++) {
         var x = position.x + i * offsetPosition.x
         var y = position.y + i * offsetPosition.y
+        var type = this.map.getType({ 'x': x, 'y': y })
 
-        if (this.map.getType({'x': x, 'y': y})) {
+        if (type === null || type !== '') {
             throw new Error('无法到达[' + x + ',' + y + ']')
         }
     }
@@ -454,8 +473,8 @@ Boxbot.prototype.checkPath = function (direction, step) {
  * 键盘控制事件
  * @param {event}
  */
-Boxbot.prototype.control = function(event) {
-    var e = event || window.event
+Boxbot.prototype.control = function(e) {
+    e = e || event
 
     switch (e.keyCode) {
         case 13:
@@ -465,7 +484,11 @@ Boxbot.prototype.control = function(event) {
             this.turn(90)
             break
         case 38:
-            this.move(this.getCurrentDirection(), 1)
+            try {
+                this.move(this.getCurrentDirection(), 1)
+            } catch (ex) {
+                console.log(ex)
+            }
             e.preventDefault()
             break
         case 39:
@@ -473,6 +496,8 @@ Boxbot.prototype.control = function(event) {
             break
         case 40:
             this.turn(180)
+            break
+        default:
             break
     }
 }
@@ -663,9 +688,12 @@ function Application() {
     this.speed = 300
     this.taskQueue = []
     this.editor = new Editor()
-    this.robot = new Boxbot(20)
+    this.robot = new Boxbot()
+    this.$speedBtn = $('.speed')
+    this.$sizeBtn = $('.map-size')
     this.$runBtn = $('.execute-btn')
     this.$buildBtn = $('.random-btn')
+    this.$resetBtn = $('.reset-btn')
     this.init()
 }
 
@@ -675,6 +703,24 @@ function Application() {
 Application.prototype.init = function() {
     addEvent(this.$runBtn, 'click', this.run.bind(this))
     addEvent(this.$buildBtn, 'click', this.build.bind(this))
+    addEvent(this.$sizeBtn, 'change', this.setSize.bind(this))
+    addEvent(this.$speedBtn, 'change', this.setSpeed.bind(this))
+    addEvent(this.$resetBtn, 'click', this.reset.bind(this))
+    addEvent(document, 'keydown', this.robot.control.bind(this.robot))
+}
+
+/**
+ * 设置地图大小
+ */
+Application.prototype.setSize = function (e) {
+    e = e || event
+
+    var size = parseInt(e.target.value)
+    $('article').className = { 20: 'map-20x20', 30: 'map-30x30' }[size]
+
+    this.taskQueue = []
+    this.robot.map.init(size, size)
+    this.robot.init()
 }
 
 /**
@@ -689,6 +735,24 @@ Application.prototype.build = function() {
     }
 
     map.setWall(coordinate)
+}
+
+/**
+ * 清除所有墙
+ */
+Application.prototype.reset = function() {
+    var walls = $a('.wall')
+    for (var i = 0, len = walls.length; i < len; i++) {
+        walls[i].removeAttribute('class')
+    }
+}
+
+/**
+ * 获取并设置动画速度
+ */
+Application.prototype.setSpeed = function(e) {
+    e = e || event
+    this.speed = e.target.value
 }
 
 /**
@@ -715,7 +779,6 @@ Application.prototype.start = function() {
     var step = null
 
     var timer = setInterval(function () {
-        console.log('sss')
         if (!self.taskQueue.length) {
             clearInterval(timer)
             return
