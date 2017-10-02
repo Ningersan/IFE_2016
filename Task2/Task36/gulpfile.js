@@ -3,6 +3,7 @@ var eslint = require('gulp-eslint')
 var minifyCss = require('gulp-minify-css')
 var uglify = require('gulp-uglify')
 var concat = require('gulp-concat')
+var optimize = require('amd-optimize')
 var rename = require('gulp-rename')
 
 gulp.task('lint', function() {
@@ -20,18 +21,9 @@ gulp.task('minifyCss', function() {
 })
 
 gulp.task('scripts', function() {
-    gulp.src([
-        './src/js/utils.js',
-        './src/js/map.js',
-        './src/js/editor.js',
-        './src/js/boxbot.js',
-        './src/js/finder.js',
-        './src/js/command.js',
-        './src/js/app.js',
-    ])
-        .pipe(concat('bundle.js'))
-        .pipe(gulp.dest('./dist/scripts'))
-        .pipe(rename('bundle.min.js'))
+    gulp.src('./src/js/*.js')
+        .pipe(optimize('./src/app'))
+        .pipe(concat('bundle.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest('./dist/scripts'))
 })
