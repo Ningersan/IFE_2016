@@ -24,14 +24,24 @@ define(function() {
      * @return {boolean}
      */
     function inList(point, list) {
+        return list.some(function(item) {
+            return item.x === point.x && item.y === point.y
+        })
+    }
+
+    /**
+     * 判断坐标点是否在列表中
+     * @param {object} point - 坐标点
+     * @param {array} list - 列表
+     * @return {boolean}
+     */
+    function getTargetIndex(target, list) {
         for (var i = 0, len = list.length; i < len; i++) {
             var item = list[i]
-            if (item.x === point.x && item.y === point.y) {
+            if (item.x === target.x && item.y === target.y) {
                 return i
             }
         }
-
-        return false
     }
 
     /**
@@ -63,6 +73,7 @@ define(function() {
         $a: $a,
         inList: inList,
         addEvent: addEvent,
+        getTargetIndex: getTargetIndex,
         comparisonByProperty: comparisonByProperty,
     }
 })

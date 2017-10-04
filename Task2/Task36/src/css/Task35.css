@@ -86,6 +86,10 @@ select:focus {
     margin-right: -10px;
 }
 
+.algorithm {
+    margin-left: 10px;
+}
+
 .execute-btn {
     margin-left: 10px;
     width: 45px;
@@ -97,8 +101,8 @@ select:focus {
 
 .commander {
     margin-left: 20px;
-    width: 200px;
-    height: 382px;
+    width: 360px;
+    height: 741px;
     overflow: hidden;
 }
 

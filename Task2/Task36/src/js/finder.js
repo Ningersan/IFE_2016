@@ -21,7 +21,7 @@ define(['utils'], function(utils) {
      * @param {object} point - 坐标
      * @return {array}
      */
-    Finder.prototype.getRounds = function (point) {
+    Finder.prototype.getRounds = function(point) {
         var up = { x: point.x, y: point.y - 1 }
         var right = { x: point.x + 1, y: point.y }
         var down = { x: point.x, y: point.y + 1 }
@@ -34,13 +34,86 @@ define(['utils'], function(utils) {
      * 过滤掉四周点的墙和外界坐标
      * @param {array} rounds - 四周点坐标数组
      */
-    Finder.prototype.filter = function (rounds) {
+    Finder.prototype.filter = function(rounds) {
         var self = this
 
-        return rounds.filter(function (point) {
+        return rounds.filter(function(point) {
             return !self.map.getType({ x: point.x, y: point.y }) && !utils.inList(point, self.closeList)
         })
     }
+
+    Finder.prototype.getPath = function(start, current) {
+        if (current.x === start.x && current.y === start.y) {
+            console.log(this.result)
+            return this.result
+        }
+
+        this.result.unshift({ x: current.x, y: current.y })
+        return this.getPath(start, current.parent)
+    }
+
+    Finder.prototype.findWay = function(start, end, algorithm) {
+        algorithm = { 'A*': this.AStar, 'BFS': this.bfs }[algorithm]
+        return algorithm.call(this, start, end)
+    }
+
+    /**
+     * 广度优先算法
+     * @param {object} start - 起点
+     * @param {object} end - 终点
+     * @return {array} - 路径
+     */
+    Finder.prototype.bfs = function (start, end) {
+        var self = this
+
+        // 重置数据
+        this.openList = []
+        this.closeList = []
+        this.result = []
+
+        this.openList = [start]
+
+        while (this.openList.length) {
+            var filter = null
+            var children = null
+            var currentPoint = this.openList.shift()
+
+            if (!utils.inList(currentPoint, this.closeList)) {
+                this.closeList.push(currentPoint)
+            }
+
+            if (currentPoint.x === end.x && currentPoint.y === end.y) {
+                return this.getPath(start, currentPoint)
+            }
+
+            filter = this.getRounds(currentPoint).filter(function (point) {
+                return !self.map.getType({ x: point.x, y: point.y }) && !utils.inList(point, self.closeList) && !utils.inList(point, self.openList)
+            })
+
+            children = filter.map(function (point) {
+                point.parent = currentPoint
+                return point
+            })
+
+            Array.prototype.push.apply(this.openList, children)
+        }
+
+        // 如果开启列表没有值，表示找不到路径
+        throw new Error('无法寻路')
+    }
+
+    /**
+     * Finder.prototype.dfs = function(path, target) {
+        path = [path]
+
+        var current = path.pop()
+        this.closeList.push(current)
+
+        if (current.x === target.x && current.y === target.y) {
+            return path
+        }
+    }
+     */
 
     /**
      * A star 算法，不可沿着斜方向移动
@@ -48,12 +121,13 @@ define(['utils'], function(utils) {
      * @param {object} end - 终点
      * @return {array} - 路径
      */
-    Finder.prototype.findWay = function (start, end) {
+    Finder.prototype.AStar = function(start, end) {
+        console.log(this)
         // 结果索引, 在开启列表中的终点
         var resultIndex = null
 
         // 路径点，沿着parent上朔可得到路径
-        var dotCur = null
+        var currentPos = null
 
         // 重置数据
         this.openList = []
@@ -74,7 +148,7 @@ define(['utils'], function(utils) {
         this.openList.push({ x: start.x, y: start.y, G: 0 })
 
         // 结果索引为开启列表中出现的终点
-        while (!(resultIndex = utils.inList({ x: end.x, y: end.y }, this.openList))) {
+        while (!(resultIndex = utils.getTargetIndex({ x: end.x, y: end.y }, this.openList))) {
             // 当前节点为开启列表中F值最小的点
             var currentPoint = this.openList.pop()
 
@@ -113,15 +187,10 @@ define(['utils'], function(utils) {
         }
 
         // 根据结果索引，找到路径点
-        dotCur = this.openList[resultIndex]
+        currentPos = this.openList[resultIndex]
 
         // 沿着路径点的父节点上朔即可获得完整路径
-        while (dotCur.x !== start.x || dotCur.y !== start.y) {
-            this.result.unshift({ x: dotCur.x, y: dotCur.y })
-            dotCur = dotCur.parent
-        }
-
-        return this.result
+        return this.getPath(start, currentPos)
     }
 
     return {

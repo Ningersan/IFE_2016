@@ -4,6 +4,7 @@ define(['editor', 'boxbot', 'utils'], function(editor, boxbot, utils) {
      */
     function Main() {
         this.speed = 300
+        this.algorithm = 'A*'
         this.taskQueue = []
         this.editor = new editor.Editor()
         this.robot = new boxbot.Boxbot()
@@ -18,7 +19,7 @@ define(['editor', 'boxbot', 'utils'], function(editor, boxbot, utils) {
     /**
      * 初始化事件
      */
-    Main.prototype.init = function () {
+    Main.prototype.init = function() {
         utils.addEvent(this.$runBtn, 'click', this.run.bind(this))
         utils.addEvent(this.$buildBtn, 'click', this.build.bind(this))
         utils.addEvent(this.$sizeBtn, 'change', this.setSize.bind(this))
@@ -30,7 +31,7 @@ define(['editor', 'boxbot', 'utils'], function(editor, boxbot, utils) {
     /**
      * 设置地图大小
      */
-    Main.prototype.setSize = function (e) {
+    Main.prototype.setSize = function(e) {
         e = e || event
 
         var size = parseInt(e.target.value)
@@ -45,9 +46,17 @@ define(['editor', 'boxbot', 'utils'], function(editor, boxbot, utils) {
     }
 
     /**
+     * 获取并设置动画速度
+     */
+    Main.prototype.setSpeed = function(e) {
+        e = e || event
+        this.speed = e.target.value
+    }
+
+    /**
      * 随机修墙
      */
-    Main.prototype.build = function () {
+    Main.prototype.build = function() {
         var map = this.robot.map
         var coordinate = map.random()
 
@@ -61,7 +70,7 @@ define(['editor', 'boxbot', 'utils'], function(editor, boxbot, utils) {
     /**
      * 清除所有墙
      */
-    Main.prototype.reset = function () {
+    Main.prototype.reset = function() {
         var walls = utils.$a('.wall')
         for (var i = 0, len = walls.length; i < len; i++) {
             walls[i].removeAttribute('class')
@@ -69,37 +78,29 @@ define(['editor', 'boxbot', 'utils'], function(editor, boxbot, utils) {
     }
 
     /**
-     * 获取并设置动画速度
-     */
-    Main.prototype.setSpeed = function (e) {
-        e = e || event
-        this.speed = e.target.value
-    }
-
-    /**
      * 获取代码
      * @return {array} - 指令数组
      */
-    Main.prototype.getCommands = function () {
+    Main.prototype.getCommands = function() {
         return this.editor.$editor.value.split('\n')
     }
 
     /**
      * @param {function} func - 目标指令
      */
-    Main.prototype.addTaskQueue = function (task) {
+    Main.prototype.addTaskQueue = function(task) {
         this.taskQueue.push(task)
     }
 
     /**
      * 代码执行和动画设置
      */
-    Main.prototype.start = function () {
+    Main.prototype.start = function() {
         var i = 0
         var self = this
         var step = null
 
-        var timer = setInterval(function () {
+        var timer = setInterval(function() {
             if (!self.taskQueue.length) {
                 clearInterval(timer)
                 return
@@ -146,7 +147,7 @@ define(['editor', 'boxbot', 'utils'], function(editor, boxbot, utils) {
     /**
      * 检查，确认无误后执行代码
      */
-    Main.prototype.run = function () {
+    Main.prototype.run = function() {
         var self = this
         var isLegal = true
         var commands = this.getCommands()
@@ -154,7 +155,7 @@ define(['editor', 'boxbot', 'utils'], function(editor, boxbot, utils) {
         // 清空当前任务队列
         this.taskQueue = []
 
-        commands.forEach(function (command, index) {
+        commands.forEach(function(command, index) {
             var task = self.editor.getTask(command)
             console.log(task)
             if (task) {

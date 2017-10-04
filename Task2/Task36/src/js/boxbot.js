@@ -14,13 +14,16 @@ define(['map', 'finder', 'utils'], function(map, finder, utils) {
         this.$robot = utils.$('.boxbot')
         this.gridWidth = null
         this.gridHeight = null
+        this.algorithm = 'A*'
+        this.$algorithmBtn = utils.$('.algorithm')
         this.init()
+        utils.addEvent(this.$algorithmBtn, 'change', this.setAlgorithm.bind(this))
     }
 
     /**
      * 初始化小方块的位置和键盘事件
      */
-    Boxbot.prototype.init = function () {
+    Boxbot.prototype.init = function() {
         this.gridWidth = this.$robot.clientWidth
         this.gridHeight = this.$robot.clientHeight
 
@@ -30,11 +33,19 @@ define(['map', 'finder', 'utils'], function(map, finder, utils) {
     }
 
     /**
+     * 设置寻路算法
+     */
+    Boxbot.prototype.setAlgorithm = function(e) {
+        e = e || event
+        this.algorithm = e.target.value
+    }
+
+    /**
      * 控制小方块转向
      * @param {number} byAngle - 要旋转的角度
      * @param {number} toAngle - 转向到的角度
      */
-    Boxbot.prototype.turn = function (byAngle, toAngle) {
+    Boxbot.prototype.turn = function(byAngle, toAngle) {
         var angle = null
         var curAngle = parseInt(/-?\d*\.?\d/.exec(this.$robot.style.transform))
         var currentDirection = this.getCurrentDirection()
@@ -53,7 +64,7 @@ define(['map', 'finder', 'utils'], function(map, finder, utils) {
      * 获取小方块当前朝向
      * @returns {Number} 0-360之间的角度
      */
-    Boxbot.prototype.getCurrentDirection = function () {
+    Boxbot.prototype.getCurrentDirection = function() {
         // 旋转角度
         var angle = parseFloat(/-?\d*\.?\d/.exec(this.$robot.style.transform))
 
@@ -66,7 +77,7 @@ define(['map', 'finder', 'utils'], function(map, finder, utils) {
      * 获取小方块当前坐标位置
      * @returns {Object} 坐标对象
      */
-    Boxbot.prototype.getCurrentPosition = function () {
+    Boxbot.prototype.getCurrentPosition = function() {
         var $robot = this.$robot
         var offsetTop = $robot.style.top.replace('px', '')
         var offsetLeft = $robot.style.left.replace('px', '')
@@ -82,7 +93,7 @@ define(['map', 'finder', 'utils'], function(map, finder, utils) {
      * @param {number} direction - 方向
      * @param {number} step - 前进的格数
      */
-    Boxbot.prototype.getOffsetPosition = function (direction, step) {
+    Boxbot.prototype.getOffsetPosition = function(direction, step) {
         var sign = {
             0: [0, 1],
             90: [-1, 0],
@@ -102,7 +113,7 @@ define(['map', 'finder', 'utils'], function(map, finder, utils) {
      * @param {number} step - 前进的格数
      * @return {array} - 目的坐标
      */
-    Boxbot.prototype.getPosition = function (direction, step) {
+    Boxbot.prototype.getPosition = function(direction, step) {
         var currentPosition = null
         var offsetPosition = null
 
@@ -126,7 +137,7 @@ define(['map', 'finder', 'utils'], function(map, finder, utils) {
      * @param {number} step - 前进的格数
      * @return {boolean} - 返回是否执行状态
      */
-    Boxbot.prototype.move = function (direction, step) {
+    Boxbot.prototype.move = function(direction, step) {
         var destination = null
 
         this.checkPath(direction, step)
@@ -140,7 +151,7 @@ define(['map', 'finder', 'utils'], function(map, finder, utils) {
      * @param {array} destination - 目的坐标
      * @param {boolean} isTurn - 是否转向
      */
-    Boxbot.prototype.moveTo = function (destination, isTurn) {
+    Boxbot.prototype.moveTo = function(destination, isTurn) {
         isTurn = typeof isTurn === 'undefined' ? true : isTurn
 
         if (isTurn) {
@@ -167,13 +178,13 @@ define(['map', 'finder', 'utils'], function(map, finder, utils) {
      * @@param {object} destination - 目的坐标
      * @return {array} - 路径数组
      */
-    Boxbot.prototype.search = function (destination) {
+    Boxbot.prototype.search = function(destination) {
         destination = { x: parseInt(destination[0]), y: parseInt(destination[1]) }
 
         if (this.map.getType(destination) !== null) {
             var start = this.getCurrentPosition()
             var end = destination
-            var path = this.finder.findWay(start, end)
+            var path = this.finder.findWay(start, end, this.algorithm)
 
             return path
         } else {
@@ -184,7 +195,7 @@ define(['map', 'finder', 'utils'], function(map, finder, utils) {
     /**
      * 在朝向上修墙
      */
-    Boxbot.prototype.build = function () {
+    Boxbot.prototype.build = function() {
         var position = this.getPosition(this.getCurrentDirection(), 1)
 
         if (!this.map.getType(position)) {
@@ -199,7 +210,7 @@ define(['map', 'finder', 'utils'], function(map, finder, utils) {
      * 给墙设置颜色
      * @param {string} color - 颜色号
      */
-    Boxbot.prototype.setColor = function (color) {
+    Boxbot.prototype.setColor = function(color) {
         var position = this.getPosition(this.getCurrentDirection(), 1)
 
         if (this.map.getType(position) === 'wall') {
@@ -214,7 +225,7 @@ define(['map', 'finder', 'utils'], function(map, finder, utils) {
      * @param {number} direction - 方向
      * @param {number} step - 前进格数
      */
-    Boxbot.prototype.checkPath = function (direction, step) {
+    Boxbot.prototype.checkPath = function(direction, step) {
         var position = this.getCurrentPosition()
         var offsetPosition = this.getOffsetPosition(direction, 1)
 
@@ -233,32 +244,24 @@ define(['map', 'finder', 'utils'], function(map, finder, utils) {
      * 键盘控制事件
      * @param {event}
      */
-    Boxbot.prototype.control = function (e) {
+    Boxbot.prototype.control = function(e) {
         e = e || event
 
-        switch (e.keyCode) {
-            case 13:
-                this.build()
-                break
-            case 37:
-                this.turn(90)
-                break
-            case 38:
+        var direction = { 37: LEFT, 38: TOP, 39: RIGHT, 40: BOTTOM }[e.keyCode]
+        if (typeof direction !== 'undefined') {
+            e.preventDefault()
+
+            if (direction === this.getCurrentDirection()) {
                 try {
-                    this.move(this.getCurrentDirection(), 1)
+                    this.move(direction, 1)
                 } catch (ex) {
                     console.log(ex)
                 }
-                e.preventDefault()
-                break
-            case 39:
-                this.turn(-90)
-                break
-            case 40:
-                this.turn(180)
-                break
-            default:
-                break
+            } else {
+                this.turn(null, direction)
+            }
+        } else if (e.keyCode === 13) {
+            this.build()
         }
     }
 
