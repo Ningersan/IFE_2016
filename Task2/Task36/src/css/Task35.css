@@ -3,6 +3,11 @@
     font-family: "Source Code Pro", "Consolas", "Microsoft yahei", 'Segoe UI', sans-serif;
 }
 
+.container {
+    width: 1440px;
+    min-width: 1440px;
+}
+
 article {
     position: relative;
     margin: 30px;
@@ -101,7 +106,7 @@ select:focus {
 
 .commander {
     margin-left: 20px;
-    width: 360px;
+    width: 420px;
     height: 741px;
     overflow: hidden;
 }
@@ -142,6 +147,44 @@ select:focus {
     background-color: #34495e;
 }
 
+.tips {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 800px;
+    height: 640px;
+    color: #fff;
+    border-radius: 3px;
+    border: 1px solid rgba(0, 0, 0, .4);
+    background-color: #2c3e50;
+    transform: translate(-50%, -55%);
+}
+
+.tips .close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    color: #d87093;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.tips h4 {
+    text-align: center;
+    color: #d87093;
+}
+
+.tips p {
+    padding-left: 150px;
+}
+
+.tips span {
+    color: #22C3AA;
+}
+
 .wall {
     background-color: #bdc3c7;
 }
@@ -152,4 +195,8 @@ select:focus {
 
 .error {
     background-color: #d87093
+}
+
+.hidden {
+    display: none;
 }

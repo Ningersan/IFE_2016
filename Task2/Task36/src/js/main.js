@@ -13,6 +13,8 @@ define(['editor', 'boxbot', 'utils'], function(editor, boxbot, utils) {
         this.$runBtn = utils.$('.execute-btn')
         this.$buildBtn = utils.$('.random-btn')
         this.$resetBtn = utils.$('.reset-btn')
+        this.$tipsBtn = utils.$('.tips-btn')
+        this.$closeBtn = utils.$('.close')
         this.init()
     }
 
@@ -25,7 +27,9 @@ define(['editor', 'boxbot', 'utils'], function(editor, boxbot, utils) {
         utils.addEvent(this.$sizeBtn, 'change', this.setSize.bind(this))
         utils.addEvent(this.$speedBtn, 'change', this.setSpeed.bind(this))
         utils.addEvent(this.$resetBtn, 'click', this.reset.bind(this))
-        utils.addEvent(document, 'keydown', this.robot.control.bind(this.robot))
+        utils.addEvent(this.$tipsBtn, 'click', this.toggleTips.bind(this))
+        utils.addEvent(this.$closeBtn, 'click', this.toggleTips.bind(this))
+        utils.addEvent(document, 'keydown', this.control.bind(this))
     }
 
     /**
@@ -74,6 +78,35 @@ define(['editor', 'boxbot', 'utils'], function(editor, boxbot, utils) {
         var walls = utils.$a('.wall')
         for (var i = 0, len = walls.length; i < len; i++) {
             walls[i].removeAttribute('class')
+        }
+    }
+
+    /**
+     * 出现指令集提示
+     */
+    Main.prototype.toggleTips = function() {
+        utils.$('.tips').classList.toggle('hidden')
+    }
+
+    Main.prototype.control = function(e) {
+        e = e || event
+
+        var direction = { 37: LEFT, 38: TOP, 39: RIGHT, 40: BOTTOM }[e.keyCode]
+
+        if (typeof direction !== 'undefined') {
+            e.preventDefault()
+
+            if (direction === this.robot.getCurrentDirection()) {
+                try {
+                    this.robot.move(direction, 1)
+                } catch (ex) {
+                    console.log(ex)
+                }
+            } else {
+                this.robot.turn(null, direction)
+            }
+        } else if (e.keyCode === 13) {
+            this.robot.build()
         }
     }
 

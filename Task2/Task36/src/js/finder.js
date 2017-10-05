@@ -17,6 +17,15 @@ define(['utils'], function(utils) {
     }
 
     /**
+     * 重置数据
+     */
+    Finder.prototype.clear = function() {
+        this.openList = []
+        this.closeList = []
+        this.result = []
+    }
+
+    /**
      * 获取坐标点周围（上下左右）的坐标
      * @param {object} point - 坐标
      * @return {array}
@@ -31,29 +40,30 @@ define(['utils'], function(utils) {
     }
 
     /**
-     * 过滤掉四周点的墙和外界坐标
+     * 过滤掉四周点的墙、外界坐标和列表中的点
      * @param {array} rounds - 四周点坐标数组
+     * @param {}
      */
     Finder.prototype.filter = function(rounds) {
         var self = this
 
         return rounds.filter(function(point) {
-            return !self.map.getType({ x: point.x, y: point.y }) && !utils.inList(point, self.closeList)
+            return self.map.getType({ x: point.x, y: point.y }) === '' &&
+              !utils.inList(point, self.closeList) && !utils.inList(point, self.openList)
         })
     }
 
-    Finder.prototype.getPath = function(start, current) {
+    Finder.prototype.backtrace = function(start, current) {
         if (current.x === start.x && current.y === start.y) {
-            console.log(this.result)
             return this.result
         }
 
         this.result.unshift({ x: current.x, y: current.y })
-        return this.getPath(start, current.parent)
+        return this.backtrace(start, current.parent)
     }
 
     Finder.prototype.findWay = function(start, end, algorithm) {
-        algorithm = { 'A*': this.AStar, 'BFS': this.bfs }[algorithm]
+        algorithm = { 'A*': this.AStar, 'BFS': this.bfs, 'DFS': this.dfs }[algorithm]
         return algorithm.call(this, start, end)
     }
 
@@ -67,53 +77,61 @@ define(['utils'], function(utils) {
         var self = this
 
         // 重置数据
-        this.openList = []
-        this.closeList = []
-        this.result = []
-
+        this.clear()
         this.openList = [start]
 
         while (this.openList.length) {
             var filter = null
-            var children = null
-            var currentPoint = this.openList.shift()
+            var current = this.openList.shift()
 
-            if (!utils.inList(currentPoint, this.closeList)) {
-                this.closeList.push(currentPoint)
+            if (!utils.inList(current, this.closeList)) {
+                this.closeList.push(current)
             }
 
-            if (currentPoint.x === end.x && currentPoint.y === end.y) {
-                return this.getPath(start, currentPoint)
+            if (current.x === end.x && current.y === end.y) {
+                return this.backtrace(start, current)
             }
 
-            filter = this.getRounds(currentPoint).filter(function (point) {
-                return !self.map.getType({ x: point.x, y: point.y }) && !utils.inList(point, self.closeList) && !utils.inList(point, self.openList)
+            filter = this.filter(this.getRounds(current))
+            filter.forEach(function(point) {
+                point.parent = current
+                self.openList.push(point)
             })
-
-            children = filter.map(function (point) {
-                point.parent = currentPoint
-                return point
-            })
-
-            Array.prototype.push.apply(this.openList, children)
         }
 
         // 如果开启列表没有值，表示找不到路径
         throw new Error('无法寻路')
     }
 
-    /**
-     * Finder.prototype.dfs = function(path, target) {
-        path = [path]
+    Finder.prototype.dfs = function(start, end) {
+        var self = this
 
-        var current = path.pop()
-        this.closeList.push(current)
+        // 重置数据
+        this.clear()
+        this.openList = [start]
 
-        if (current.x === target.x && current.y === target.y) {
-            return path
+        while (this.openList.length) {
+            var filter = null
+            var current = this.openList.pop()
+
+            if (!utils.inList(current, this.closeList)) {
+                this.closeList.push(current)
+            }
+
+            if (current.x === end.x && current.y === end.y) {
+                return this.backtrace(start, current)
+            }
+
+            filter = this.filter(this.getRounds(current))
+            filter.forEach(function(point) {
+                point.parent = current
+                self.openList.push(point)
+            })
         }
+
+        // 如果开启列表没有值，表示找不到路径
+        throw new Error('无法寻路')
     }
-     */
 
     /**
      * A star 算法，不可沿着斜方向移动
@@ -122,7 +140,6 @@ define(['utils'], function(utils) {
      * @return {array} - 路径
      */
     Finder.prototype.AStar = function(start, end) {
-        console.log(this)
         // 结果索引, 在开启列表中的终点
         var resultIndex = null
 
@@ -130,9 +147,7 @@ define(['utils'], function(utils) {
         var currentPos = null
 
         // 重置数据
-        this.openList = []
-        this.closeList = []
-        this.result = []
+        this.clear()
 
         // 如果目标点在地图外或者有墙，结束寻路
         if (this.map.getType(end)) {
@@ -153,7 +168,9 @@ define(['utils'], function(utils) {
             var currentPoint = this.openList.pop()
 
             // 向关闭列表存入当前点
-            this.closeList.push(currentPoint)
+            if (!utils.inList(currentPoint, this.closeList)) {
+                this.closeList.push(currentPoint)
+            }
 
             var filter = this.filter(this.getRounds(currentPoint))
 
@@ -161,12 +178,16 @@ define(['utils'], function(utils) {
             var openList = filter.map(function (point) {
                 // 设置父节点
                 point.parent = currentPoint
+
                 // G点表示起点到该点的移动耗费（假设为10），不可沿着对角线走
                 point.G = currentPoint.G + 10
+
                 // H点表示该点移动到终点的预计耗费（假设为10），不可沿着对角线走
                 point.H = Math.abs(end.x - point.x) * 10 + Math.abs(end.y - point.y) * 10
+
                 // F点表示G点加上H点的值
                 point.F = point.G + point.H
+
                 return point
             })
 
@@ -190,7 +211,7 @@ define(['utils'], function(utils) {
         currentPos = this.openList[resultIndex]
 
         // 沿着路径点的父节点上朔即可获得完整路径
-        return this.getPath(start, currentPos)
+        return this.backtrace(start, currentPos)
     }
 
     return {
