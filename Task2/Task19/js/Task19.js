@@ -143,8 +143,8 @@ var queue = {
             return
         }
 
-        for (var i = 0, len = items.length; i < len - 2; i++) {
-            for (var j = len - 1; j > i; j--) {
+        for (var i = 0, len = items.length; i < len - 1; i++) {
+            for (var j = len; j > i; j--) {
                 if (items[j] < items[j - 1]) {
                     this.swap(j, j - 1)
                     this.animations.push([j, j - 1])
@@ -160,7 +160,7 @@ var queue = {
             return
         }
 
-        for (var i = 0, len = items.length; i < len - 2; i++) {
+        for (var i = 0, len = items.length; i < len - 1; i++) {
             var min = i
             for (var j = i + 1; j < len; j++) {
                 if (items[j] < items[min]) {
