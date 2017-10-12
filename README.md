@@ -52,7 +52,7 @@ demo: https://ningersan.github.io/IFE_2016/Task2/Task17/index.html
 Task18: 基础JavaScript编码（一）           
 demo: https://ningersan.github.io/IFE_2016/Task2/Task18/index.html
 
-Task19: 基础JavaScript编码（二）      
+Task19: 基础JavaScript编码（二） 【冒泡排序，选择排序，插入排序，快速排序，堆排序 等排序算法的可视化展示】     
 demo: https://ningersan.github.io/IFE_2016/Task2/Task19/index.html
 
 Task20: 基础JavaScript编码（三）      
@@ -61,19 +61,19 @@ demo: https://ningersan.github.io/IFE_2016/Task2/Task20/index.html
 Task21: 基础JavaScript编码（四）      
 demo: https://ningersan.github.io/IFE_2016/Task2/Task21/index.html    
 
-Task22: JavaScript和树（一)      
+Task22: JavaScript和树（一)  【二叉树前序、中序、后序遍历】    
 demo: https://ningersan.github.io/IFE_2016/Task2/Task22/index.html    
 
 Task23: JavaScript和树（二）      
 demo: https://ningersan.github.io/IFE_2016/Task2/Task23/index.html       
 
-Task24：JavaScript和树（三）      
+Task24：JavaScript和树（三）【多叉树节点的深度/广度遍历、深度/广度搜索】      
 demo: https://ningersan.github.io/IFE_2016/Task2/Task24/index.html      
 
 Task25：JavaScript和树（四）      
 demo: https://ningersan.github.io/IFE_2016/Task2/Task25/index.html         
 
-Task26: 行星与飞船（一）         
+Task26: 行星与飞船（一）        
 demo: https://ningersan.github.io/IFE_2016/Task2/Task26/index.html           
 
 Task27: 行星与飞船（二）         
@@ -97,8 +97,8 @@ demo: https://ningersan.github.io/IFE_2016/Task2/Task33/index.html
 Task34：听指令的小方块（二）    
 demo: https://ningersan.github.io/IFE_2016/Task2/Task34/index.html         
 
-Task35：听指令的小方块（三）    
-demo: https://ningersan.github.io/IFE_2016/Task2/Task35/index.html
+Task35：听指令的小方块（三）【DFS、BFS、A*寻路算法】    
+demo: https://ningersan.github.io/IFE_2016/Task2/Task36/dist/index.html
 
 ## 任务三
 
