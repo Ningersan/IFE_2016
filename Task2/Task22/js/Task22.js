@@ -1,4 +1,4 @@
-var stack = [];
+var queue = [];
 var delay = 1000;
 var btn = document.querySelector("button");
 
@@ -30,7 +30,7 @@ function traverseTree(value, root) {
             }
 
             //将渲染函数压入栈中
-            stack.push(function () {
+            queue.push(function () {
                 renderTreeNode(root);
             });
             preOrder(root.firstElementChild);
@@ -44,7 +44,7 @@ function traverseTree(value, root) {
             }
 
             inOrder(root.firstElementChild);
-            stack.push(function () {
+            queue.push(function () {
                 renderTreeNode(root);
             });
             inOrder(root.lastElementChild);
@@ -58,7 +58,7 @@ function traverseTree(value, root) {
             
             postOrder(root.firstElementChild);
             postOrder(root.lastElementChild);
-            stack.push(function () {
+            queue.push(function () {
                 renderTreeNode(root);
             });
         };
@@ -67,12 +67,12 @@ function traverseTree(value, root) {
 
     //设置时间间隔依次调用渲染函数
     var time = setInterval(function () {
-        if (stack.length === 0) {
+        if (queue.length === 0) {
             clearTimeout(time);
             btn.disabled = false;
             return;
         }
-        stack.shift()();
+        queue.shift()();
     }, delay);
 }
 

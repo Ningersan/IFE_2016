@@ -230,6 +230,7 @@ var queue = {
 
     heapSort: function() {
         var self = this
+
         // 建堆
         var heapSize = this.items.length
         for (var i = Math.floor(heapSize / 2) - 1; i >= 0; i--) {
