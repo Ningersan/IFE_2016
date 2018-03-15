@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>IFE JavaScript Task 02</title>
+    <style>
+        #num-area {
+            display: -webkit-flex;
+            display: flex;
+            -webkit-align-items: flex-end;
+            align-items: flex-end;
+            width: 80%;
+            height: 250px;
+        }
+
+        #num-area div {
+            display: inline-block;
+            margin: 5px;
+            width: 15px;
+            cursor: pointer;
+            opacity: 0.9;
+            /* transition: height .5s; */
+        }
+
+        .normal {
+            background-color: #ed7d31;
+        }
+
+        .active {
+            background-color: #55bcbc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="control">
+        <button class="random" style="margin-right: 15px">随机20个数</button>
+        <input class="num-input" type="text">
+        <button class="rightIn">右侧入</button>
+        <button class="leftOut" style="margin-right: 15px">左侧出</button>
+        <button class="sort" id="bubbleSort">冒泡排序</button>
+        <button class="sort" id="selectSort">选择排序</button>
+        <button class="sort" id="insertSort">插入排序</button>
+        <button class="sort" id="quickSort">快速排序</button>
+        <button class="sort" id="heapSort" style="margin-right: 15px" disabled>堆排序</button>
+    </div>
+    <div id="num-area"></div>
+
+    <ul class="keypoint">
+        <li>冒泡排序：两两比较，交换顺序。</li>
+        <li>选择排序：每次搜索未排序元素中的最小值。</li>
+        <li>插入排序：讲一个元素插入到有序元素的适当位置。</li>
+        <li>快速排序：以key为基准，比key小的放左边，比key大的放右边</li>
+    </ul>
+
+
+    <script src="../src/index.js"></script>
+</body>
+
+</html>
