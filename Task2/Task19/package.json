@@ -1,23 +1,25 @@
 {
-  "name": "task19",
+  "name": "parcelkit",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
+  "repository": "https://github.com/VickieYan/ParcelKit.git",
+  "author": "Vickie",
+  "license": "MIT",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel ./client/public/index.html"
   },
-  "author": "",
-  "license": "ISC",
+  "dependencies": {
+    "autoprefixer": "^8.1.0",
+    "node-sass": "^4.7.2",
+    "postcss-modules": "^1.1.0",
+    "posthtml-img-autosize": "^0.1.2",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
   "devDependencies": {
-    "browser-sync": "^2.18.13",
-    "eslint": "^4.6.1",
-    "eslint-config-airbnb-base": "^12.0.0",
-    "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-node": "^5.1.1",
-    "eslint-plugin-promise": "^3.5.0",
-    "eslint-plugin-standard": "^3.0.1",
-    "gulp": "^3.9.1",
-    "gulp-eslint": "^4.0.0"
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "parcel-bundler": "^1.6.2",
+    "typescript": "^2.7.2"
   }
 }
