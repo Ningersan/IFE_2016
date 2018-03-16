@@ -29,7 +29,7 @@ export const createRandomNumbers = amount => {
     let arr = []
     let num = null
     for (let i = 0; i < amount; i++) {
-        num = Math.random() * (MAX_VALUE - MIN_VALUE) + MIN_VALUE
+        num = parseInt(Math.random() * (MAX_VALUE - MIN_VALUE)) + MIN_VALUE
         arr.push(num)
     }
     return arr

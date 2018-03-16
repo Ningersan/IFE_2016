@@ -10,7 +10,7 @@ class Queue {
     }
 
     dequeue() {
-        this.dataStore.shift()
+        return this.dataStore.shift()
     }
 
     delete(index) {

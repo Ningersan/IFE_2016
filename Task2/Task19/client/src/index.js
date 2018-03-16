@@ -36,7 +36,7 @@ const strategy = {
     },
     'leftOut': function () {
         if (!queue.isEmpty()) {
-            queue.dequeue()
+            alert(queue.dequeue())
             arrCurrent = queue.getQueue()
         } else {
             alert('the queue is empty')
@@ -86,7 +86,6 @@ function refresh() {
 }
 
 function setArrCurrent(arr) {
-    console.log(arr)
     arrCurrent = arr
 }
 
