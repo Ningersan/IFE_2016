@@ -51,16 +51,16 @@ function SpaceCraft(id, speed, energyConsume, energySystem) {
 
     //飞船当前状态
     this.state = null;
-    
+
     //飞船速度
     this.speed = speed;
-    
+
     //飞船动力系统
     this.energyConsume = energyConsume;
-    
+
     //飞船能量系统
     this.energySystem = energySystem;
-    
+
     //飞船能源
     this.energy = 100;
 }

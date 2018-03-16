@@ -6,7 +6,7 @@ var data = {
     "小绿": randomScore(3),
     "小青": randomScore(3),
     "小蓝": randomScore(3),
-    "小紫": randomScore(3)
+    "小紫": randomScore(3),
 };
 
 var table0 = new tableCreator({
@@ -15,7 +15,7 @@ var table0 = new tableCreator({
     tableBody: data,
     isTotal: false,
     isSortable: false,
-    isFrozen: false
+    isFrozen: false,
 });
 
 var table1 = new tableCreator({
@@ -24,7 +24,7 @@ var table1 = new tableCreator({
     tableBody: data,
     isTotal: true,
     isSortable: false,
-    isFrozen: false
+    isFrozen: false,
 });
 
 var table2 = new tableCreator({
@@ -33,7 +33,7 @@ var table2 = new tableCreator({
     tableBody: data,
     isTotal: true,
     isSortable: true,
-    isFrozen: false
+    isFrozen: false,
 });
 
 var table3 = new tableCreator({
@@ -42,7 +42,7 @@ var table3 = new tableCreator({
     tableBody: data,
     isTotal: true,
     isSortable: false,
-    isFrozen: true
+    isFrozen: true,
 });
 
 var table4 = new tableCreator({
@@ -56,7 +56,7 @@ var table4 = new tableCreator({
         background: '#22C3AA',
         color: '#fff',
         arrowColor: '#D0648A'
-    }
+    },
 });
 
 var table5 = new tableCreator({
