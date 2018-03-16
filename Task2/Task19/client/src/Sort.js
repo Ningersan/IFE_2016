@@ -86,6 +86,44 @@ class Sort {
         }
     }
 
+    /**
+     * maxHeapify建立最大堆
+     * 最大堆建成后将堆堆顶和堆底交换
+     * 剩下的元素继续建立最大堆
+     */
+    heapSort() {
+        let heapSize = this.arrElements.length
+        // 建堆
+        for (let i = Math.floor(heapSize / 1) - 1; i >= 0; i--) {
+            this.maxHeapify(this.arrElements, i, heapSize)
+        }
+
+        //排序
+        for (var j = heapSize - 1; j >= 1; j--) {
+            this.swap(0, j)
+            this.arrAnimations.push([0, j])
+            this.maxHeapify(this.arrElements, 0, --heapSize)
+        }
+
+    }
+
+    maxHeapify(arr, x, len) {
+        const l = 2 * x + 1
+        const r = 2 * x + 2
+        let largest = x
+        if (l < len && arr[l] > arr[largest]) {
+            largest = l
+        }
+        if (r < len && arr[r] > arr[largest]) {
+            largest = r
+        }
+        if (largest !== x) {
+            this.swap(x, largest)
+            this.arrAnimations.push([x, largest])
+            this.maxHeapify(arr, largest, len)
+        }
+    }
+
 
     swap(index1, index2) {
         let temp = null
