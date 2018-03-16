@@ -53,7 +53,7 @@ Task18: 基础JavaScript编码（一）
 demo: https://ningersan.github.io/IFE_2016/Task2/Task18/index.html
 
 Task19: 基础JavaScript编码（二） 【冒泡排序，选择排序，插入排序，快速排序，堆排序 等排序算法的可视化展示】     
-demo: https://ningersan.github.io/IFE_2016/Task2/Task19/index.html
+demo: https://ningersan.github.io/IFE_2016/Task2/Task19/dist/index.html
 
 Task20: 基础JavaScript编码（三）      
 demo: https://ningersan.github.io/IFE_2016/Task2/Task20/index.html  
